@@ -1,3 +1,10 @@
+# NetBeans Excludes
+build.xml
+/nbproject/
+/build/
+/web/bower_components/
+/web/node_modules/
+
 # Compiled class file
 *.class
 
