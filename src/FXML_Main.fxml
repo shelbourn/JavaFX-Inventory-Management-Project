@@ -12,3 +12,5 @@
         <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
     </children>
 </AnchorPane>
+
+<Test></Test>
