@@ -1,3 +1,5 @@
+package Main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +20,7 @@ public class InventoryManager extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML_Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Main.fmxl"));
         
         Scene scene = new Scene(root);
         
