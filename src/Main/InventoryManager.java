@@ -14,13 +14,13 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author matts
+ * @author Matthew Shelbourn
  */
 public class InventoryManager extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML_Main.fmxl"));
+        Parent root = FXMLLoader.load(getClass().getResource("./View/FXML_Main.fmxl"));
         
         Scene scene = new Scene(root);
         
