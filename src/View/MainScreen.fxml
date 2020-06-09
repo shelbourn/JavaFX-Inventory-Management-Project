@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreenController">
+<AnchorPane fx:id="mainScr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreenController">
    <children>
       <Label layoutX="35.0" layoutY="88.0" prefHeight="26.0" prefWidth="294.0" text="Inventory Management System" textFill="#908e8e" AnchorPane.leftAnchor="35.0">
          <font>
@@ -35,7 +35,7 @@
                   <TableColumn fx:id="mainScrPriceCol" editable="false" prefWidth="122.66668023003467" text="Price per Unit" />
                </columns>
             </TableView>
-            <Label fx:id="mainScrProdLbl" layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Products" textFill="STEELBLUE">
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Products" textFill="STEELBLUE">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
@@ -76,7 +76,7 @@
                   <TableColumn fx:id="mainScrCostCol" editable="false" prefWidth="122.66668023003467" text="Price/Cost per Unit" />
               </columns>
             </TableView>
-            <Label fx:id="mainScrPartsLbl" layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Parts" textFill="STEELBLUE">
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Parts" textFill="STEELBLUE">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>

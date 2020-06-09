@@ -28,35 +28,33 @@ public class AddPartController implements Initializable {
     @FXML
     private Button mainScrExitBtn;
     @FXML
-    private Label mainScrPartsLbl;
+    private AnchorPane modifyPartScr;
     @FXML
-    private RadioButton addPartScrIHRadio;
+    private Button modifyPartScrSaveBtn;
     @FXML
-    private RadioButton addPartScrOutRadio;
+    private Button modifyPartScrCancelBtn;
     @FXML
-    private Button addPartScrSaveBtn;
+    private RadioButton modifyPartScrIHRadio;
     @FXML
-    private Button addPartScrCancelBtn;
+    private ToggleGroup modifyPartScrRadioBtns;
     @FXML
-    private ToggleGroup addPartScrRadioBtns;
+    private Label modifyPartScrMachIDLbl;
     @FXML
-    private Label addPartScrMachIDLbl;
+    private TextField modifyPartScrMachIDField;
     @FXML
-    private TextField addPartScrMachIDField;
+    private RadioButton modifyPartScrOutRadio;
     @FXML
-    private TextField addPartScrIDField;
+    private TextField modifyPartScrIDField;
     @FXML
-    private TextField addPartScrPartPriceField;
+    private TextField modifyPartScrPartPriceField;
     @FXML
-    private TextField addPartScrPartMaxField;
+    private TextField modifyPartScrPartMaxField;
     @FXML
-    private TextField addPartScrPartNameField;
+    private TextField modifyPartScrPartNameField;
     @FXML
-    private TextField addPartScrPartInvField;
+    private TextField modifyPartScrPartInvField;
     @FXML
-    private TextField addPartScrPartMinField;
-    @FXML
-    private AnchorPane addPartScr;
+    private TextField modifyPartScrPartMinField;
 
     /**
      * Initializes the controller class.
@@ -72,47 +70,47 @@ public class AddPartController implements Initializable {
 
 
     @FXML
-    private void addPartScrIHRadioHandler(MouseEvent event) {
+    private void modifyPartScrSaveBtnHandler(MouseEvent event) {
     }
 
     @FXML
-    private void addPartScrOutRadioHandler(MouseEvent event) {
+    private void modifyPartScrCancelBtnHandler(MouseEvent event) {
     }
 
     @FXML
-    private void addPartScrSaveBtnHandler(MouseEvent event) {
+    private void modifyPartScrIHRadioHandler(MouseEvent event) {
     }
 
     @FXML
-    private void addPartScrCancelBtnHandler(MouseEvent event) {
+    private void modifyPartScrMachIDFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void addPartScrMachIDFieldHandler(KeyEvent event) {
+    private void modifyPartScrOutRadioHandler(MouseEvent event) {
     }
 
     @FXML
-    private void addPartScrIDFieldHandler(KeyEvent event) {
+    private void modifyPartScrIDFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void addPartScrPartPriceFieldHandler(KeyEvent event) {
+    private void modifyPartScrPartPriceFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void addPartScrPartMaxFieldHandler(KeyEvent event) {
+    private void modifyPartScrPartMaxFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void addPartScrPartNameFieldHandler(KeyEvent event) {
+    private void modifyPartScrPartNameFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void addPartScrPartInvFieldHandler(MouseEvent event) {
+    private void modifyPartScrPartInvFieldHandler(MouseEvent event) {
     }
 
     @FXML
-    private void addPartScrPartMinFieldHandler(KeyEvent event) {
+    private void modifyPartScrPartMinFieldHandler(KeyEvent event) {
     }
     
 }

@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,8 +37,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private TableColumn<?, ?> mainScrPriceCol;
     @FXML
-    private Label mainScrProdLbl;
-    @FXML
     private Button mainScrProdAddBtn;
     @FXML
     private Button mainScrProdModifyBtn;
@@ -62,8 +59,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private TableColumn<?, ?> mainScrCostCol;
     @FXML
-    private Label mainScrPartsLbl;
-    @FXML
     private Button mainScrPartSearchBtn;
     @FXML
     private Button mainScrPartAddBtn;
@@ -73,6 +68,8 @@ public class MainScreenController implements Initializable {
     private Button mainScrPartDeleteBtn;
     @FXML
     private Button mainScrExitBtn;
+    @FXML
+    private AnchorPane mainScr;
 
     /**
      * Initializes the controller class.
