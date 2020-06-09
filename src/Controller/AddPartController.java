@@ -26,35 +26,35 @@ import javafx.scene.layout.AnchorPane;
 public class AddPartController implements Initializable {
 
     @FXML
-    private Button mainScrExitBtn;
+    private AnchorPane addPartScr;
     @FXML
-    private AnchorPane modifyPartScr;
+    private AnchorPane addPartScrPane;
     @FXML
-    private Button modifyPartScrSaveBtn;
+    private Button addPartScrSaveBtn;
     @FXML
-    private Button modifyPartScrCancelBtn;
+    private Button addPartScrCancelBtn;
     @FXML
-    private RadioButton modifyPartScrIHRadio;
+    private RadioButton addPartScrIHRadio;
     @FXML
-    private ToggleGroup modifyPartScrRadioBtns;
+    private ToggleGroup addPartScrRadioBtns;
     @FXML
-    private Label modifyPartScrMachIDLbl;
+    private Label addPartScrMachIDLbl;
     @FXML
-    private TextField modifyPartScrMachIDField;
+    private TextField addPartScrMachIDField;
     @FXML
-    private RadioButton modifyPartScrOutRadio;
+    private RadioButton addPartScrOutRadio;
     @FXML
-    private TextField modifyPartScrIDField;
+    private TextField addPartScrIDField;
     @FXML
-    private TextField modifyPartScrPartPriceField;
+    private TextField addPartScrPartPriceField;
     @FXML
-    private TextField modifyPartScrPartMaxField;
+    private TextField addPartScrPartMaxField;
     @FXML
-    private TextField modifyPartScrPartNameField;
+    private TextField addPartScrPartNameField;
     @FXML
-    private TextField modifyPartScrPartInvField;
+    private TextField addPartScrPartInvField;
     @FXML
-    private TextField modifyPartScrPartMinField;
+    private TextField addPartScrPartMinField;
 
     /**
      * Initializes the controller class.
@@ -64,53 +64,50 @@ public class AddPartController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void mainScrExitBtnHandler(MouseEvent event) {
-    }
 
 
     @FXML
-    private void modifyPartScrSaveBtnHandler(MouseEvent event) {
+    private void addPartScrSaveBtnHandler(MouseEvent event) {
     }
 
     @FXML
-    private void modifyPartScrCancelBtnHandler(MouseEvent event) {
+    private void addPartScrCancelBtnHandler(MouseEvent event) {
     }
 
     @FXML
-    private void modifyPartScrIHRadioHandler(MouseEvent event) {
+    private void addPartScrIHRadioHandler(MouseEvent event) {
     }
 
     @FXML
-    private void modifyPartScrMachIDFieldHandler(KeyEvent event) {
+    private void addPartScrMachIDFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void modifyPartScrOutRadioHandler(MouseEvent event) {
+    private void addPartScrOutRadioHandler(MouseEvent event) {
     }
 
     @FXML
-    private void modifyPartScrIDFieldHandler(KeyEvent event) {
+    private void addPartScrIDFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void modifyPartScrPartPriceFieldHandler(KeyEvent event) {
+    private void addPartScrPartPriceFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void modifyPartScrPartMaxFieldHandler(KeyEvent event) {
+    private void addPartScrPartMaxFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void modifyPartScrPartNameFieldHandler(KeyEvent event) {
+    private void addPartScrPartNameFieldHandler(KeyEvent event) {
     }
 
     @FXML
-    private void modifyPartScrPartInvFieldHandler(MouseEvent event) {
+    private void addPartScrPartInvFieldHandler(MouseEvent event) {
     }
 
     @FXML
-    private void modifyPartScrPartMinFieldHandler(KeyEvent event) {
+    private void addPartScrPartMinFieldHandler(KeyEvent event) {
     }
     
 }

@@ -9,14 +9,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
+<AnchorPane fx:id="addPartScr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
    <children>
-      <Button fx:id="mainScrExitBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="959.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#mainScrExitBtnHandler" prefHeight="51.0" prefWidth="163.0" style="-fx-border-radius: 5px;" text="Exit">
-         <font>
-            <Font name="Segoe UI" size="18.0" />
-         </font>
-      </Button>
-      <AnchorPane fx:id="addPartScr" layoutX="24.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
+      <AnchorPane fx:id="addPartScrPane" layoutX="24.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
             <Label layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Add Part" textFill="STEELBLUE">
                <font>

@@ -25,6 +25,10 @@ import javafx.scene.layout.AnchorPane;
 public class MainScreenController implements Initializable {
 
     @FXML
+    private AnchorPane mainScr;
+    @FXML
+    private Button mainScrExitBtn;
+    @FXML
     private AnchorPane mainScrProdPane;
     @FXML
     private TableView<?> mainScrPartTab1;
@@ -66,10 +70,6 @@ public class MainScreenController implements Initializable {
     private Button mainScrPartModifyBtn;
     @FXML
     private Button mainScrPartDeleteBtn;
-    @FXML
-    private Button mainScrExitBtn;
-    @FXML
-    private AnchorPane mainScr;
 
     /**
      * Initializes the controller class.
@@ -78,6 +78,10 @@ public class MainScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void mainScrExitBtnHandler(MouseEvent event) {
+    }
 
     @FXML
     private void mainScrProdAddBtnHandler(MouseEvent event) {
@@ -119,8 +123,5 @@ public class MainScreenController implements Initializable {
     private void mainScrPartDeleteBtnHandler(MouseEvent event) {
     }
 
-    @FXML
-    private void mainScrExitBtnHandler(MouseEvent event) {
-    }
     
 }
