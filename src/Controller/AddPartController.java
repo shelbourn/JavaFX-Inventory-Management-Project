@@ -28,8 +28,6 @@ public class AddPartController implements Initializable {
     @FXML
     private Button mainScrExitBtn;
     @FXML
-    private AnchorPane addPartScrPane;
-    @FXML
     private Label mainScrPartsLbl;
     @FXML
     private RadioButton addPartScrIHRadio;
@@ -57,6 +55,8 @@ public class AddPartController implements Initializable {
     private TextField addPartScrPartInvField;
     @FXML
     private TextField addPartScrPartMinField;
+    @FXML
+    private AnchorPane addPartScr;
 
     /**
      * Initializes the controller class.
