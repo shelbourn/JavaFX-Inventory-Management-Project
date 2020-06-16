@@ -15,43 +15,27 @@ import javafx.collections.ObservableList;
 
 
 public class Inventory {
-    /***
-     * Variables
-     */
     
+    // Variables
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
     private ObservableList<Product> allProducts = FXCollections.observableArrayList();
   
-    /***
-     * Getters
-     */
-    
+    // Getter for allParts
     public ObservableList<Part> getParts(){
         return allParts;
     }
     
+    //Getter for allProducts
     public ObservableList<Product> getProducts(){
         return allProducts;
     }
     
-    /***
-     * Methods
-     */
-    
-    /***
-     * Add Part
-     * @param newPart 
-     */
-    
+    // Add Part method
     public void addPart (Part newPart) {
         allParts.add(newPart);
     }
     
-    /***
-     * Add Product
-     * @param newProduct 
-     */
-    
+    // Add Product method
     public void addProduct (Product newProduct){
         allProducts.add(newProduct);
     }
