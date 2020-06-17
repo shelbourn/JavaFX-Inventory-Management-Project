@@ -18,12 +18,22 @@ import javafx.beans.property.StringProperty;
 public abstract class Part {
     
     // Properties for Part class
-    private IntegerProperty partID = new SimpleIntegerProperty();
-    private StringProperty partName = new SimpleStringProperty();
-    private DoubleProperty partPrice = new SimpleDoubleProperty();
-    private IntegerProperty partStockLevel = new SimpleIntegerProperty();
-    private IntegerProperty partMinStockLevel = new SimpleIntegerProperty();
-    private IntegerProperty partMaxStockLevel = new SimpleIntegerProperty();
+    private IntegerProperty partID;
+    private StringProperty partName;
+    private DoubleProperty partPrice;
+    private IntegerProperty partStockLevel;
+    private IntegerProperty partMinStockLevel;
+    private IntegerProperty partMaxStockLevel;
+    
+    // Constructor to Instantiate Part Class
+    public Part() {
+        this.partID = new SimpleIntegerProperty();
+        this.partName = new SimpleStringProperty();
+        this.partPrice = new SimpleDoubleProperty();
+        this.partStockLevel = new SimpleIntegerProperty();
+        this.partMinStockLevel = new SimpleIntegerProperty();
+        this.partMaxStockLevel = new SimpleIntegerProperty();
+    }
     
     // Getters for Part Property Values
     public final IntegerProperty getPartID() {
