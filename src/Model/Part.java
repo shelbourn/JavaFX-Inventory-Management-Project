@@ -1,5 +1,5 @@
 /**
- * Abstract class used to store class variables and methods to then be inherited by
+ * Abstract class used to store class properties and methods to then be inherited by
  * the InHouse and Outsourced sub-classes
  * 
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
@@ -86,31 +86,31 @@ public abstract class Part {
     }
     
     // Setters for Part Properties
-    public void setPartID(IntegerProperty partID) {
+    public final void setPartID(IntegerProperty partID) {
         this.partID = partID;
     }
 
-    public void setPartName(StringProperty partName) {
+    public final void setPartName(StringProperty partName) {
         this.partName = partName;
     }
 
 
-    public void setPartPrice(DoubleProperty partPrice) {
+    public final void setPartPrice(DoubleProperty partPrice) {
         this.partPrice = partPrice;
     }
 
 
-    public void setPartStockLevel(IntegerProperty partStockLevel) {
+    public final void setPartStockLevel(IntegerProperty partStockLevel) {
         this.partStockLevel = partStockLevel;
     }
 
 
-    public void setPartMinStockLevel(IntegerProperty partMinStockLevel) {
+    public final void setPartMinStockLevel(IntegerProperty partMinStockLevel) {
         this.partMinStockLevel = partMinStockLevel;
     }
 
 
-    public void setPartMaxStockLevel(IntegerProperty partMaxStockLevel) {
+    public final void setPartMaxStockLevel(IntegerProperty partMaxStockLevel) {
         this.partMaxStockLevel = partMaxStockLevel;
     }
     
