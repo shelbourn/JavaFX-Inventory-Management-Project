@@ -7,68 +7,101 @@
 
 package Model;
 
+// Package Imports
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public abstract class Part {
     
-    // Variables
-    private int partID;
-    private String partName;
-    private double partPrice;
-    private int partStockLevel;
-    private int minStockLevelPart;
-    private int maxStockLevelPart;
-
-    // Getter and Setter for partID
-    public int getPartID() {
+    // Properties for Part class
+    private IntegerProperty partID = new SimpleIntegerProperty();
+    private StringProperty partName = new SimpleStringProperty();
+    private DoubleProperty partPrice = new SimpleDoubleProperty();
+    private IntegerProperty partStockLevel = new SimpleIntegerProperty();
+    private IntegerProperty partMinStockLevel = new SimpleIntegerProperty();
+    private IntegerProperty partMaxStockLevel = new SimpleIntegerProperty();
+    
+    // Getters for Part Property Values
+    public final IntegerProperty getPartID() {
         return partID;
     }
 
-    public void setPartID(int partID) {
+    public final StringProperty getPartName() {
+        return partName;
+    }
+    
+    public final DoubleProperty getPartPrice() {
+        return partPrice;
+    }
+    
+    public final IntegerProperty getPartStockLevel() {
+        return partStockLevel;
+    }
+    
+    public final IntegerProperty getPartMinStockLevel() {
+        return partMinStockLevel;
+    }
+    
+    public final IntegerProperty getPartMaxStockLevel() {
+        return partMaxStockLevel;
+    }
+    
+    // Getters for Part Properties
+    public IntegerProperty getPartIDProperty() {
+        return partID;
+    }
+    
+    public StringProperty getPartNameProperty() {
+        return partName;
+    }
+    
+    public DoubleProperty getPartPriceProperty() {
+        return partPrice;
+    }
+    
+    public IntegerProperty getPartStockLevelProperty() {
+        return partStockLevel;
+    }
+    
+    public IntegerProperty getPartMinStockLevelProperty() {
+        return partMinStockLevel;
+    }
+    
+    public IntegerProperty getPartMaxStockLevelProperty() {
+        return partMaxStockLevel;
+    }
+    
+    // Setters for Part Properties
+    public void setPartID(IntegerProperty partID) {
         this.partID = partID;
     }
 
-    // Getter and Setter for partName
-    public String getPartName() {
-        return partName;
-    }
-
-    public void setPartName(String partName) {
+    public void setPartName(StringProperty partName) {
         this.partName = partName;
     }
 
-    // Getter and Setter for partPrice
-    public double getPrice() {
-        return partPrice;
-    }
 
-    public void setPrice(double partPrice) {
+    public void setPartPrice(DoubleProperty partPrice) {
         this.partPrice = partPrice;
     }
 
-    // Getter and Setter for partStockLevel
-    public int getStockLevel() {
-        return partStockLevel;
-    }
 
-    public void setStockLevel(int partStockLevel) {
+    public void setPartStockLevel(IntegerProperty partStockLevel) {
         this.partStockLevel = partStockLevel;
     }
 
-    // Getter and Setter for minStockLevelPart
-    public int getMinStockLevel() {
-        return minStockLevelPart;
+
+    public void setPartMinStockLevel(IntegerProperty partMinStockLevel) {
+        this.partMinStockLevel = partMinStockLevel;
     }
 
-    public void setMinStockLevel(int minStockLevelPart) {
-        this.minStockLevelPart = minStockLevelPart;
-    }
 
-    // Getter and Setter for maxStockLevelPart
-    public int getMaxStockLevel() {
-        return maxStockLevelPart;
-    }
-
-    public void setMaxStockLevel(int maxStockLevelPart) {
-        this.maxStockLevelPart = maxStockLevelPart;
+    public void setPartMaxStockLevel(IntegerProperty partMaxStockLevel) {
+        this.partMaxStockLevel = partMaxStockLevel;
     }
     
     
