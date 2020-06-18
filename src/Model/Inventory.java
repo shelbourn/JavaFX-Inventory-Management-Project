@@ -34,19 +34,32 @@ public class Inventory {
         this.allProducts = allProducts;
     }
     
-    // Methods for Inventory class
+    /*** Methods for Inventory Class ***/
+    
+    // Add Part
     public void addPart(Part newPart) {
         allParts.add(newPart);
     }
     
+    // Add Product
     public void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
     
+    // Lookup Part
     public Part lookupPart(int partID) {
-        for (Part p : allParts) {
-            if (p.getPartID() == partID)
-                return p;
+        for (Part prt : allParts) {
+            if (prt.getPartID() == partID)
+                return prt;
+            }
+            return null;
+        }
+    
+    // Lookup Product
+    public Product lookupProduct(int productID) {
+        for (Product prd : allProducts) {
+            if (prd.getProductID() == productID)
+                return prd;
             }
             return null;
         }
