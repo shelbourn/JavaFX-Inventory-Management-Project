@@ -23,13 +23,13 @@ public class InHouse extends Part {
     }
 
     // Getter for InHouse Part properties
-    public final StringProperty getMachineID() {
-        return machineID;
+    public final String getMachineID() {
+        return machineID.get();
     }
 
     // Setter for InHouse Part properties
-    public final void setMachineID(StringProperty machineID) {
-        this.machineID = machineID;
+    public final void setMachineID(String value) {
+        machineID.set(value);
     }
     
     
