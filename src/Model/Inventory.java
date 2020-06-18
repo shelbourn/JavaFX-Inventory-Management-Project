@@ -15,8 +15,10 @@ public class Inventory {
     // Properties for Inventory class
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
     private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private int generatedPartID = 0;
+    private int generatedProductID = 0;
 
-    // Getters for Inventory properties 
+    // Getters for Inventory property values 
     public ObservableList<Part> getAllParts() {
         return allParts;
     }
@@ -25,6 +27,16 @@ public class Inventory {
         return allProducts;
     }
     
+    public int getGeneratedPartID() {
+        generatedPartID++;
+        return generatedPartID;
+    }
+    
+    public int getGeneratedProductID() {
+        generatedProductID++;
+        return generatedProductID;
+    }
+       
     // Setters for Inventory properties
     public void setAllParts(ObservableList<Part> allParts) {
         this.allParts = allParts;
@@ -53,21 +65,37 @@ public class Inventory {
     // Lookup Part by Name
     public Part lookupPartByName(String partName) {
         for (Part prt : allParts) {
-            if (prt.getPartName() == partName)
+            if (prt.getPartName().equals(partName))
                 return prt;
         }
         return null;
     }
     
     // Update Part
-    public final void updatePart(int index, Part selectedPart) {
+    public void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
     
-    // Delete Part
-    public final boolean deletePart(Part selectedPart) {
-        for(int i = 0; i < allProducts.size (); i++) {
-            return allProducts.get(i).getAssociatedParts().contains(selectedPart);
+    // Delete Part (Only deletes part from product's associated parts)
+    // May need to add another method to delete part from inventory completely
+    public boolean deleteAssociatedPart(Part selectedPart) {
+        for(int i = 0; i < allProducts.size(); i++) {
+            if (allProducts.get(i).getAssociatedParts().contains(selectedPart)){
+                allProducts.get(i).getAssociatedParts().remove(selectedPart);
+                       return true; 
+            }
+        }
+        return false;
+    }
+    
+    // Delete Part (Deletes part from Inventory) *** Not sure if this and above method need
+    // to be combined ***
+    public boolean deletePart (Part selectedPart) {
+        for(int i = 0; i < allParts.size(); i++) {
+            if(allParts.get(i).getPartID() == selectedPart.getPartID()) {
+                allParts.remove(i);
+                return true;
+            }
         }
         return false;
     }
@@ -89,7 +117,7 @@ public class Inventory {
     // Lookup Product by Name
     public Product lookupProductByName(String productName) {
         for (Product prd : allProducts) {
-            if (prd.getProductName() == productName)
+            if (prd.getProductName().equals(productName))
                 return prd;
         }
         return null;
@@ -98,6 +126,17 @@ public class Inventory {
     // Update Product
     public void updateProduct(int index, Product selectedProduct) {
         allProducts.set(index, selectedProduct);
+    }
+    
+    // Delete Product
+    public boolean deleteProduct(Product selectedProduct) {
+        for(int i = 0; i < allProducts.size (); i++) {
+           if(allProducts.get(i).getProductID() == selectedProduct.getProductID()) {
+               allProducts.remove(i);
+               return true;
+           }
+        }
+        return false;
     }
     
     
