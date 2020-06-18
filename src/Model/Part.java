@@ -36,28 +36,28 @@ public abstract class Part {
     }
     
     // Getters for Part Property Values
-    public final IntegerProperty getPartID() {
-        return partID;
+    public final int getPartID() {
+        return partID.get();
     }
 
-    public final StringProperty getPartName() {
-        return partName;
+    public final String getPartName() {
+        return partName.get();
     }
     
-    public final DoubleProperty getPartPrice() {
-        return partPrice;
+    public final double getPartPrice() {
+        return partPrice.get();
     }
     
-    public final IntegerProperty getPartStockLevel() {
-        return partStockLevel;
+    public final int getPartStockLevel() {
+        return partStockLevel.get();
     }
     
-    public final IntegerProperty getPartMinStockLevel() {
-        return partMinStockLevel;
+    public final int getPartMinStockLevel() {
+        return partMinStockLevel.get();
     }
     
-    public final IntegerProperty getPartMaxStockLevel() {
-        return partMaxStockLevel;
+    public final int getPartMaxStockLevel() {
+        return partMaxStockLevel.get();
     }
     
     // Getters for Part Properties
@@ -86,32 +86,32 @@ public abstract class Part {
     }
     
     // Setters for Part Properties
-    public final void setPartID(IntegerProperty partID) {
-        this.partID = partID;
+    public final void setPartID(int value) {
+        partID.set(value);
     }
 
-    public final void setPartName(StringProperty partName) {
-        this.partName = partName;
-    }
-
-
-    public final void setPartPrice(DoubleProperty partPrice) {
-        this.partPrice = partPrice;
+    public final void setPartName(String value) {
+        partName.set(value);
     }
 
 
-    public final void setPartStockLevel(IntegerProperty partStockLevel) {
-        this.partStockLevel = partStockLevel;
+    public final void setPartPrice(double value) {
+        partPrice.set(value);
     }
 
 
-    public final void setPartMinStockLevel(IntegerProperty partMinStockLevel) {
-        this.partMinStockLevel = partMinStockLevel;
+    public final void setPartStockLevel(int value) {
+        partStockLevel.set(value);
     }
 
 
-    public final void setPartMaxStockLevel(IntegerProperty partMaxStockLevel) {
-        this.partMaxStockLevel = partMaxStockLevel;
+    public final void setPartMinStockLevel(int value) {
+        partMinStockLevel.set(value);
+    }
+
+
+    public final void setPartMaxStockLevel(int value) {
+        partMaxStockLevel.set(value);
     }
     
     

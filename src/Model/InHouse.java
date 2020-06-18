@@ -13,14 +13,14 @@ import javafx.beans.property.StringProperty;
 
 public class InHouse extends Part {
     
+    // Properties for the InHouse Part sub-class
+    private StringProperty machineID;
+    
     // Constructor to Instantiate InHouse Part sub-class
     public InHouse() {
         super();
         this.machineID = new SimpleStringProperty();
     }
-    
-    // Properties for the InHouse Part sub-class
-    private StringProperty machineID;
 
     // Getter for InHouse Part properties
     public final StringProperty getMachineID() {
