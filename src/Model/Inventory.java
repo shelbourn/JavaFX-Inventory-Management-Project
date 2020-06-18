@@ -41,13 +41,8 @@ public class Inventory {
         allParts.add(newPart);
     }
     
-    // Add Product
-    public void addProduct(Product newProduct) {
-        allProducts.add(newProduct);
-    }
-    
-    // Lookup Part
-    public Part lookupPart(int partID) {
+    // Lookup Part by ID (may want to combine the two search methods into one function)
+    public Part lookupPartByID(int partID) {
         for (Part prt : allParts) {
             if (prt.getPartID() == partID)
                 return prt;
@@ -55,14 +50,57 @@ public class Inventory {
             return null;
         }
     
-    // Lookup Product
-    public Product lookupProduct(int productID) {
+    // Lookup Part by Name
+    public Part lookupPartByName(String partName) {
+        for (Part prt : allParts) {
+            if (prt.getPartName() == partName)
+                return prt;
+        }
+        return null;
+    }
+    
+    // Update Part
+    public final void updatePart(int index, Part selectedPart) {
+        allParts.set(index, selectedPart);
+    }
+    
+    // Delete Part
+    public final boolean deletePart(Part selectedPart) {
+        for(int i = 0; i < allProducts.size (); i++) {
+            return allProducts.get(i).getAssociatedParts().contains(selectedPart);
+        }
+        return false;
+    }
+    
+    // Add Product
+    public void addProduct(Product newProduct) {
+        allProducts.add(newProduct);
+    }
+    
+    // Lookup Product by ID (may want to combine the two search methods into one function)
+    public Product lookupProductByID(int productID) {
         for (Product prd : allProducts) {
             if (prd.getProductID() == productID)
                 return prd;
             }
             return null;
         }
+    
+    // Lookup Product by Name
+    public Product lookupProductByName(String productName) {
+        for (Product prd : allProducts) {
+            if (prd.getProductName() == productName)
+                return prd;
+        }
+        return null;
+    }
+    
+    // Update Product
+    public void updateProduct(int index, Product selectedProduct) {
+        allProducts.set(index, selectedProduct);
+    }
+    
+    
 }
 
 

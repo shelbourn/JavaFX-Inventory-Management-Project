@@ -64,7 +64,7 @@ public class Product {
         return productMaxStockLevel.get();
     }
     
-    public final static ObservableList<Part> getAssociatedParts() {
+    public final ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
     
@@ -118,7 +118,7 @@ public class Product {
         productMaxStockLevel.set(value);
     }
     
-    public final static void setAssociatedParts(ObservableList<Part> associatedParts) {
+    public final void setAssociatedParts(ObservableList<Part> associatedParts) {
         Product.associatedParts = associatedParts;
     }
 }
