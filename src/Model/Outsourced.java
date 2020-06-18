@@ -14,7 +14,7 @@ import javafx.beans.property.StringProperty;
 
 public class Outsourced extends Part {
     
-    // Properties for Outsource sub-class
+    // Properties for Outsourced Part sub-class
     private StringProperty companyName;
     
     // Constructor to Instantiate Outsourced Part sub-class
