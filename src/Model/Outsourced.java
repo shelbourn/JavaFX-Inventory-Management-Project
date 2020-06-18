@@ -24,12 +24,12 @@ public class Outsourced extends Part {
     }
 
     // Getter for Outsourced Part properties
-    public final StringProperty getCompanyName() {
-        return companyName;
+    public final String getCompanyName() {
+        return companyName.get();
     }
 
     // Setter for Outsourced Part properties
-    public final void setCompanyName(StringProperty companyName) {
-        this.companyName = companyName;
+    public final void setCompanyName(String value) {
+        companyName.set(value);
     }
 }
