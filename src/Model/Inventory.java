@@ -97,6 +97,7 @@ public class Inventory {
                 return true;
             }
         }
+        System.out.println("This part was not found in inventory.");
         return false;
     }
     
@@ -136,6 +137,7 @@ public class Inventory {
                return true;
            }
         }
+        System.out.println("This product was not found in inventory.");
         return false;
     }
     
