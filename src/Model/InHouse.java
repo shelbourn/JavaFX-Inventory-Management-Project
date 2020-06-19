@@ -1,14 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Model;
-
 /**
- *
+ * Defines the properties and methods for the InHouse class which is a sub-class of the
+ * Part super class
+ * 
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
-public class InHouse {
+
+package Model;
+
+// Package Imports
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public class InHouse extends Part {
+    
+    // Properties for the InHouse Part sub-class
+    private StringProperty machineID;
+    
+    // Constructor to Instantiate InHouse Part sub-class
+    public InHouse() {
+        super();
+        this.machineID = new SimpleStringProperty();
+    }
+
+    // Getter for InHouse Part properties
+    public final String getMachineID() {
+        return machineID.get();
+    }
+
+    // Setter for InHouse Part properties
+    public final void setMachineID(String value) {
+        machineID.set(value);
+    }
+    
+    
     
 }
