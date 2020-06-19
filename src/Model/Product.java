@@ -64,7 +64,7 @@ public class Product {
         return productMaxStockLevel.get();
     }
     
-    public final ObservableList<Part> getAssociatedParts() {
+    public static ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }
     
@@ -118,11 +118,49 @@ public class Product {
         productMaxStockLevel.set(value);
     }
     
-    public final void setAssociatedParts(ObservableList<Part> associatedParts) {
+    public static void setAssociatedParts(ObservableList<Part> associatedParts) {
         Product.associatedParts = associatedParts;
     }
     
-    // Exception Handling
+    /*** Exception Handling ***/
     
-    /*** Build Switch-Case here for exceptions ***/
+    // Exception handling for entered field values
+    private static String productValueExceptions(double prodPrice, int prodStockLevel, int prodMinStockLevel, int prodMaxStockLevel, String productValueException) {
+        if(prodPrice <= 0) {
+            productValueException = productValueException + "\nProduct Price cannot be $0 or negative.";
+        }
+        if(prodStockLevel <1) {
+            productValueException = productValueException + "\nProduct Stock Level cannot be zero.";
+        }
+        if(prodStockLevel < prodMinStockLevel) {
+            productValueException = productValueException + "\nProduct Stock Level must be greater than its Minimum Stock Level requirement.";
+        }
+        if(prodStockLevel > prodMaxStockLevel) {
+            productValueException = productValueException + "\nProduct Stock Level must be less than its Maximum Stock Level requirement.";
+        }
+        if(prodMinStockLevel  > prodMaxStockLevel) {
+            productValueException = productValueException + "\nProduct Minimum Stock Level cannot be greater than its Maximum Stock Level.";
+        }
+        return productValueException;
+    }
+    
+    // Exception handling for empty fields
+    private static String productFieldExceptions(String prodName, String prodPrice, String prodStockLevel, String prodMinStockLevel, String prodMaxStockLevel, String productFieldException) {
+        if(prodName.equals("")) {
+            productFieldException = productFieldException + "\nProduct Name cannot be blank.";
+        }
+        if(prodPrice.equals("")) {
+            productFieldException = productFieldException + "\nProduct Price cannot be blank.";
+        }
+        if(prodStockLevel.equals("")) {
+            productFieldException = productFieldException + "\nProduct Stock Level cannot be blank.";
+        }
+        if(prodMinStockLevel.equals("")) {
+            productFieldException = productFieldException + "\nProduct Minimum Stock Level cannot be blank.";
+        }
+        if(prodMaxStockLevel.equals("")) {
+            productFieldException = productFieldException + "\nProduct Maximum Stock Level cannot be blank.";
+        }
+    return productFieldException;
+    }
 }

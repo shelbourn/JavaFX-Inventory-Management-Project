@@ -114,9 +114,47 @@ public abstract class Part {
         partMaxStockLevel.set(value);
     }
     
-    // Exception Handling
+    /*** Exception Handling ***/
     
-    /*** Build Switch-Case here for exceptions ***/
+    // Exception handling for entered field values
+    private static String partValueExceptions(double partPrice, int partStockLevel, int partMinStockLevel, int partMaxStockLevel, String partValueException) {
+        if(partPrice <= 0) {
+            partValueException = partValueException + "\nPart Price cannot be $0 or negative.";
+        }
+        if(partStockLevel <1) {
+            partValueException = partValueException + "\nPart Stock Level cannot be zero.";
+        }
+        if(partStockLevel < partMinStockLevel) {
+            partValueException = partValueException + "\nPart Stock Level must be greater than its Minimum Stock Level requirement.";
+        }
+        if(partStockLevel > partMaxStockLevel) {
+            partValueException = partValueException + "\nPart Stock Level must be less than its Maximum Stock Level requirement.";
+        }
+        if(partMinStockLevel  > partMaxStockLevel) {
+            partValueException = partValueException + "\nPart Minimum Stock Level cannot be greater than its Maximum Stock Level.";
+        }
+        return partValueException;
+    }
+    
+    // Exception handling for empty fields
+    private static String partFieldExceptions(String partName, String partPrice, String partStockLevel, String partMinStockLevel, String partMaxStockLevel, String partFieldException) {
+        if(partName.equals("")) {
+            partFieldException = partFieldException + "\nPart Name cannot be blank.";
+        }
+        if(partPrice.equals("")) {
+            partFieldException = partFieldException + "\nPart Price cannot be blank.";
+        }
+        if(partStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Stock Level cannot be blank.";
+        }
+        if(partMinStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Minimum Stock Level cannot be blank.";
+        }
+        if(partMaxStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Maximum Stock Level cannot be blank.";
+        }
+    return partFieldException;
+    }
     
     
 }
