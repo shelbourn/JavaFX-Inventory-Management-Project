@@ -114,5 +114,9 @@ public abstract class Part {
         partMaxStockLevel.set(value);
     }
     
+    // Exception Handling
+    
+    /*** Build Switch-Case here for exceptions ***/
+    
     
 }

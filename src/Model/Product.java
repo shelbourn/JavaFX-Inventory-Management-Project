@@ -121,4 +121,8 @@ public class Product {
     public final void setAssociatedParts(ObservableList<Part> associatedParts) {
         Product.associatedParts = associatedParts;
     }
+    
+    // Exception Handling
+    
+    /*** Build Switch-Case here for exceptions ***/
 }
