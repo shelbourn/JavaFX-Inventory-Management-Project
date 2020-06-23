@@ -36,27 +36,27 @@ public abstract class Part {
     }
     
     // Getters for Part Property Values
-    public final int getPartID() {
+    public int getPartID() {
         return partID.get();
     }
 
-    public final String getPartName() {
+    public String getPartName() {
         return partName.get();
     }
     
-    public final double getPartPrice() {
+    public double getPartPrice() {
         return partPrice.get();
     }
     
-    public final int getPartStockLevel() {
+    public int getPartStockLevel() {
         return partStockLevel.get();
     }
     
-    public final int getPartMinStockLevel() {
+    public int getPartMinStockLevel() {
         return partMinStockLevel.get();
     }
     
-    public final int getPartMaxStockLevel() {
+    public int getPartMaxStockLevel() {
         return partMaxStockLevel.get();
     }
     
@@ -86,31 +86,31 @@ public abstract class Part {
     }
     
     // Setters for Part Properties
-    public final void setPartID(int value) {
+    public void setPartID(int value) {
         partID.set(value);
     }
 
-    public final void setPartName(String value) {
+    public void setPartName(String value) {
         partName.set(value);
     }
 
 
-    public final void setPartPrice(double value) {
+    public void setPartPrice(double value) {
         partPrice.set(value);
     }
 
 
-    public final void setPartStockLevel(int value) {
+    public void setPartStockLevel(int value) {
         partStockLevel.set(value);
     }
 
 
-    public final void setPartMinStockLevel(int value) {
+    public void setPartMinStockLevel(int value) {
         partMinStockLevel.set(value);
     }
 
 
-    public final void setPartMaxStockLevel(int value) {
+    public void setPartMaxStockLevel(int value) {
         partMaxStockLevel.set(value);
     }
     
@@ -121,7 +121,7 @@ public abstract class Part {
         if(partPrice <= 0) {
             partValueException = partValueException + "\nPart Price cannot be $0 or negative.";
         }
-        if(partStockLevel <1) {
+        if(partStockLevel < 1) {
             partValueException = partValueException + "\nPart Stock Level cannot be zero.";
         }
         if(partStockLevel < partMinStockLevel) {
@@ -155,6 +155,4 @@ public abstract class Part {
         }
     return partFieldException;
     }
-    
-    
 }

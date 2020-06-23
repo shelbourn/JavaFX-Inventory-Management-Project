@@ -140,8 +140,6 @@ public class Inventory {
         System.out.println("This product was not found in inventory.");
         return false;
     }
-    
-    
 }
 
 

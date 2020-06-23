@@ -40,27 +40,27 @@ public class Product {
     
     // Getters for Product Property Values
 
-    public final int getProductID() {
+    public int getProductID() {
         return productID.get();
     }
 
-    public final String getProductName() {
+    public String getProductName() {
         return productName.get();
     }
     
-    public final double getProductPrice() {
+    public double getProductPrice() {
         return productPrice.get();
     }
     
-    public final int getProductStockLevel() {
+    public int getProductStockLevel() {
         return productStockLevel.get();
     }
     
-    public final int getProductMinStockLevel() {
+    public int getProductMinStockLevel() {
         return productMinStockLevel.get();
     }
     
-    public final int getProductMaxStockLevel() {
+    public int getProductMaxStockLevel() {
         return productMaxStockLevel.get();
     }
     
@@ -94,27 +94,27 @@ public class Product {
     }
     
     // Setters for Product Properties
-    public final void setProductID(int value) {
+    public void setProductID(int value) {
         productID.set(value);
     }
     
-    public final void setProductName(String value) {
+    public void setProductName(String value) {
         productName.set(value);
     }
 
-    public final void setProductPrice(double value) {
+    public void setProductPrice(double value) {
         productPrice.set(value);
     }
 
-    public final void setProductStockLevel(int value) {
+    public void setProductStockLevel(int value) {
         productStockLevel.set(value);
     }
 
-    public final void setProductMinStockLevel(int value) {
+    public void setProductMinStockLevel(int value) {
         productMinStockLevel.set(value);
     }
 
-    public final void setProductMaxStockLevel(int value) {
+    public void setProductMaxStockLevel(int value) {
         productMaxStockLevel.set(value);
     }
     
@@ -129,7 +129,7 @@ public class Product {
         if(prodPrice <= 0) {
             productValueException = productValueException + "\nProduct Price cannot be $0 or negative.";
         }
-        if(prodStockLevel <1) {
+        if(prodStockLevel < 1) {
             productValueException = productValueException + "\nProduct Stock Level cannot be zero.";
         }
         if(prodStockLevel < prodMinStockLevel) {
