@@ -7,6 +7,7 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,8 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -26,35 +25,35 @@ import javafx.scene.layout.AnchorPane;
 public class AddPartController implements Initializable {
 
     @FXML
+    private Button saveBtn;
+    @FXML
+    private Button cancelBtn;
+    @FXML
+    private RadioButton inHouseRadio;
+    @FXML
+    private RadioButton outsourcedRadio;
+    @FXML
+    private TextField partIDField;
+    @FXML
+    private TextField maxLevelField;
+    @FXML
+    private TextField partNameField;
+    @FXML
+    private TextField minLevelField;
+    @FXML
     private AnchorPane addPartScr;
     @FXML
     private AnchorPane addPartScrPane;
     @FXML
-    private Button addPartScrSaveBtn;
+    private ToggleGroup addPartToggleGroup;
     @FXML
-    private Button addPartScrCancelBtn;
+    private Label dynamicLabel;
     @FXML
-    private RadioButton addPartScrIHRadio;
+    private TextField dynamicField;
     @FXML
-    private ToggleGroup addPartScrRadioBtns;
+    private TextField priceCostField;
     @FXML
-    private Label addPartScrMachIDLbl;
-    @FXML
-    private TextField addPartScrMachIDField;
-    @FXML
-    private RadioButton addPartScrOutRadio;
-    @FXML
-    private TextField addPartScrIDField;
-    @FXML
-    private TextField addPartScrPartPriceField;
-    @FXML
-    private TextField addPartScrPartMaxField;
-    @FXML
-    private TextField addPartScrPartNameField;
-    @FXML
-    private TextField addPartScrPartInvField;
-    @FXML
-    private TextField addPartScrPartMinField;
+    private TextField invLevelField;
 
     /**
      * Initializes the controller class.
@@ -64,50 +63,19 @@ public class AddPartController implements Initializable {
         // TODO
     }    
 
-
-
     @FXML
-    private void addPartScrSaveBtnHandler(MouseEvent event) {
+    private void saveBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void addPartScrCancelBtnHandler(MouseEvent event) {
+    private void cancelBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void addPartScrIHRadioHandler(MouseEvent event) {
+    private void inHouseRadioHandler(ActionEvent event) {
     }
 
     @FXML
-    private void addPartScrMachIDFieldHandler(KeyEvent event) {
+    private void outsourcedRadioHandler(ActionEvent event) {
     }
-
-    @FXML
-    private void addPartScrOutRadioHandler(MouseEvent event) {
-    }
-
-    @FXML
-    private void addPartScrIDFieldHandler(KeyEvent event) {
-    }
-
-    @FXML
-    private void addPartScrPartPriceFieldHandler(KeyEvent event) {
-    }
-
-    @FXML
-    private void addPartScrPartMaxFieldHandler(KeyEvent event) {
-    }
-
-    @FXML
-    private void addPartScrPartNameFieldHandler(KeyEvent event) {
-    }
-
-    @FXML
-    private void addPartScrPartInvFieldHandler(MouseEvent event) {
-    }
-
-    @FXML
-    private void addPartScrPartMinFieldHandler(KeyEvent event) {
-    }
-    
 }
