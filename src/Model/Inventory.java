@@ -13,48 +13,49 @@ import javafx.collections.ObservableList;
 public class Inventory {
     
     // Properties for Inventory class
-    private ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
-    private int generatedPartID = 0;
-    private int generatedProductID = 0;
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static int generatedPartID = 1000;
+    private static int generatedProductID = 1000;
 
     // Getters for Inventory property values 
-    public ObservableList<Part> getAllParts() {
+    public static ObservableList<Part> getAllParts() {
         return allParts;
     }
 
-    public ObservableList<Product> getAllProducts() {
+    public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
     
-    public int getGeneratedPartID() {
+    public static int getGeneratedPartID() {
         generatedPartID++;
         return generatedPartID;
     }
     
-    public int getGeneratedProductID() {
+    public static int getGeneratedProductID() {
         generatedProductID++;
         return generatedProductID;
     }
        
     // Setters for Inventory properties
-    public void setAllParts(ObservableList<Part> allParts) {
-        this.allParts = allParts;
+    public static void setAllParts(ObservableList<Part> allParts) {
+        Inventory.allParts = allParts;
     }
 
-    public void setAllProducts(ObservableList<Product> allProducts) {
-        this.allProducts = allProducts;
+    public static void setAllProducts(ObservableList<Product> allProducts) {
+        Inventory.allProducts = allProducts;
     }
     
-    /*** Methods for Inventory Class ***/
+    /*** Methods for Inventory Class
+     * @param newPart ***/
     
     // Add Part
-    public void addPart(Part newPart) {
+    public static void addPart(Part newPart) {
         allParts.add(newPart);
     }
     
     // Lookup Part by ID (may want to combine the two search methods into one function)
-    public Part lookupPartByID(int partID) {
+    public static Part lookupPartByID(int partID) {
         for (Part prt : allParts) {
             if (prt.getPartID() == partID)
                 return prt;
@@ -63,7 +64,7 @@ public class Inventory {
         }
     
     // Lookup Part by Name
-    public Part lookupPartByName(String partName) {
+    public static Part lookupPartByName(String partName) {
         for (Part prt : allParts) {
             if (prt.getPartName().equals(partName))
                 return prt;
@@ -72,17 +73,17 @@ public class Inventory {
     }
     
     // Update Part
-    public void updatePart(int index, Part selectedPart) {
+    public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
     
     // Delete Part (Only deletes part from product's associated parts)
     // May need to add another method to delete part from inventory completely
-    public boolean deleteAssociatedPart(Part selectedPart) {
-        for(int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getAssociatedParts().contains(selectedPart)){
-                allProducts.get(i).getAssociatedParts().remove(selectedPart);
-                       return true; 
+    public static boolean deleteAssociatedPart(Part selectedPart) {
+        for (Product allProduct : allProducts) {
+            if (Product.getAssociatedParts().contains(selectedPart)){
+                Product.getAssociatedParts().remove(selectedPart);
+                return true; 
             }
         }
         return false;
@@ -90,7 +91,7 @@ public class Inventory {
     
     // Delete Part (Deletes part from Inventory) *** Not sure if this and above method need
     // to be combined ***
-    public boolean deletePart (Part selectedPart) {
+    public static boolean deletePart (Part selectedPart) {
         for(int i = 0; i < allParts.size(); i++) {
             if(allParts.get(i).getPartID() == selectedPart.getPartID()) {
                 allParts.remove(i);
@@ -102,12 +103,12 @@ public class Inventory {
     }
     
     // Add Product
-    public void addProduct(Product newProduct) {
+    public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
     
     // Lookup Product by ID (may want to combine the two search methods into one function)
-    public Product lookupProductByID(int productID) {
+    public static Product lookupProductByID(int productID) {
         for (Product prd : allProducts) {
             if (prd.getProductID() == productID)
                 return prd;
@@ -116,7 +117,7 @@ public class Inventory {
         }
     
     // Lookup Product by Name
-    public Product lookupProductByName(String productName) {
+    public static Product lookupProductByName(String productName) {
         for (Product prd : allProducts) {
             if (prd.getProductName().equals(productName))
                 return prd;
@@ -125,12 +126,12 @@ public class Inventory {
     }
     
     // Update Product
-    public void updateProduct(int index, Product selectedProduct) {
+    public static void updateProduct(int index, Product selectedProduct) {
         allProducts.set(index, selectedProduct);
     }
     
     // Delete Product
-    public boolean deleteProduct(Product selectedProduct) {
+    public static boolean deleteProduct(Product selectedProduct) {
         for(int i = 0; i < allProducts.size (); i++) {
            if(allProducts.get(i).getProductID() == selectedProduct.getProductID()) {
                allProducts.remove(i);

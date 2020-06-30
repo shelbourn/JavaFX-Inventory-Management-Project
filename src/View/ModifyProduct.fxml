@@ -54,7 +54,7 @@
                </font>
             </Label>
             <Line endX="988.5185546875" fill="#a7a7a7" layoutX="171.0" layoutY="65.0" startX="-152.66665649414062" stroke="#adadad" />
-            <TextField fx:id="productIDField" disable="true" editable="false" layoutX="213.0" layoutY="197.0" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
+            <TextField fx:id="productIDField" editable="false" layoutX="213.0" layoutY="197.0" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
                <font>
                   <Font name="Segoe UI" size="16.0" />
                </font>
