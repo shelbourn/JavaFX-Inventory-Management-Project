@@ -78,13 +78,18 @@ public class AddPartController implements Initializable {
      * @param url
      * @param rb
      */
-    
+       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partID = Inventory.getGeneratedPartID();
         partIDField.setText("Auto-Generated:   " + partID);
     }    
 
+    /***
+     * Save Button tests for field/value exceptions, creates in-house/outsourced parts,
+     * displays alerts, navigates user back to main screen upon successful part addition.
+    */
+       
     @FXML
     private void saveBtnHandler(ActionEvent event) throws IOException {
         String partName = partNameField.getText();
@@ -202,6 +207,12 @@ public class AddPartController implements Initializable {
     }
 
     // Try to outsource this code to @AlertMessages.java
+    
+    /***
+     * Cancel button displays a CONFIRMATION alert requesting user to confirm cancel
+     * and if they confirm then they are returned to the application's main screen.
+     */
+    
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
       try {
@@ -226,6 +237,7 @@ public class AddPartController implements Initializable {
             catch (IOException e) {}
     }
 
+    // Dynamically setting the Machine ID / Company Name field based on selected radio button
     @FXML
     private void inHouseRadioHandler(ActionEvent event) {
         inHousePart = true;
