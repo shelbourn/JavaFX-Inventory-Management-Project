@@ -8,27 +8,27 @@
 package Model;
 
 // Package Imports
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class InHouse extends Part {
     
     // Properties for the InHouse Part sub-class
-    private StringProperty machineID;
+    private IntegerProperty machineID;
     
     // Constructor to Instantiate InHouse Part sub-class
     public InHouse() {
         super();
-        this.machineID = new SimpleStringProperty();
+        this.machineID = new SimpleIntegerProperty();
     }
 
     // Getter for InHouse Part properties
-    public String getMachineID() {
+    public int getMachineID() {
         return machineID.get();
     }
 
     // Setter for InHouse Part properties
-    public void setMachineID(String value) {
+    public void setMachineID(int value) {
         machineID.set(value);
     }
 }

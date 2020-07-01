@@ -9,9 +9,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addPartScr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
+
+<AnchorPane prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
    <children>
-      <AnchorPane fx:id="addPartScrPane" layoutX="24.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
+      <AnchorPane fx:id="addPartScrPane" layoutX="25.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
             <Label layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Add Part" textFill="STEELBLUE">
                <font>

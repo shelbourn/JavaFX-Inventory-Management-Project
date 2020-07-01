@@ -117,7 +117,7 @@ public abstract class Part {
     /*** Exception Handling ***/
     
     // Exception handling for entered field values
-    private static String partValueExceptions(double partPrice, int partStockLevel, int partMinStockLevel, int partMaxStockLevel, int partMachineID, String partValueException) {
+    public static String partValueExceptions(double partPrice, int partStockLevel, int partMinStockLevel, int partMaxStockLevel, String partValueException) {
         if(partPrice <= 0) {
             partValueException = partValueException + "\nPart Price cannot be $0 or negative.";
         }
@@ -137,7 +137,31 @@ public abstract class Part {
     }
     
     // Exception handling for empty fields
-    private static String partFieldExceptions(String partName, String partPrice, String partStockLevel, String partMinStockLevel, String partMaxStockLevel, String partCompanyName, String partMachineID, String partFieldException) {
+    //In-House Parts
+    public static String inHousePartFieldExceptions(String partName, String partPrice, String partStockLevel, String partMinStockLevel, String partMaxStockLevel, String partMachineID, String partFieldException) {
+        if(partName.equals("")) {
+            partFieldException = partFieldException + "\nPart Name cannot be blank.";
+        }
+        if(partPrice.equals("")) {
+            partFieldException = partFieldException + "\nPart Price cannot be blank.";
+        }
+        if(partStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Stock Level cannot be blank.";
+        }
+        if(partMinStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Minimum Stock Level cannot be blank.";
+        }
+        if(partMaxStockLevel.equals("")) {
+            partFieldException = partFieldException + "\nPart Maximum Stock Level cannot be blank.";
+        }
+        if(partMachineID.equals("")) {
+            partFieldException = partFieldException + "\nMachine ID field cannot be blank.";
+        }
+    return partFieldException;
+    }
+    
+    // Outsourced Parts
+    public static String outsourcedPartFieldExceptions(String partName, String partPrice, String partStockLevel, String partMinStockLevel, String partMaxStockLevel, String partCompanyName, String partFieldException) {
         if(partName.equals("")) {
             partFieldException = partFieldException + "\nPart Name cannot be blank.";
         }
@@ -155,9 +179,6 @@ public abstract class Part {
         }
         if(partCompanyName.equals("")) {
             partFieldException = partFieldException + "\nCompany Name field cannot be blank.";
-        }
-        if(partMachineID.equals("")) {
-            partFieldException = partFieldException + "\nMachine ID field cannot be blank.";
         }
     return partFieldException;
     }
