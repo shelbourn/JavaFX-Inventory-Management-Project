@@ -97,7 +97,7 @@ public class AddPartController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Exit to Main Screen");
             alert.setHeaderText("Would you like to cancel this operation?");
-            alert.setContentText("Click OK to cancel operation and return to the main screen. \nClick CANCEL to continue operation and return to the current screen.");
+            alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
             alert.showAndWait();
             
             if (alert.getResult() == ButtonType.OK) {

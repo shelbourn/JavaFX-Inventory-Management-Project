@@ -20,7 +20,7 @@ public class InventoryManager extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddPart.fxml"));
         
         Scene scene = new Scene(root);
         
