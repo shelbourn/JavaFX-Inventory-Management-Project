@@ -94,21 +94,17 @@ public abstract class Part {
         partName.set(value);
     }
 
-
     public void setPartPrice(double value) {
         partPrice.set(value);
     }
-
 
     public void setPartStockLevel(int value) {
         partStockLevel.set(value);
     }
 
-
     public void setPartMinStockLevel(int value) {
         partMinStockLevel.set(value);
     }
-
 
     public void setPartMaxStockLevel(int value) {
         partMaxStockLevel.set(value);
@@ -159,7 +155,7 @@ public abstract class Part {
         }
     return partFieldException;
     }
-    
+      
     // Outsourced Parts
     public static String outsourcedPartFieldExceptions(String partName, String partPrice, String partStockLevel, String partMinStockLevel, String partMaxStockLevel, String partCompanyName, String partFieldException) {
         if(partName.equals("")) {
@@ -181,5 +177,94 @@ public abstract class Part {
             partFieldException = partFieldException + "\nCompany Name field cannot be blank.";
         }
     return partFieldException;
+    }
+    
+    // Exception handling for entered field data types
+    // In-House Parts
+    private static boolean partPriceDataTypeException (String partPrice) {
+        try {
+            Double.parseDouble(partPrice);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private static boolean stockLevelDataTypeException (String partStockLevel) {
+        try {
+            Integer.parseInt(partStockLevel);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private static boolean maxLevelDataTypeException (String partMaxStockLevel) {
+        try {
+            Integer.parseInt(partMaxStockLevel);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private static boolean minLevelDataTypeException (String partMinStockLevel) {
+        try {
+            Integer.parseInt(partMinStockLevel);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private static boolean machineIDDataTypeException (String machineID) {
+        try {
+            Integer.parseInt(machineID);
+            return true;
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    // Alert message text for In-House Part data type exceptions
+    public static String iHPartDataTypeExceptions (String partPrice, String partStockLevel, String partMaxStockLevel, String partMinStockLevel, String machineID, String iHPartDataTypeException) {
+        if (partPriceDataTypeException(partPrice) == false ) {
+            iHPartDataTypeException = iHPartDataTypeException + "\nPart Price must be a number in the format XX.XX";
+        }
+        if (stockLevelDataTypeException(partStockLevel) == false ) {
+            iHPartDataTypeException = iHPartDataTypeException + "\nPart Inventory Level must be a whole number greater than 0.";
+        }
+        if (maxLevelDataTypeException(partMaxStockLevel) == false ) {
+            iHPartDataTypeException = iHPartDataTypeException + "\nPart Maximum Inventory Level must be a whole number.";
+        }
+        if (minLevelDataTypeException(partMinStockLevel) == false ) {
+            iHPartDataTypeException = iHPartDataTypeException + "\nPart Minimum Inventory Level must be a whole number.";
+        }
+        if (machineIDDataTypeException(machineID) == false ) {
+            iHPartDataTypeException = iHPartDataTypeException + "\nIn-House Part Machine ID must be a whole number.";
+        }
+        return iHPartDataTypeException;
+    }
+    
+    // Alert message text for Outsourced Part data type exceptions
+    public static String outsourcedPartDataTypeExceptions (String partPrice, String partStockLevel, String partMaxStockLevel, String partMinStockLevel, String outsourcedPartDataTypeException) {
+        if (partPriceDataTypeException(partPrice) == false ) {
+            outsourcedPartDataTypeException = outsourcedPartDataTypeException + "\nPart Price must be a number in the format XX.XX";
+        }
+        if (stockLevelDataTypeException(partStockLevel) == false ) {
+            outsourcedPartDataTypeException = outsourcedPartDataTypeException + "\nPart Inventory Level must be a whole number greater than 0.";
+        }
+        if (maxLevelDataTypeException(partMaxStockLevel) == false ) {
+            outsourcedPartDataTypeException = outsourcedPartDataTypeException + "\nPart Maximum Inventory Level must be a whole number.";
+        }
+        if (minLevelDataTypeException(partMinStockLevel) == false ) {
+            outsourcedPartDataTypeException = outsourcedPartDataTypeException + "\nPart Minimum Inventory Level must be a whole number.";
+        }
+        return outsourcedPartDataTypeException;
     }
 }
