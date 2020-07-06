@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller for the AddProduct.fxml file and Add Product view
+ *
+ * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
 package Controller;
 
@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AddProductController implements Initializable {
 
+    // FXML Generated Properties
     @FXML
     private AnchorPane addProdScr;
     @FXML
@@ -72,13 +73,22 @@ public class AddProductController implements Initializable {
     @FXML
     private Button deleteBtn;
 
+    // Additional properties needed for functionality
+    private int productID;
+    private String productFieldException = new String();
+    private String productValueException = new String();
+    private String productDataTypeException = new String();
+
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void saveBtnHandler(ActionEvent event) {
@@ -99,5 +109,5 @@ public class AddProductController implements Initializable {
     @FXML
     private void deleteBtnHandler(ActionEvent event) {
     }
-    
+
 }
