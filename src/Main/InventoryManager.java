@@ -5,7 +5,6 @@ package Main;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,13 +16,13 @@ import javafx.stage.Stage;
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
 public class InventoryManager extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/View/AddPart.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddProduct.fxml"));
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -34,5 +33,5 @@ public class InventoryManager extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

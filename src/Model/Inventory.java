@@ -1,9 +1,8 @@
 /**
  * Enables adding, deleting, modifying, and searching for parts and products in inventory.
- * 
+ *
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
-
 package Model;
 
 // Package Imports
@@ -11,14 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-    
+
     // Properties for Inventory class
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
     private static int generatedPartID = 1000;
     private static int generatedProductID = 1000;
 
-    // Getters for Inventory property values 
+    // Getters for Inventory property values
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
@@ -26,74 +25,87 @@ public class Inventory {
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
-    
+
     public static int getGeneratedPartID() {
         generatedPartID++;
         return generatedPartID;
     }
-    
+
     public static int getGeneratedProductID() {
         generatedProductID++;
         return generatedProductID;
     }
-       
-    // Setters for Inventory properties
-    public static void setAllParts(ObservableList<Part> allParts) {
-        Inventory.allParts = allParts;
+
+    /**
+     * * Methods for Inventory Class
+     *
+     * @param newPart **
+     */
+    // Integer validation for input
+    public static boolean validInt(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
-    public static void setAllProducts(ObservableList<Product> allProducts) {
-        Inventory.allProducts = allProducts;
-    }
-    
-    /*** Methods for Inventory Class
-     * @param newPart ***/
-    
     // Add Part
     public static void addPart(Part newPart) {
         allParts.add(newPart);
     }
-    
-    // Lookup Part by ID (may want to combine the two search methods into one function)
-    public static Part lookupPartByID(int partID) {
-        for (Part prt : allParts) {
-            if (prt.getPartID() == partID)
-                return prt;
+
+    // Lookup parts by Part ID or Part Name
+    public static int lookupPart(String partSearch) {
+        boolean partFound = false;
+        int partIndex = 0;
+        if (validInt(partSearch)) {
+            for (int i = 0; i < allParts.size(); i++) {
+                if (Integer.parseInt(partSearch) == allParts.get(i).getPartID()) {
+                    partIndex = i;
+                    partFound = true;
+                }
             }
-            return null;
+        } else {
+            for (int i = 0; i < allParts.size(); i++) {
+                partSearch = partSearch.toLowerCase();
+                if (partSearch.equals(allParts.get(i).getPartName().toLowerCase())) {
+                    partIndex = i;
+                    partFound = true;
+                }
+            }
         }
-    
-    // Lookup Part by Name
-    public static Part lookupPartByName(String partName) {
-        for (Part prt : allParts) {
-            if (prt.getPartName().equals(partName))
-                return prt;
+        if (partFound == true) {
+            return partIndex;
+        } else {
+            System.out.println("ERROR: Unable to locate any parts based on the given search parameters.");
+            return -1;
         }
-        return null;
     }
-    
+
     // Update Part
     public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
-    
+
     // Delete Part (Only deletes part from product's associated parts)
     // May need to add another method to delete part from inventory completely
     public static boolean deleteAssociatedPart(Part selectedPart) {
         for (Product allProduct : allProducts) {
-            if (Product.getAssociatedParts().contains(selectedPart)){
+            if (Product.getAssociatedParts().contains(selectedPart)) {
                 Product.getAssociatedParts().remove(selectedPart);
-                return true; 
+                return true;
             }
         }
         return false;
     }
-    
+
     // Delete Part (Deletes part from Inventory) *** Not sure if this and above method need
     // to be combined ***
-    public static boolean deletePart (Part selectedPart) {
-        for(int i = 0; i < allParts.size(); i++) {
-            if(allParts.get(i).getPartID() == selectedPart.getPartID()) {
+    public static boolean deletePart(Part selectedPart) {
+        for (int i = 0; i < allParts.size(); i++) {
+            if (allParts.get(i).getPartID() == selectedPart.getPartID()) {
                 allParts.remove(i);
                 return true;
             }
@@ -101,48 +113,54 @@ public class Inventory {
         System.out.println("This part was not found in inventory.");
         return false;
     }
-    
+
     // Add Product
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
-    
-    // Lookup Product by ID (may want to combine the two search methods into one function)
-    public static Product lookupProductByID(int productID) {
-        for (Product prd : allProducts) {
-            if (prd.getProductID() == productID)
-                return prd;
+
+    // Lookup parts by Part ID or Part Name
+    public static int lookupProduct(String productSearch) {
+        boolean productFound = false;
+        int productIndex = 0;
+        if (validInt(productSearch)) {
+            for (int i = 0; i < allProducts.size(); i++) {
+                if (Integer.parseInt(productSearch) == allProducts.get(i).getProductID()) {
+                    productIndex = i;
+                    productFound = true;
+                }
             }
-            return null;
+        } else {
+            for (int i = 0; i < allParts.size(); i++) {
+                productSearch = productSearch.toLowerCase();
+                if (productSearch.equals(allParts.get(i).getPartName().toLowerCase())) {
+                    productIndex = i;
+                    productFound = true;
+                }
+            }
         }
-    
-    // Lookup Product by Name
-    public static Product lookupProductByName(String productName) {
-        for (Product prd : allProducts) {
-            if (prd.getProductName().equals(productName))
-                return prd;
+        if (productFound == true) {
+            return productIndex;
+        } else {
+            System.out.println("ERROR: Unable to locate any products based on the given search parameters.");
+            return -1;
         }
-        return null;
     }
-    
+
     // Update Product
     public static void updateProduct(int index, Product selectedProduct) {
         allProducts.set(index, selectedProduct);
     }
-    
+
     // Delete Product
     public static boolean deleteProduct(Product selectedProduct) {
-        for(int i = 0; i < allProducts.size (); i++) {
-           if(allProducts.get(i).getProductID() == selectedProduct.getProductID()) {
-               allProducts.remove(i);
-               return true;
-           }
+        for (int i = 0; i < allProducts.size(); i++) {
+            if (allProducts.get(i).getProductID() == selectedProduct.getProductID()) {
+                allProducts.remove(i);
+                return true;
+            }
         }
         System.out.println("This product was not found in inventory.");
         return false;
     }
 }
-
-
-
-
