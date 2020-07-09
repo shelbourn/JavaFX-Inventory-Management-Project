@@ -248,7 +248,6 @@ public class AddPartController implements Initializable {
         }
     }
 
-    // Try to outsource this code to @AlertMessages.java
     /**
      * *
      * Cancel button displays a CONFIRMATION alert requesting user to confirm
@@ -257,24 +256,21 @@ public class AddPartController implements Initializable {
      */
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-            alert.setHeaderText("Would you like to cancel this operation?");
-            alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        alert.setHeaderText("Would you like to cancel this operation?");
+        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        alert.showAndWait();
 
-            if (alert.getResult() == ButtonType.OK) {
-                Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(root);
-                Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                mainScreenWindow.setScene(scene);
-                mainScreenWindow.show();
-            } else {
-                alert.close();
-            }
-        } catch (IOException e) {
+        if (alert.getResult() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+            mainScreenWindow.setScene(scene);
+            mainScreenWindow.show();
+        } else {
+            alert.close();
         }
     }
 }

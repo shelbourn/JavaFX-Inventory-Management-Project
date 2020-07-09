@@ -5,10 +5,13 @@
  */
 package Controller;
 
+import Model.Inventory;
 import Model.Part;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,6 +106,21 @@ public class AddProductController implements Initializable {
     // Search ID and Name or just ID???
     @FXML
     private void searchBtnHandler(ActionEvent event) {
+        String partSearchString = searchField.getText();
+        int searchedPartIndex;
+        if (Inventory.lookupPart(partSearchString) == -1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: PART NOT FOUND");
+            alert.setHeaderText("Unable to locate part");
+            alert.setContentText("The Part ID or name entered was not found in inventory.");
+            alert.showAndWait();
+        } else {
+            searchedPartIndex = Inventory.lookupPart(partSearchString);
+            Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
+            ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
+            searchedPartList.add(searchedPart);
+            addTable.setItems(searchedPartList);
+        }
     }
 
     @FXML
@@ -125,24 +143,21 @@ public class AddProductController implements Initializable {
      */
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-            alert.setHeaderText("Would you like to cancel this operation?");
-            alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        alert.setHeaderText("Would you like to cancel this operation?");
+        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        alert.showAndWait();
 
-            if (alert.getResult() == ButtonType.OK) {
-                Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(root);
-                Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                mainScreenWindow.setScene(scene);
-                mainScreenWindow.show();
-            } else {
-                alert.close();
-            }
-        } catch (IOException e) {
+        if (alert.getResult() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+            mainScreenWindow.setScene(scene);
+            mainScreenWindow.show();
+        } else {
+            alert.close();
         }
     }
 }

@@ -38,8 +38,6 @@ public class Inventory {
 
     /**
      * * Methods for Inventory Class
-     *
-     * @param newPart **
      */
     // Integer validation for input
     public static boolean validInt(String input) {
@@ -89,29 +87,21 @@ public class Inventory {
         allParts.set(index, selectedPart);
     }
 
-    // Delete Part (Only deletes part from product's associated parts)
-    // May need to add another method to delete part from inventory completely
-    public static boolean deleteAssociatedPart(Part selectedPart) {
-        for (Product allProduct : allProducts) {
-            if (Product.getAssociatedParts().contains(selectedPart)) {
-                Product.getAssociatedParts().remove(selectedPart);
-                return true;
+    // Delete Part Validation
+    // Checks to see whether part can be deleted or not (checks whether part is associated with any products)
+    public static boolean deletePartCheck(Part selectedPart) {
+        boolean okayToDeletePart = true;
+        for (int i = 0; i < allProducts.size(); i++) {
+            if (allProducts.get(i).getAssociatedParts().contains(selectedPart)) {
+                okayToDeletePart = false;
             }
         }
-        return false;
+        return okayToDeletePart;
     }
 
-    // Delete Part (Deletes part from Inventory) *** Not sure if this and above method need
-    // to be combined ***
-    public static boolean deletePart(Part selectedPart) {
-        for (int i = 0; i < allParts.size(); i++) {
-            if (allParts.get(i).getPartID() == selectedPart.getPartID()) {
-                allParts.remove(i);
-                return true;
-            }
-        }
-        System.out.println("This part was not found in inventory.");
-        return false;
+// Delete Part
+    public static void deletePart(Part selectedPart) {
+        allParts.remove(selectedPart);
     }
 
     // Add Product
@@ -152,15 +142,23 @@ public class Inventory {
         allProducts.set(index, selectedProduct);
     }
 
-    // Delete Product
-    public static boolean deleteProduct(Product selectedProduct) {
+    // Delete Product Validation
+    // Checks to see whether a product can be deleted or not (checks whether the product contains any parts)
+    public static boolean deleteProductCheck(Product selectedProduct) {
+        boolean okayToDeleteProduct = false;
+        int selectedProductID = selectedProduct.getProductID();
         for (int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getProductID() == selectedProduct.getProductID()) {
-                allProducts.remove(i);
-                return true;
+            if (allProducts.get(i).getProductID() == selectedProductID) {
+                if (allProducts.get(i).getAssociatedParts().isEmpty()) {
+                    okayToDeleteProduct = true;
+                }
             }
         }
-        System.out.println("This product was not found in inventory.");
-        return false;
+        return okayToDeleteProduct;
+    }
+
+    // Delete Product
+    public static void deleteProduct(Product selectedProduct) {
+        allProducts.remove(selectedProduct);
     }
 }
