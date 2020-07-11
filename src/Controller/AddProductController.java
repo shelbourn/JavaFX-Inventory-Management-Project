@@ -87,6 +87,7 @@ public class AddProductController implements Initializable {
 
     // Additional properties needed for functionality
     private int productID;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private String productFieldException = new String();
     private String productValueException = new String();
     private String productDataTypeException = new String();
@@ -99,11 +100,27 @@ public class AddProductController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
-    // Add ability to clear the search field
-    // Search ID and Name or just ID???
+    // Helper Methods for Updating Table Views
+    private void updateAddTable() {
+        addTable.setItems(Inventory.getAllParts());
+    }
+
+    private void updateDeleteTable() {
+        deleteTable.setItems(associatedParts);
+    }
+
+    /**
+     * * Search Button Handler searches for Part by ID and Part name. If search
+     * field is empty and the button is clicked then an error is thrown. If a
+     * part ID or name is not found in inventory then an INFORMATION alert is
+     * thrown. If a part ID or name is found then then the part is returned and
+     * added to a temporary list that populates the AddTable list view.
+     *
+     * @param event
+     */
     @FXML
     private void searchBtnHandler(ActionEvent event) {
         String partSearchString = searchField.getText();
