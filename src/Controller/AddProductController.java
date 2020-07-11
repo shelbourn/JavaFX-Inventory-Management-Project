@@ -125,7 +125,12 @@ public class AddProductController implements Initializable {
     private void searchBtnHandler(ActionEvent event) {
         String partSearchString = searchField.getText();
         int searchedPartIndex;
-        if (Inventory.lookupPart(partSearchString) == -1) {
+        if (partSearchString == "") {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: EMPTY FIELD");
+            alert.setHeaderText("Unable to process search");
+            alert.setContentText("Search field cannot be blank.");
+        } else if (Inventory.lookupPart(partSearchString) == -1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR: PART NOT FOUND");
             alert.setHeaderText("Unable to locate part");
