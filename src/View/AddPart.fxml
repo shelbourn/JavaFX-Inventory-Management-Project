@@ -9,48 +9,78 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addPartScr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
+<AnchorPane prefHeight="563.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPartController">
    <children>
-      <AnchorPane fx:id="addPartScrPane" layoutX="24.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
+      <AnchorPane fx:id="addPartScrPane" layoutX="25.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
+            <RadioButton fx:id="inHouseRadio" layoutX="268.0" layoutY="31.0" mnemonicParsing="false" onAction="#inHouseRadioHandler" text="In-House">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="addPartToggleGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="outsourcedRadio" layoutX="397.0" layoutY="31.0" mnemonicParsing="false" onAction="#outsourcedRadioHandler" text="Outsourced" toggleGroup="$addPartToggleGroup">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+            </RadioButton>
+            <TextField fx:id="partNameField" layoutX="215.0" layoutY="149.0" prefHeight="33.0" prefWidth="286.0" promptText="Part Name">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="partIDField" disable="true" editable="false" focusTraversable="false" layoutX="216.0" layoutY="86.0" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="invLevelField" layoutX="215.0" layoutY="212.0" prefHeight="33.0" prefWidth="286.0" promptText="Inventory Level">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="priceCostField" layoutX="215.0" layoutY="275.0" prefHeight="33.0" prefWidth="286.0" promptText="Price / Cost">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="maxLevelField" layoutX="215.0" layoutY="338.0" prefHeight="33.0" prefWidth="108.0" promptText="Max">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="minLevelField" layoutX="395.0" layoutY="338.0" prefHeight="33.0" prefWidth="108.0" promptText="Min">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="dynamicField" layoutX="215.0" layoutY="401.0" prefHeight="33.0" prefWidth="286.0" promptText="Dynamically Assigned">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </TextField>
+            <Button fx:id="saveBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="455.0" mnemonicParsing="false" onAction="#saveBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Save">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="455.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Cancel">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </Button>
             <Label layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="169.0" text="Add Part" textFill="STEELBLUE">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="addPartScrSaveBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#addPartScrSaveBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Save">
-               <font>
-                  <Font name="Segoe UI" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="addPartScrCancelBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#addPartScrCancelBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Cancel">
-               <font>
-                  <Font name="Segoe UI" size="18.0" />
-               </font>
-            </Button>
-            <RadioButton fx:id="addPartScrIHRadio" layoutX="268.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#addPartScrIHRadioHandler" text="In-House">
-               <font>
-                  <Font name="Segoe UI" size="15.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="addPartScrRadioBtns" />
-               </toggleGroup>
-            </RadioButton>
-            <Label fx:id="addPartScrMachIDLbl" layoutX="40.0" layoutY="406.0" text="Machine ID">
+            <Label fx:id="dynamicLabel" layoutX="40.0" layoutY="406.0" text="Dyn Assigned">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="addPartScrMachIDField" layoutX="215.0" layoutY="401.0" onKeyTyped="#addPartScrMachIDFieldHandler" prefHeight="33.0" prefWidth="286.0" promptText="Machine ID">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
-            <RadioButton fx:id="addPartScrOutRadio" layoutX="397.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#addPartScrOutRadioHandler" text="Outsourced" toggleGroup="$addPartScrRadioBtns">
-               <font>
-                  <Font name="Segoe UI" size="15.0" />
-               </font>
-            </RadioButton>
             <Label layoutX="40.0" layoutY="154.0" text="Part Name">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
@@ -77,41 +107,11 @@
                </font>
             </Label>
             <Line endX="357.5556640625" fill="#a7a7a7" layoutX="172.0" layoutY="65.0" startX="-152.66665649414062" stroke="#adadad" />
-            <TextField fx:id="addPartScrIDField" layoutX="216.0" layoutY="86.0" onKeyTyped="#addPartScrIDFieldHandler" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="addPartScrPartPriceField" layoutX="215.0" layoutY="275.0" onKeyTyped="#addPartScrPartPriceFieldHandler" prefHeight="33.0" prefWidth="286.0" promptText="Price / Cost">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="addPartScrPartMaxField" layoutX="215.0" layoutY="338.0" onKeyTyped="#addPartScrPartMaxFieldHandler" prefHeight="33.0" prefWidth="108.0" promptText="Max">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="addPartScrPartNameField" layoutX="215.0" layoutY="149.0" onKeyTyped="#addPartScrPartNameFieldHandler" prefHeight="33.0" prefWidth="286.0" promptText="Part Name">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="addPartScrPartInvField" layoutX="215.0" layoutY="212.0" onMouseClicked="#addPartScrPartInvFieldHandler" prefHeight="33.0" prefWidth="286.0" promptText="Inventory Level">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
             <Label layoutX="341.0" layoutY="343.0" text="Min">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="addPartScrPartMinField" layoutX="395.0" layoutY="338.0" onKeyTyped="#addPartScrPartMinFieldHandler" prefHeight="33.0" prefWidth="108.0" promptText="Min">
-               <font>
-                  <Font name="Segoe UI" size="16.0" />
-               </font>
-            </TextField>
          </children>
       </AnchorPane>
    </children>

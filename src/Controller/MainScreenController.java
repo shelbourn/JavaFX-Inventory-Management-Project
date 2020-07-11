@@ -7,14 +7,13 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -27,49 +26,51 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane mainScr;
     @FXML
-    private Button mainScrExitBtn;
+    private Button exitBtn;
     @FXML
-    private AnchorPane mainScrProdPane;
+    private AnchorPane productsPanel;
     @FXML
-    private TableView<?> mainScrPartTab1;
+    private TableView<?> productsTable;
     @FXML
-    private TableColumn<?, ?> mainScrProdIDCol;
+    private TableColumn<?, ?> productsTableProductIDCol;
     @FXML
-    private TableColumn<?, ?> mainScrProdNameCol;
+    private TableColumn<?, ?> productsTableProductNameCol;
     @FXML
-    private TableColumn<?, ?> mainScrInvLvlProdCol;
+    private TableColumn<?, ?> productsTableInvLevelCol;
     @FXML
-    private TableColumn<?, ?> mainScrPriceCol;
+    private TableColumn<?, ?> productsTablePPUCol;
     @FXML
-    private Button mainScrProdAddBtn;
+    private Button productsAddBtn;
     @FXML
-    private Button mainScrProdModifyBtn;
+    private Button productsModifyBtn;
     @FXML
-    private Button mainScrProdDeleteBtn;
+    private Button productsDeleteBtn;
     @FXML
-    private Button mainScrProdSearchBtn;
+    private Button productsSearchBtn;
     @FXML
-    private TextField mainScrPartSearchField;
+    private TextField productsSearchField;
     @FXML
-    private AnchorPane mainScrPartPane;
+    private AnchorPane partPanel;
     @FXML
-    private TableView<?> mainScrPartTab;
+    private TableView<?> partsTable;
     @FXML
-    private TableColumn<?, ?> mainScrPartIDCol;
+    private TableColumn<?, ?> partsTablePartIDCol;
     @FXML
-    private TableColumn<?, ?> mainScrPartNmCol;
+    private TableColumn<?, ?> partsTablePartNameCol;
     @FXML
-    private TableColumn<?, ?> mainScrInvLvlPartCol;
+    private TableColumn<?, ?> partsTableInvLevelCol;
     @FXML
-    private TableColumn<?, ?> mainScrCostCol;
+    private TableColumn<?, ?> partsTablePPUCol;
     @FXML
-    private Button mainScrPartSearchBtn;
+    private Button partsSearchBtn;
     @FXML
-    private Button mainScrPartAddBtn;
+    private TextField partsSearchField;
     @FXML
-    private Button mainScrPartModifyBtn;
+    private Button partsAddBtn;
     @FXML
-    private Button mainScrPartDeleteBtn;
+    private Button partsModifyBtn;
+    @FXML
+    private Button partsDeleteBtn;
 
     /**
      * Initializes the controller class.
@@ -80,48 +81,42 @@ public class MainScreenController implements Initializable {
     }    
 
     @FXML
-    private void mainScrExitBtnHandler(MouseEvent event) {
+    private void exitBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrProdAddBtnHandler(MouseEvent event) {
+    private void productsAddBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrProdModifyBtn(MouseEvent event) {
+    private void productsModifyBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrProdDeleteBtnHandler(MouseEvent event) {
+    private void productsDeleteBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrProdSearchBtnHandler(MouseEvent event) {
+    private void productsSearchBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrProdSearchFieldHandler(InputMethodEvent event) {
+    private void partsSearchBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrPartSearchBtnHandler(MouseEvent event) {
+    private void partsAddBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrPartSearchFieldHandler(InputMethodEvent event) {
+    private void partsModifyBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void mainScrPartAddBtnHandler(MouseEvent event) {
+    private void partsDeleteBtnHandler(ActionEvent event) {
     }
 
-    @FXML
-    private void mainScrPartModifyBtn(MouseEvent event) {
-    }
 
-    @FXML
-    private void mainScrPartDeleteBtnHandler(MouseEvent event) {
-    }
 
     
 }
