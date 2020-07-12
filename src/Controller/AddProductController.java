@@ -176,6 +176,17 @@ public class AddProductController implements Initializable {
         alert.setHeaderText("Would you like to remove this part from the product's part list?");
         alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
         alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User confirmed. \nPart has been removed from Product's part list.");
+            Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
+            removeAlert.setTitle("SUCCESS: PART REMOVED");
+            removeAlert.setHeaderText("The selected part has been removed from the part list.");
+            removeAlert.setContentText("Click OK to close this window.");
+            removeAlert.showAndWait();
+        } else {
+            alert.close();
+        }
     }
 
     @FXML
