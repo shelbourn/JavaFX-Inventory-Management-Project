@@ -100,7 +100,25 @@ public class AddProductController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Fetching and displaying Product ID
+        productID = Inventory.getGeneratedProductID();
+        productIDField.setText("Auto-Generated:   " + productID);
 
+        // Fetching and setting Add Table rows
+        addTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
+        addTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
+        addTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
+        addTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+
+        // Fetching and setting Delete Table rows
+        deleteTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
+        deleteTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
+        deleteTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
+        deleteTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+
+        // Initializing Add Part and Delete Part table views
+        updateAddTable();
+        updateDeleteTable();
     }
 
     // Helper Methods for Updating Table Views
