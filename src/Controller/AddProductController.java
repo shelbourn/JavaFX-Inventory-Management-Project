@@ -145,12 +145,32 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * * Add Button Handler adds the selected part in the Add Parts table view
+     * to the current list of Associated Parts that belong to the product
+     *
+     * @param event
+     */
     @FXML
     private void addBtnHandler(ActionEvent event) {
+        Part selectedPart = addTable.getSelectionModel().getSelectedItem();
+        associatedParts.add(selectedPart);
+        updateDeleteTable();
     }
 
+    /**
+     * * Delete Button Handler first throws a CONFIRMATION alert to confirm that
+     * the user wishes to delete a part from the list of Associated Parts that
+     * belong to the product. If the user confirms then the part will be
+     * removed. If the user cancels then the part will stay in the Associated
+     * Parts list.
+     *
+     * @param event
+     */
     @FXML
     private void deleteBtnHandler(ActionEvent event) {
+        Part selectedPart = deleteTable.getSelectionModel().getSelectedItem();
+
     }
 
     @FXML
