@@ -143,7 +143,7 @@ public class AddProductController implements Initializable {
     private void searchBtnHandler(ActionEvent event) {
         String partSearchString = searchField.getText();
         int searchedPartIndex;
-        if (partSearchString == "") {
+        if (partSearchString.equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR: EMPTY FIELD");
             alert.setHeaderText("Unable to process search");
@@ -165,13 +165,24 @@ public class AddProductController implements Initializable {
 
     /**
      * * Add Button Handler adds the selected part in the Add Parts table view
-     * to the current list of Associated Parts that belong to the product
+     * to the current list of Associated Parts that belong to the product. If no
+     * part is selected then an error will be thrown.
      *
      * @param event
      */
     @FXML
     private void addBtnHandler(ActionEvent event) {
+        boolean noActiveSelection = addTable.getSelectionModel().isEmpty();
         Part selectedPart = addTable.getSelectionModel().getSelectedItem();
+
+        if (noActiveSelection) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: NO PART SELECTED");
+            alert.setHeaderText("No part has been added to product's part list.");
+            alert.setContentText("A part must be selected before it can be added to the part list.");
+            alert.showAndWait();
+        }
+
         associatedParts.add(selectedPart);
         updateDeleteTable();
     }
@@ -226,6 +237,7 @@ public class AddProductController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation. \n\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             Scene scene = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
