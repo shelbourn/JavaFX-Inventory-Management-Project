@@ -159,9 +159,9 @@ public class AddProductController implements Initializable {
     }
 
     /**
-     * * Delete Button Handler first throws a CONFIRMATION alert to confirm that
-     * the user wishes to delete a part from the list of Associated Parts that
-     * belong to the product. If the user confirms then the part will be
+     * * Delete Button Handler first throws a CONFIRMATION alert to confirm
+     * that the user wishes to delete a part from the list of Associated Parts
+     * that belong to the product. If the user confirms then the part will be
      * removed. If the user cancels then the part will stay in the Associated
      * Parts list.
      *
@@ -171,6 +171,11 @@ public class AddProductController implements Initializable {
     private void deleteBtnHandler(ActionEvent event) {
         Part selectedPart = deleteTable.getSelectionModel().getSelectedItem();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: REMOVE PART");
+        alert.setHeaderText("Would you like to remove this part from the product's part list?");
+        alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
+        alert.showAndWait();
     }
 
     @FXML

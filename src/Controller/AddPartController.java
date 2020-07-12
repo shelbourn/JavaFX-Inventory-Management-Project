@@ -207,6 +207,7 @@ public class AddPartController implements Initializable {
                         alert.showAndWait();
 
                         if (alert.getResult() == ButtonType.OK) {
+                            System.out.println("In-House Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
                             Scene scene = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -233,6 +234,7 @@ public class AddPartController implements Initializable {
                         alert.showAndWait();
 
                         if (alert.getResult() == ButtonType.OK) {
+                            System.out.println("Outsourced Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
                             Scene scene = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -263,6 +265,7 @@ public class AddPartController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation. Exiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             Scene scene = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
