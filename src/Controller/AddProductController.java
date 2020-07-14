@@ -7,6 +7,7 @@ package Controller;
 
 import Model.Inventory;
 import Model.Part;
+import Model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -221,14 +222,78 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * * Save Button Handler verifies that there are no empty fields, incorrect
+     * values, or incompatible data types present. If any of the above are
+     * present then an exception is thrown and logged. If there are no
+     * exceptions to handle then the product will be saved and added to
+     * inventory.
+     *
+     * @param event
+     */
     @FXML
-    private void saveBtnHandler(ActionEvent event) {
+    private void saveBtnHandler(ActionEvent event) throws IOException {
         String productName = productNameField.getText();
         String productPrice = priceField.getText();
         String productStockLevel = inventoryLevelField.getText();
         String productMinStockLevel = minLevelField.getText();
         String productMaxStockLevel = maxLevelField.getText();
 
+        productFieldException = Product.productFieldExceptions(
+                productName,
+                productPrice,
+                productStockLevel,
+                productMinStockLevel,
+                productMaxStockLevel,
+                productFieldException);
+
+        productDataTypeException = Product.prodDataTypeExceptions(
+                productPrice,
+                productStockLevel,
+                productMaxStockLevel,
+                productMinStockLevel,
+                productDataTypeException);
+
+        productValueException = Product.productValueExceptions(
+                Double.parseDouble(productPrice),
+                Integer.parseInt(productStockLevel),
+                Integer.parseInt(productMaxStockLevel),
+                Integer.parseInt(productMinStockLevel),
+                productValueException);
+
+        if (productFieldException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            alert.setHeaderText("This product has not been added to inventory");
+            alert.setContentText(productFieldException);
+            alert.showAndWait();
+            productFieldException = "";
+        } else if (productDataTypeException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            alert.setHeaderText("This product has not been added to inventory");
+            alert.setContentText(productDataTypeException);
+            alert.showAndWait();
+            productDataTypeException = "";
+        } else if (productValueException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID VALUES PRESENT");
+            alert.setHeaderText("This product has not been added to inventory");
+            alert.setContentText(productValueException);
+            alert.showAndWait();
+            productValueException = "";
+        } else {
+            try {
+                if (productValueException.length() > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
+                    alert.setHeaderText("This part has not been added to inventory");
+                    alert.setContentText(productValueException);
+                    alert.showAndWait();
+                    productValueException = "";
+                }
+            }
+        }
     }
 
     /**
