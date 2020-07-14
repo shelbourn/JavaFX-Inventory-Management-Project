@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -177,12 +178,13 @@ public class AddProductController implements Initializable {
             ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
             searchedPartList.add(searchedPart);
             addTable.setItems(searchedPartList);
+            searchField.setText("");
         }
     }
 
     /**
-     * * Executes part search when the ENTER key is typed while the search field
-     * is in focus.
+     * * Executes part search when the ENTER key is typed while the search
+     * field is in focus.
      *
      * @param event
      */
@@ -208,8 +210,19 @@ public class AddProductController implements Initializable {
                 ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
                 searchedPartList.add(searchedPart);
                 addTable.setItems(searchedPartList);
+                searchField.setText("");
             }
         }
+    }
+
+    /**
+     * * Clears the search field
+     *
+     * @param event
+     */
+    @FXML
+    private void clearSearchFieldHandler(MouseEvent event) {
+        searchField.setText("");
     }
 
     /**
