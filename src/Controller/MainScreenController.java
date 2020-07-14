@@ -37,15 +37,15 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane productsPanel;
     @FXML
-    private TableView<?> productsTable;
+    private TableView<Product> productsTable;
     @FXML
-    private TableColumn<?, ?> productsTableProductIDCol;
+    private TableColumn<Product, Integer> productsTableProductIDCol;
     @FXML
-    private TableColumn<?, ?> productsTableProductNameCol;
+    private TableColumn<Product, String> productsTableProductNameCol;
     @FXML
-    private TableColumn<?, ?> productsTableInvLevelCol;
+    private TableColumn<Product, Integer> productsTableInvLevelCol;
     @FXML
-    private TableColumn<?, ?> productsTablePPUCol;
+    private TableColumn<Product, Double> productsTablePPUCol;
     @FXML
     private Button productsAddBtn;
     @FXML
@@ -59,15 +59,15 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane partPanel;
     @FXML
-    private TableView<?> partsTable;
+    private TableView<Part> partsTable;
     @FXML
-    private TableColumn<?, ?> partsTablePartIDCol;
+    private TableColumn<Part, Integer> partsTablePartIDCol;
     @FXML
-    private TableColumn<?, ?> partsTablePartNameCol;
+    private TableColumn<Part, String> partsTablePartNameCol;
     @FXML
-    private TableColumn<?, ?> partsTableInvLevelCol;
+    private TableColumn<Part, Integer> partsTableInvLevelCol;
     @FXML
-    private TableColumn<?, ?> partsTablePPUCol;
+    private TableColumn<Part, Double> partsTablePPUCol;
     @FXML
     private Button partsSearchBtn;
     @FXML
@@ -99,7 +99,23 @@ public class MainScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Fetching and setting Parts Table rows
+        partsTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
+        partsTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
+        partsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
+        partsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+
+        // Fetching and setting Products Table rows
+        productsTableProductIDCol.setCellValueFactory(cellData -> cellData.getValue().getProductIDProperty().asObject());
+        productsTableProductNameCol.setCellValueFactory(cellData -> cellData.getValue().getProductNameProperty());
+        productsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getProductStockLevelProperty().asObject());
+        productsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getProductPriceProperty().asObject());
+
+        // Initializing Add Part and Delete Part table views
+        updatePartsTable();
+        updateProductsTable();
+        partTableTestDataHelper();
+        productTableTestDataHelper();
     }
 
     // Method to create part table test data (******COMMENT OUT BEFORE FINAL BUILD*******)
@@ -132,7 +148,11 @@ public class MainScreenController implements Initializable {
      * @param event
      */
     private void updatePartsTable() {
-        partsTable
+        partsTable.setItems(Inventory.getAllParts());
+    }
+
+    private void updateProductsTable() {
+        productsTable.setItems(Inventory.getAllProducts());
     }
 
     @FXML
