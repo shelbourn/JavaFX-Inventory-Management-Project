@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
@@ -120,9 +121,22 @@ public class AddProductController implements Initializable {
         // Initializing Add Part and Delete Part table views
         updateAddTable();
         updateDeleteTable();
+        testDataHelper();
     }
 
-    // Helper Methods for Updating Table Views
+// Helper Methods for Updating Table Views
+    // Method to create test data (COMMENT OUT BEFORE FINAL BUILD)
+    private void testDataHelper() {
+        for (int i = 3000; i < 3006; i++) {
+            InHouse inHouseTest = new InHouse();
+            inHouseTest.setPartID(i);
+            inHouseTest.setPartName("Test" + i);
+            inHouseTest.setPartStockLevel(i - 2095);
+            inHouseTest.setPartPrice(i - 999);
+            Inventory.addPart(inHouseTest);
+        }
+    }
+
     private void updateAddTable() {
         addTable.setItems(Inventory.getAllParts());
     }
@@ -250,15 +264,15 @@ public class AddProductController implements Initializable {
         productDataTypeException = Product.prodDataTypeExceptions(
                 productPrice,
                 productStockLevel,
-                productMaxStockLevel,
                 productMinStockLevel,
+                productMaxStockLevel,
                 productDataTypeException);
 
         productValueException = Product.productValueExceptions(
                 Double.parseDouble(productPrice),
                 Integer.parseInt(productStockLevel),
-                Integer.parseInt(productMaxStockLevel),
                 Integer.parseInt(productMinStockLevel),
+                Integer.parseInt(productMaxStockLevel),
                 productValueException);
 
         if (productFieldException.length() > 0) {
@@ -284,14 +298,42 @@ public class AddProductController implements Initializable {
             productValueException = "";
         } else {
             try {
-                if (productValueException.length() > 0) {
+                if (associatedParts.isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
-                    alert.setHeaderText("This part has not been added to inventory");
-                    alert.setContentText(productValueException);
+                    alert.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
+                    alert.setHeaderText("This product has not been added to inventory");
+                    alert.setContentText("A new product must contain at least one part.");
                     alert.showAndWait();
-                    productValueException = "";
+                } else {
+                    Product newProduct = new Product();
+                    newProduct.setProductID(productID);
+                    newProduct.setProductName(productName);
+                    newProduct.setProductPrice(Double.parseDouble(productPrice));
+                    newProduct.setProductStockLevel(Integer.parseInt(productStockLevel));
+                    newProduct.setProductMaxStockLevel(Integer.parseInt(productMaxStockLevel));
+                    newProduct.setProductMinStockLevel(Integer.parseInt(productMinStockLevel));
+                    newProduct.setAssociatedParts(associatedParts);
+                    Inventory.addProduct(newProduct);
+                    System.out.println("Product " + productName + " (ID#: " + productID + ") successfully added to inventory.");
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("SUCCESS: PRODUCT ADDED");
+                    alert.setHeaderText("Product Successfully Added to Inventory");
+                    alert.setContentText("Click OK to return to the main screen.");
+                    alert.showAndWait();
+
+                    if (alert.getResult() == ButtonType.OK) {
+                        System.out.println("User confirmed product addition. \nExiting to Main Screen.");
+                        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                        Scene scene = new Scene(root);
+                        Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+                        mainScreenWindow.setScene(scene);
+                        mainScreenWindow.show();
+                    } else {
+                    }
                 }
+            } catch (IOException e) {
             }
         }
     }
