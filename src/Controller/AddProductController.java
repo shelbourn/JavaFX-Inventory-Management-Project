@@ -125,7 +125,7 @@ public class AddProductController implements Initializable {
     }
 
 // Helper Methods for Updating Table Views
-    // Method to create test data (COMMENT OUT BEFORE FINAL BUILD)
+    // Method to create test data (******COMMENT OUT BEFORE FINAL BUILD*******)
     private void testDataHelper() {
         for (int i = 3000; i < 3006; i++) {
             InHouse inHouseTest = new InHouse();
