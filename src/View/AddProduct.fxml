@@ -131,9 +131,9 @@
             <Group layoutX="1114.0" layoutY="109.0" onMouseClicked="#clearSearchFieldHandler" scaleX="0.8" scaleY="0.8">
                <children>
                   <Ellipse fill="#dadada" layoutY="1.765625" opacity="0.49" radiusX="10.0" radiusY="10.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Text layoutX="-5.3" layoutY="7.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
+                  <Text fill="#9b9b9b" layoutX="-6.3" layoutY="7.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
                      <font>
-                        <Font name="Arial" size="16.0" />
+                        <Font name="Gill Sans MT Bold" size="16.0" />
                      </font>
                   </Text>
                </children>
