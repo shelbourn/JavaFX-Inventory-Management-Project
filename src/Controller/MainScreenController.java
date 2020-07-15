@@ -9,18 +9,29 @@ import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -156,56 +167,211 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void exitBtnHandler(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: EXIT APPLICATION");
-        alert.setHeaderText("Are you sure you would like to exit this application?");
-        alert.setContentText("Click OK to exit the application. \n\nClick CANCEL to continue and return to the current screen.");
-        alert.showAndWait();
+    private void productsAddBtnHandler(ActionEvent event) {
+    }
 
-        if (alert.getResult() == ButtonType.OK) {
+    @FXML
+    private void productsModifyBtnHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void productsDeleteBtnHandler(ActionEvent event) {
+    }
+
+    // Parts Table Methods
+    /**
+     * * Search Button Handlers searches for Part by ID and Part name. If
+     * search field is empty and the button is clicked then an error is thrown.
+     * If a part ID or name is not found in inventory then an INFORMATION alert
+     * is thrown. If a part ID or name is found then then the part is returned
+     * and added to a temporary list that populates the AddTable list view.
+     *
+     * @param event
+     */
+    @FXML
+    private void partsSearchBtnHandler(ActionEvent event) {
+        String partSearchString = partsSearchField.getText();
+        int searchedPartIndex;
+        if (partSearchString.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: EMPTY FIELD");
+            alert.setHeaderText("Unable to process search");
+            alert.setContentText("Search field cannot be blank.");
+            alert.showAndWait();
+        } else if (Inventory.lookupPart(partSearchString) == -1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: PART NOT FOUND");
+            alert.setHeaderText("Unable to locate part");
+            alert.setContentText("The Part ID or name entered was not found in inventory.");
+            alert.showAndWait();
+        } else {
+            searchedPartIndex = Inventory.lookupPart(partSearchString);
+            Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
+            ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
+            searchedPartList.add(searchedPart);
+            partsTable.setItems(searchedPartList);
+            partsSearchField.setText("");
+        }
+    }
+
+    /**
+     * * Executes part search when the ENTER key is typed while the search
+     * field is in focus.
+     *
+     * @param event
+     */
+    @FXML
+    private void partsSearchFieldEnterHandler(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            String partSearchString = partsSearchField.getText();
+            int searchedPartIndex;
+            if (partSearchString.equals("")) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: EMPTY FIELD");
+                alert.setHeaderText("Unable to process search");
+                alert.setContentText("Search field cannot be blank.");
+                alert.showAndWait();
+            } else if (Inventory.lookupPart(partSearchString) == -1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: PART NOT FOUND");
+                alert.setHeaderText("Unable to locate part");
+                alert.setContentText("The Part ID or name entered was not found in inventory.");
+                alert.showAndWait();
+            } else {
+                searchedPartIndex = Inventory.lookupPart(partSearchString);
+                Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
+                ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
+                searchedPartList.add(searchedPart);
+                partsTable.setItems(searchedPartList);
+                partsSearchField.setText("");
+            }
+        }
+    }
+
+    /**
+     * * Clears the Parts Search Field
+     *
+     * @param event
+     */
+    @FXML
+    private void clearPartSearchFieldHandler(MouseEvent event) {
+        partsSearchField.setText("");
+    }
+
+    @FXML
+    private void partsAddBtnHandler(ActionEvent event) throws IOException {
+        System.out.println("User selected 'ADD PART'. \n\nOpening ADD PART screen.");
+        Parent root = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
+        Scene scene = new Scene(root);
+        Stage addPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        addPartWindow.setTitle("ABC Company: Inventory Management System");
+        addPartWindow.setScene(scene);
+        addPartWindow.show();
+    }
+
+    /**
+     * * Products Search Button Handlers searches for Product by ID and Part
+     * name. If search field is empty and the button is clicked then an error is
+     * thrown. If a product ID or name is not found in inventory then an
+     * INFORMATION alert is thrown. If a product ID or name is found then then
+     * the part is returned and added to a temporary list that populates the
+     * AddTable list view.
+     *
+     * @param event
+     */
+    @FXML
+    private void productsSearchBtnHandler(ActionEvent event) {
+        String productSearchString = productsSearchField.getText();
+        int searchedProductIndex;
+        if (productSearchString.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: EMPTY FIELD");
+            alert.setHeaderText("Unable to process search");
+            alert.setContentText("Search field cannot be blank.");
+            alert.showAndWait();
+        } else if (Inventory.lookupProduct(productSearchString) == -1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: PRODUCT NOT FOUND");
+            alert.setHeaderText("Unable to locate product");
+            alert.setContentText("The Product ID or name entered was not found in inventory.");
+            alert.showAndWait();
+        } else {
+            searchedProductIndex = Inventory.lookupProduct(productSearchString);
+            Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
+            ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
+            searchedProductList.add(searchedProduct);
+            productsTable.setItems(searchedProductList);
+            productsSearchField.setText("");
+        }
+    }
+
+    /**
+     * * Executes product search when the ENTER key is typed while the search
+     * field is in focus.
+     *
+     * @param event
+     */
+    @FXML
+    private void productsSearchFieldEnterHandler(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            String productSearchString = productsSearchField.getText();
+            int searchedProductIndex;
+            if (productSearchString.equals("")) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: EMPTY FIELD");
+                alert.setHeaderText("Unable to process search");
+                alert.setContentText("Search field cannot be blank.");
+                alert.showAndWait();
+            } else if (Inventory.lookupProduct(productSearchString) == -1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: PRODUCT NOT FOUND");
+                alert.setHeaderText("Unable to locate product");
+                alert.setContentText("The Product ID or name entered was not found in inventory.");
+                alert.showAndWait();
+            } else {
+                searchedProductIndex = Inventory.lookupProduct(productSearchString);
+                Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
+                ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
+                searchedProductList.add(searchedProduct);
+                productsTable.setItems(searchedProductList);
+                productsSearchField.setText("");
+            }
+        }
+    }
+
+    /**
+     * * Clears the Product Search Field
+     *
+     * @param event
+     */
+    @FXML
+    private void clearProductSearchFieldHandler(MouseEvent event) {
+        productsSearchField.setText("");
+    }
+
+    @FXML
+    private void partsModifyBtnHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void partsDeleteBtnHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void exitBtnHandler(ActionEvent event) {
+        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        exitAlert.setTitle("CONFIRMATION: EXIT APPLICATION");
+        exitAlert.setHeaderText("Are you sure you would like to exit this application?");
+        exitAlert.setContentText("Click OK to exit the application. \n\nClick CANCEL to continue and return to the current screen.");
+        exitAlert.showAndWait();
+
+        if (exitAlert.getResult() == ButtonType.OK) {
             System.out.println("User confirmed. Exiting application. END.");
             System.exit(0);
         } else {
             System.out.println("User cancelled alert. Returning to Main Screen.");
-            alert.close();
+            exitAlert.close();
         }
     }
-}
-
-@FXML
-        private void productsAddBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void productsModifyBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void productsDeleteBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void productsSearchBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void partsSearchBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void partsAddBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void partsModifyBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-        private void partsDeleteBtnHandler(ActionEvent event) {
-    }
-
-
-
 
 }

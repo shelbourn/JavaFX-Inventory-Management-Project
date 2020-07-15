@@ -166,6 +166,7 @@ public class AddProductController implements Initializable {
             alert.setTitle("ERROR: EMPTY FIELD");
             alert.setHeaderText("Unable to process search");
             alert.setContentText("Search field cannot be blank.");
+            alert.showAndWait();
         } else if (Inventory.lookupPart(partSearchString) == -1) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR: PART NOT FOUND");
@@ -198,6 +199,7 @@ public class AddProductController implements Initializable {
                 alert.setTitle("ERROR: EMPTY FIELD");
                 alert.setHeaderText("Unable to process search");
                 alert.setContentText("Search field cannot be blank.");
+                alert.showAndWait();
             } else if (Inventory.lookupPart(partSearchString) == -1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("ERROR: PART NOT FOUND");

@@ -123,7 +123,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < allParts.size(); i++) {
                 productSearch = productSearch.toLowerCase();
-                if (productSearch.equals(allParts.get(i).getPartName().toLowerCase())) {
+                if (productSearch.contains(allParts.get(i).getPartName().toLowerCase())) {
                     productIndex = i;
                     productFound = true;
                 }
