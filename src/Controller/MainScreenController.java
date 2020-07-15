@@ -258,7 +258,28 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void partsModifyBtnHandler(ActionEvent event) {
+    private void partsModifyBtnHandler(ActionEvent event) throws IOException {
+        boolean noActiveSelection = partsTable.getSelectionModel().isEmpty();
+        partModify = partsTable.getSelectionModel().getSelectedItem();
+        partModifyIndex = Inventory.getAllParts().indexOf(partModify);
+        String partModifyName = partModify.getPartName();
+        int partModifyID = partModify.getPartID();
+
+        if (noActiveSelection) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: NO PART SELECTED");
+            alert.setHeaderText("No part has been selected to modify.");
+            alert.setContentText("You must select a part before it can be modified.");
+            alert.showAndWait();
+        } else {
+            System.out.println("User has selected " + partModifyName + " with Part ID: " + partModifyID + " to modify.\n\n Opening Modify Part Screen now.");
+            Parent root = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+            Scene scene = new Scene(root);
+            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            mainScreenWindow.setTitle("Modify Part | " + partModifyName + " | " + "Part ID: " + partModifyID);
+            mainScreenWindow.setScene(scene);
+            mainScreenWindow.show();
+        }
     }
 
     @FXML
