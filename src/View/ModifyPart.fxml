@@ -82,7 +82,7 @@
                   <Font name="Segoe UI" size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="priceCostFiled" layoutX="215.0" layoutY="275.0" prefHeight="33.0" prefWidth="286.0" promptText="Price / Cost">
+            <TextField fx:id="priceCostField" layoutX="215.0" layoutY="275.0" prefHeight="33.0" prefWidth="286.0" promptText="Price / Cost">
                <font>
                   <Font name="Segoe UI" size="16.0" />
                </font>

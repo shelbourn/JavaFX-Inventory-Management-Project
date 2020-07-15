@@ -6,6 +6,10 @@
 package Controller;
 
 import static Controller.MainScreenController.getPartModifyIndex;
+import Model.InHouse;
+import static Model.Inventory.getAllParts;
+import Model.Outsourced;
+import Model.Part;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,13 +55,13 @@ public class ModifyPartController implements Initializable {
     @FXML
     private TextField partIDField;
     @FXML
-    private TextField priceCostFiled;
-    @FXML
     private TextField maxLevelField;
     @FXML
     private TextField partNameField;
     @FXML
     private TextField inventoryLevelField;
+    @FXML
+    private TextField priceCostField;
     @FXML
     private TextField minLevelField;
     @FXML
@@ -79,7 +83,25 @@ public class ModifyPartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Part partToModify = getAllParts().get(partModifyIndex);
+        partID = getAllParts().get(partModifyIndex).getPartID();
+        partIDField.setText("Auto-Generated:   " + partID);
+        partNameField.setText(partToModify.getPartName());
+        inventoryLevelField.setText(Integer.toString(partToModify.getPartStockLevel()));
+        priceCostField.setText(Double.toString(partToModify.getPartPrice()));
+        maxLevelField.setText(Integer.toString(partToModify.getPartMaxStockLevel()));
+        minLevelField.setText(Integer.toString(partToModify.getPartMinStockLevel()));
+
+        if (partToModify instanceof InHouse) {
+            inHouseRadio.setSelected(true);
+            dynamicLabel.setText("Machine ID");
+            dynamicField.setText(Integer.toString(((InHouse) getAllParts().get(partModifyIndex)).getMachineID()));
+        } else {
+            outsourcedRadio.setSelected(true);
+            dynamicLabel.setText("Company Name");
+            dynamicField.setText(((Outsourced) getAllParts().get(partModifyIndex)).getCompanyName());
+        }
+
     }
 
     @FXML
