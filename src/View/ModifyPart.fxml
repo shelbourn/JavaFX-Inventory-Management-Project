@@ -36,12 +36,12 @@
                   <ToggleGroup fx:id="modifyPartToggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <Label fx:id="dynamicallyAssignedLabel" layoutX="40.0" layoutY="406.0" text="Dyn Assigned">
+            <Label fx:id="dynamicLabel" layoutX="40.0" layoutY="406.0" text="Dyn Assigned">
                <font>
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="dynamicallyAssignedField" layoutX="215.0" layoutY="401.0" prefHeight="33.0" prefWidth="286.0" promptText="Dynamically Assigned">
+            <TextField fx:id="dynamicField" layoutX="215.0" layoutY="401.0" prefHeight="33.0" prefWidth="286.0" promptText="Dynamically Assigned">
                <font>
                   <Font name="Segoe UI" size="16.0" />
                </font>
@@ -77,7 +77,7 @@
                </font>
             </Label>
             <Line endX="357.5556640625" fill="#a7a7a7" layoutX="172.0" layoutY="65.0" startX="-152.66665649414062" stroke="#adadad" />
-            <TextField fx:id="partIDField" editable="false" layoutX="216.0" layoutY="86.0" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
+            <TextField fx:id="partIDField" disable="true" editable="false" layoutX="216.0" layoutY="86.0" prefHeight="33.0" prefWidth="286.0" promptText="Auto-Generated (Disabled)">
                <font>
                   <Font name="Segoe UI" size="16.0" />
                </font>

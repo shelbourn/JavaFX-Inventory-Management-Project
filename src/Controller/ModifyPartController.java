@@ -5,17 +5,26 @@
  */
 package Controller;
 
+import static Controller.MainScreenController.getPartModifyIndex;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -24,6 +33,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class ModifyPartController implements Initializable {
 
+    // FXML Created Properties
     @FXML
     private AnchorPane modifyPartScr;
     @FXML
@@ -36,10 +46,6 @@ public class ModifyPartController implements Initializable {
     private RadioButton inHouseRadio;
     @FXML
     private ToggleGroup modifyPartToggleGroup;
-    @FXML
-    private Label dynamicallyAssignedLabel;
-    @FXML
-    private TextField dynamicallyAssignedField;
     @FXML
     private RadioButton outsourcedRadio;
     @FXML
@@ -54,6 +60,19 @@ public class ModifyPartController implements Initializable {
     private TextField inventoryLevelField;
     @FXML
     private TextField minLevelField;
+    @FXML
+    private Label dynamicLabel;
+    @FXML
+    private TextField dynamicField;
+
+    // Additional Properties needed for functionality
+    private int partID;
+    private boolean inHousePart;
+    private int partModifyIndex = getPartModifyIndex();
+    private String partFieldException = new String();
+    private String iHPartDataTypeException = new String();
+    private String outsourcedPartDataTypeException = new String();
+    private String partValueException = new String();
 
     /**
      * Initializes the controller class.
@@ -61,22 +80,46 @@ public class ModifyPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void saveBtnHandler(ActionEvent event) {
     }
 
-    @FXML
-    private void cancelBtnHandler(ActionEvent event) {
-    }
-
+    // Dynamically setting the Machine ID / Company Name field based on selected radio button
     @FXML
     private void inHouseRadioHandler(ActionEvent event) {
+        inHousePart = true;
+        dynamicLabel.setText("Machine ID");
+        dynamicField.setPromptText("Machine ID");
     }
 
     @FXML
     private void outsourcedRadioHandler(ActionEvent event) {
+        inHousePart = false;
+        dynamicLabel.setText("Company Name");
+        dynamicField.setPromptText("Company Name");
     }
-    
+
+    @FXML
+    private void cancelBtnHandler(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        alert.setHeaderText("Would you like to cancel this operation?");
+        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation. Exiting to Main Screen.");
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+            mainScreenWindow.setScene(scene);
+            mainScreenWindow.show();
+        } else {
+            alert.close();
+        }
+    }
+
 }

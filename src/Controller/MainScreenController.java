@@ -166,18 +166,6 @@ public class MainScreenController implements Initializable {
         productsTable.setItems(Inventory.getAllProducts());
     }
 
-    @FXML
-    private void productsAddBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-    private void productsModifyBtnHandler(ActionEvent event) {
-    }
-
-    @FXML
-    private void productsDeleteBtnHandler(ActionEvent event) {
-    }
-
     // Parts Table Methods
     /**
      * * Search Button Handlers searches for Part by ID and Part name. If
@@ -269,6 +257,14 @@ public class MainScreenController implements Initializable {
         addPartWindow.show();
     }
 
+    @FXML
+    private void partsModifyBtnHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void partsDeleteBtnHandler(ActionEvent event) {
+    }
+
     /**
      * * Products Search Button Handlers searches for Product by ID and Part
      * name. If search field is empty and the button is clicked then an error is
@@ -350,11 +346,15 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void partsModifyBtnHandler(ActionEvent event) {
+    private void productsAddBtnHandler(ActionEvent event) {
     }
 
     @FXML
-    private void partsDeleteBtnHandler(ActionEvent event) {
+    private void productsModifyBtnHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void productsDeleteBtnHandler(ActionEvent event) {
     }
 
     @FXML
