@@ -7,6 +7,7 @@ package Controller;
 
 import static Controller.MainScreenController.getPartModifyIndex;
 import Model.InHouse;
+import Model.Inventory;
 import static Model.Inventory.getAllParts;
 import Model.Outsourced;
 import Model.Part;
@@ -104,10 +105,6 @@ public class ModifyPartController implements Initializable {
 
     }
 
-    @FXML
-    private void saveBtnHandler(ActionEvent event) {
-    }
-
     // Dynamically setting the Machine ID / Company Name field based on selected radio button
     @FXML
     private void inHouseRadioHandler(ActionEvent event) {
@@ -121,6 +118,148 @@ public class ModifyPartController implements Initializable {
         inHousePart = false;
         dynamicLabel.setText("Company Name");
         dynamicField.setPromptText("Company Name");
+    }
+
+    @FXML
+    private void saveBtnHandler(ActionEvent event) {
+        String partName = partNameField.getText();
+        String inventoryLevel = inventoryLevelField.getText();
+        String priceCost = priceCostField.getText();
+        String maxInvLevel = maxLevelField.getText();
+        String minInvLevel = minLevelField.getText();
+        String machIDCompName = dynamicField.getText();
+
+        if (inHousePart == true) {
+            partFieldException = Part.inHousePartFieldExceptions(
+                    partName,
+                    inventoryLevel,
+                    priceCost,
+                    minInvLevel,
+                    maxInvLevel,
+                    machIDCompName,
+                    partFieldException);
+
+            iHPartDataTypeException = Part.iHPartDataTypeExceptions(
+                    priceCost,
+                    inventoryLevel,
+                    maxInvLevel,
+                    minInvLevel,
+                    machIDCompName,
+                    iHPartDataTypeException);
+        } else {
+            partFieldException = Part.outsourcedPartFieldExceptions(
+                    partName,
+                    inventoryLevel,
+                    priceCost,
+                    minInvLevel,
+                    maxInvLevel,
+                    machIDCompName,
+                    partFieldException);
+
+            outsourcedPartDataTypeException = Part.outsourcedPartDataTypeExceptions(
+                    priceCost,
+                    inventoryLevel,
+                    maxInvLevel,
+                    minInvLevel,
+                    outsourcedPartDataTypeException);
+        }
+        if (partFieldException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            alert.setHeaderText("This part has not been modified");
+            alert.setContentText(partFieldException);
+            alert.showAndWait();
+            partFieldException = "";
+        } else if (iHPartDataTypeException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            alert.setHeaderText("This part has not been modified");
+            alert.setContentText(iHPartDataTypeException);
+            alert.showAndWait();
+            iHPartDataTypeException = "";
+        } else if (outsourcedPartDataTypeException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            alert.setHeaderText("This part has not been modified");
+            alert.setContentText(outsourcedPartDataTypeException);
+            alert.showAndWait();
+            outsourcedPartDataTypeException = "";
+        } else {
+            try {
+                partValueException = Part.partValueExceptions(
+                        Double.parseDouble(priceCost),
+                        Integer.parseInt(inventoryLevel),
+                        Integer.parseInt(minInvLevel),
+                        Integer.parseInt(maxInvLevel),
+                        partValueException);
+
+                if (partValueException.length() > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
+                    alert.setHeaderText("This part has not been modified");
+                    alert.setContentText(partValueException);
+                    alert.showAndWait();
+                    partValueException = "";
+                } else {
+                    if (inHousePart == true) {
+                        InHouse inHouse = new InHouse();
+                        inHouse.setPartID(partID);
+                        inHouse.setPartName(partName);
+                        inHouse.setPartStockLevel(Integer.parseInt(inventoryLevel));
+                        inHouse.setPartPrice(Double.parseDouble(priceCost));
+                        inHouse.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
+                        inHouse.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        inHouse.setMachineID(Integer.parseInt(machIDCompName));
+                        Inventory.updatePart(partModifyIndex, inHouse);
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("SUCCESS: IN-HOUSE PART MODIFIED");
+                        alert.setHeaderText("In-House Part Successfully Modified in Inventory");
+                        alert.setContentText("Click OK to return to the main screen.");
+                        alert.showAndWait();
+
+                        if (alert.getResult() == ButtonType.OK) {
+                            System.out.println("In-House Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
+                            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                            Scene scene = new Scene(root);
+                            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.show();
+                        } else {
+                        }
+                    } else {
+                        Outsourced outsourced = new Outsourced();
+                        outsourced.setPartID(partID);
+                        outsourced.setPartName(partName);
+                        outsourced.setPartStockLevel(Integer.parseInt(inventoryLevel));
+                        outsourced.setPartPrice(Double.parseDouble(priceCost));
+                        outsourced.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
+                        outsourced.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        outsourced.setCompanyName(machIDCompName);
+                        Inventory.updatePart(partModifyIndex, outsourced);
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("SUCCESS: OUTSOURCED PART MODIFIED");
+                        alert.setHeaderText("Outsourced Part Successfully Modified in Inventory");
+                        alert.setContentText("Click OK to return to the main screen.");
+                        alert.showAndWait();
+
+                        if (alert.getResult() == ButtonType.OK) {
+                            System.out.println("Outsourced Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
+                            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                            Scene scene = new Scene(root);
+                            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.show();
+                        } else {
+                        }
+                    }
+                }
+            } catch (IOException e) {
+            }
+        }
     }
 
     @FXML
