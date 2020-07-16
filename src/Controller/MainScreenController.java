@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
@@ -125,34 +124,33 @@ public class MainScreenController implements Initializable {
         // Initializing Add Part and Delete Part table views
         updatePartsTable();
         updateProductsTable();
-        partTableTestDataHelper();
-        productTableTestDataHelper();
+//        partTableTestDataHelper();
+//        productTableTestDataHelper();
     }
 
     // Method to create part table test data (******COMMENT OUT BEFORE FINAL BUILD*******)
-    private void partTableTestDataHelper() {
-        for (int i = 3000; i < 3006; i++) {
-            InHouse inHouseTest = new InHouse();
-            inHouseTest.setPartID(i);
-            inHouseTest.setPartName("Test" + i);
-            inHouseTest.setPartStockLevel(i - 2095);
-            inHouseTest.setPartPrice(i - 999);
-            Inventory.addPart(inHouseTest);
-        }
-    }
-
-    // Method to create product table test data (******COMMENT OUT BEFORE FINAL BUILD*******)
-    private void productTableTestDataHelper() {
-        for (int i = 2006; i > 2000; i--) {
-            Product productTest = new Product();
-            productTest.setProductID(i);
-            productTest.setProductName("Test" + i);
-            productTest.setProductStockLevel(i - 2095);
-            productTest.setProductPrice(i - 999);
-            Inventory.addProduct(productTest);
-        }
-    }
-
+//    private void partTableTestDataHelper() {
+//        for (int i = 3000; i < 3006; i++) {
+//            InHouse inHouseTest = new InHouse();
+//            inHouseTest.setPartID(i);
+//            inHouseTest.setPartName("Test" + i);
+//            inHouseTest.setPartStockLevel(i - 2095);
+//            inHouseTest.setPartPrice(i - 999);
+//            Inventory.addPart(inHouseTest);
+//        }
+//    }
+//
+//    // Method to create product table test data (******COMMENT OUT BEFORE FINAL BUILD*******)
+//    private void productTableTestDataHelper() {
+//        for (int i = 2006; i > 2000; i--) {
+//            Product productTest = new Product();
+//            productTest.setProductID(i);
+//            productTest.setProductName("Test" + i);
+//            productTest.setProductStockLevel(i - 2095);
+//            productTest.setProductPrice(i - 999);
+//            Inventory.addProduct(productTest);
+//        }
+//    }
     /**
      * * Helper methods for updating table views
      *
@@ -249,7 +247,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void partsAddBtnHandler(ActionEvent event) throws IOException {
         System.out.println("User selected 'ADD PART'. \n\nOpening ADD PART screen.");
-        Parent root = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddPart.fxml"));
         Scene scene = new Scene(root);
         Stage addPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         addPartWindow.setTitle("ABC Company: Inventory Management System");
@@ -273,7 +271,7 @@ public class MainScreenController implements Initializable {
             alert.showAndWait();
         } else {
             System.out.println("User has selected " + partModifyName + " with Part ID: " + partModifyID + " to modify.\n\n Opening Modify Part Screen now.");
-            Parent root = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyPart.fxml"));
             Scene scene = new Scene(root);
             Stage modifyPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             modifyPartWindow.setTitle("Modify Part | " + partModifyName + " | " + "Part ID: " + partModifyID);
@@ -399,7 +397,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private void productsAddBtnHandler(ActionEvent event) throws IOException {
         System.out.println("User selected 'ADD PRODUCT'. \n\nOpening ADD PRODUCT screen.");
-        Parent root = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddProduct.fxml"));
         Scene scene = new Scene(root);
         Stage addProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         addProductWindow.setTitle("ABC Company: Inventory Management System");
@@ -423,7 +421,7 @@ public class MainScreenController implements Initializable {
             alert.showAndWait();
         } else {
             System.out.println("User has selected " + productModifyName + " with Product ID: " + productModifyID + " to modify.\n\n Opening Modify Product Screen now.");
-            Parent root = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyProduct.fxml"));
             Scene scene = new Scene(root);
             Stage modifyProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             modifyProductWindow.setTitle("Modify Product | " + productModifyName + " | " + "Product ID: " + productModifyID);

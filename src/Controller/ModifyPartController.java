@@ -220,7 +220,7 @@ public class ModifyPartController implements Initializable {
 
                         if (alert.getResult() == ButtonType.OK) {
                             System.out.println("In-House Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
-                            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                             Scene scene = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
@@ -247,7 +247,7 @@ public class ModifyPartController implements Initializable {
 
                         if (alert.getResult() == ButtonType.OK) {
                             System.out.println("Outsourced Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
-                            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                             Scene scene = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
@@ -272,7 +272,7 @@ public class ModifyPartController implements Initializable {
 
         if (alert.getResult() == ButtonType.OK) {
             System.out.println("User cancelled operation. Exiting to Main Screen.");
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
             Scene scene = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");

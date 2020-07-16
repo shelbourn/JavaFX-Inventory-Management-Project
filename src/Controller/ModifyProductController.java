@@ -6,7 +6,6 @@
 package Controller;
 
 import static Controller.MainScreenController.getProductModifyIndex;
-import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
@@ -132,22 +131,21 @@ public class ModifyProductController implements Initializable {
         // Initializing Add Part and Delete Part table views
         updateAddTable();
         updateDeleteTable();
-        testDataHelper();
+//        testDataHelper();
     }
 
     // Helper Methods for Updating Table Views
     // Method to create test data (******COMMENT OUT BEFORE FINAL BUILD*******)
-    private void testDataHelper() {
-        for (int i = 3000; i < 3006; i++) {
-            InHouse inHouseTest = new InHouse();
-            inHouseTest.setPartID(i);
-            inHouseTest.setPartName("Test" + i);
-            inHouseTest.setPartStockLevel(i - 2095);
-            inHouseTest.setPartPrice(i - 999);
-            Inventory.addPart(inHouseTest);
-        }
-    }
-
+//    private void testDataHelper() {
+//        for (int i = 3000; i < 3006; i++) {
+//            InHouse inHouseTest = new InHouse();
+//            inHouseTest.setPartID(i);
+//            inHouseTest.setPartName("Test" + i);
+//            inHouseTest.setPartStockLevel(i - 2095);
+//            inHouseTest.setPartPrice(i - 999);
+//            Inventory.addPart(inHouseTest);
+//        }
+//    }
     private void updateAddTable() {
         addTable.setItems(Inventory.getAllParts());
     }
@@ -336,7 +334,7 @@ public class ModifyProductController implements Initializable {
 
                     if (alert.getResult() == ButtonType.OK) {
                         System.out.println("User confirmed product modification. \nExiting to Main Screen.");
-                        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                         Scene scene = new Scene(root);
                         Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         mainScreenWindow.setTitle("ABC Company: Inventory Management System");
@@ -360,7 +358,7 @@ public class ModifyProductController implements Initializable {
 
         if (alert.getResult() == ButtonType.OK) {
             System.out.println("User cancelled operation. \n\nExiting to Main Screen.");
-            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
             Scene scene = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");

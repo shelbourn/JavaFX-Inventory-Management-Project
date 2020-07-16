@@ -85,8 +85,8 @@ public class InventoryManager extends Application {
         newProductTest.setProductPrice(price);
         newProductTest.setProductMaxStockLevel(maxInventory);
         newProductTest.setProductMinStockLevel(minInventory);
-        newProductTest.setAssociatedParts(associatedParts);
         Inventory.addProduct(newProductTest);
+        newProductTest.setAssociatedParts(associatedParts);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class InventoryManager extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
 
         Scene scene = new Scene(root);
-
+        stage.setTitle("ABC Company: Inventory Management System");
         stage.setScene(scene);
         stage.show();
     }
