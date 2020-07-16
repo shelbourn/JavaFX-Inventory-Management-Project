@@ -68,7 +68,7 @@
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Group layoutX="507.0" layoutY="38.0" onMouseClicked="#clearPartSearchFieldHandler">
+            <Group layoutX="507.0" layoutY="38.0" onMouseClicked="#clearPartSearchFieldHandler" scaleX="0.8" scaleY="0.8">
                <children>
                   <Ellipse fill="#dadada" layoutY="1.765625" opacity="0.49" radiusX="10.0" radiusY="10.0" stroke="BLACK" strokeType="INSIDE" />
                   <Text fill="#9b9b9b" layoutX="-6.3" layoutY="7.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
@@ -120,7 +120,7 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </TextField>
-            <Group layoutX="507.0" layoutY="38.0" onMouseClicked="#clearProductSearchFieldHandler">
+            <Group layoutX="507.0" layoutY="38.0" onMouseClicked="#clearProductSearchFieldHandler" scaleX="0.8" scaleY="0.8">
                <children>
                   <Ellipse fill="#dadada" layoutY="1.765625" opacity="0.49" radiusX="10.0" radiusY="10.0" stroke="BLACK" strokeType="INSIDE" />
                   <Text fill="#9b9b9b" layoutX="-6.3" layoutY="7.5" strokeType="OUTSIDE" strokeWidth="0.0" text="X">

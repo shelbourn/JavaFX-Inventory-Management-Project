@@ -284,7 +284,7 @@ public class MainScreenController implements Initializable {
     private void partsDeleteBtnHandler(ActionEvent event) {
         Part partToDelete = partsTable.getSelectionModel().getSelectedItem();
 
-        if (Inventory.deletePartCheck(partToDelete)) {
+        if (!Inventory.deletePartCheck(partToDelete)) {
             System.out.println("Part is associated with product(s).\n Unable to delete part.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERROR: UNABLE TO DELETE PART");
@@ -434,7 +434,7 @@ public class MainScreenController implements Initializable {
     private void productsDeleteBtnHandler(ActionEvent event) {
         Product productToDelete = productsTable.getSelectionModel().getSelectedItem();
 
-        if (Inventory.deleteProductCheck(productToDelete)) {
+        if (!Inventory.deleteProductCheck(productToDelete)) {
             System.out.println("Product has associated part(s).\n Unable to delete product.");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERROR: UNABLE TO DELETE PRODUCT");
