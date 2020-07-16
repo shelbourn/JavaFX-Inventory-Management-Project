@@ -261,4 +261,12 @@ public abstract class Part {
         }
         return outsourcedPartDataTypeException;
     }
+
+    public void setMachineID(int machineID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCompanyName(String companyName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
