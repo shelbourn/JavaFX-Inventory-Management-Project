@@ -268,7 +268,7 @@ public class MainScreenController implements Initializable {
         if (noActiveSelection) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERROR: NO PART SELECTED");
-            alert.setHeaderText("No part has been selected to modify.");
+            alert.setHeaderText("No part has been selected to modify");
             alert.setContentText("You must select a part before it can be modified.");
             alert.showAndWait();
         } else {
@@ -284,6 +284,36 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partsDeleteBtnHandler(ActionEvent event) {
+        Part partToDelete = partsTable.getSelectionModel().getSelectedItem();
+
+        if (Inventory.deletePartCheck(partToDelete)) {
+            System.out.println("Part is associated with product(s).\n Unable to delete part.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: UNABLE TO DELETE PART");
+            alert.setHeaderText("Part associated with product(s)");
+            alert.setContentText("Part cannot be associated with any products in order to be deleted.");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("CONFIRMATION: DELETE PART FROM INVENTORY");
+            alert.setHeaderText("Are you sure you would like to delete this part from inventory?\n\n This cannot be undone!");
+            alert.setContentText("Click OK to delete this part. \n\nClick CANCEL to close this window and keep the part.");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                System.out.println("User confirmed. \nPart is being deleted from inventory");
+                Inventory.deletePart(partToDelete);
+                updatePartsTable();
+
+                Alert partDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
+                partDeletionAlert.setTitle("SUCCESS: PART DELETED");
+                partDeletionAlert.setHeaderText("The selected part has been deleted from inventory");
+                partDeletionAlert.setContentText("The Parts table has been updated.\n\n Click OK to close this window.");
+                partDeletionAlert.showAndWait();
+            } else {
+                alert.close();
+            }
+        }
     }
 
     /**
@@ -367,7 +397,14 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productsAddBtnHandler(ActionEvent event) {
+    private void productsAddBtnHandler(ActionEvent event) throws IOException {
+        System.out.println("User selected 'ADD PRODUCT'. \n\nOpening ADD PRODUCT screen.");
+        Parent root = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        Scene scene = new Scene(root);
+        Stage addProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        addProductWindow.setTitle("ABC Company: Inventory Management System");
+        addProductWindow.setScene(scene);
+        addProductWindow.show();
     }
 
     @FXML
@@ -376,6 +413,36 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void productsDeleteBtnHandler(ActionEvent event) {
+        Product productToDelete = productsTable.getSelectionModel().getSelectedItem();
+
+        if (Inventory.deleteProductCheck(productToDelete)) {
+            System.out.println("Product has associated part(s).\n Unable to delete product.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: UNABLE TO DELETE PRODUCT");
+            alert.setHeaderText("Product has associated part(s)");
+            alert.setContentText("Product cannot be deleted if it has associated parts.");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("CONFIRMATION: DELETE PRODUCT FROM INVENTORY");
+            alert.setHeaderText("Are you sure you would like to delete this product from inventory?\n\n This cannot be undone!");
+            alert.setContentText("Click OK to delete this product. \n\nClick CANCEL to close this window and keep the product.");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                System.out.println("User confirmed. \nPart is being deleted from inventory");
+                Inventory.deleteProduct(productToDelete);
+                updateProductsTable();
+
+                Alert productDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
+                productDeletionAlert.setTitle("SUCCESS: PRODUCT DELETED");
+                productDeletionAlert.setHeaderText("The selected product has been deleted from inventory");
+                productDeletionAlert.setContentText("The Products table has been updated.\n\n Click OK to close this window.");
+                productDeletionAlert.showAndWait();
+            } else {
+                alert.close();
+            }
+        }
     }
 
     @FXML
@@ -395,4 +462,5 @@ public class MainScreenController implements Initializable {
         }
     }
 
+}
 }
