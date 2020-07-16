@@ -275,10 +275,10 @@ public class MainScreenController implements Initializable {
             System.out.println("User has selected " + partModifyName + " with Part ID: " + partModifyID + " to modify.\n\n Opening Modify Part Screen now.");
             Parent root = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
             Scene scene = new Scene(root);
-            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            mainScreenWindow.setTitle("Modify Part | " + partModifyName + " | " + "Part ID: " + partModifyID);
-            mainScreenWindow.setScene(scene);
-            mainScreenWindow.show();
+            Stage modifyPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            modifyPartWindow.setTitle("Modify Part | " + partModifyName + " | " + "Part ID: " + partModifyID);
+            modifyPartWindow.setScene(scene);
+            modifyPartWindow.show();
         }
     }
 
@@ -408,7 +408,28 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void productsModifyBtnHandler(ActionEvent event) {
+    private void productsModifyBtnHandler(ActionEvent event) throws IOException {
+        boolean noActiveSelection = productsTable.getSelectionModel().isEmpty();
+        productModify = productsTable.getSelectionModel().getSelectedItem();
+        productModifyIndex = Inventory.getAllProducts().indexOf(productModify);
+        String productModifyName = productModify.getProductName();
+        int productModifyID = productModify.getProductID();
+
+        if (noActiveSelection) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: NO PART SELECTED");
+            alert.setHeaderText("No part has been selected to modify");
+            alert.setContentText("You must select a part before it can be modified.");
+            alert.showAndWait();
+        } else {
+            System.out.println("User has selected " + productModifyName + " with Product ID: " + productModifyID + " to modify.\n\n Opening Modify Product Screen now.");
+            Parent root = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
+            Scene scene = new Scene(root);
+            Stage modifyProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            modifyProductWindow.setTitle("Modify Product | " + productModifyName + " | " + "Product ID: " + productModifyID);
+            modifyProductWindow.setScene(scene);
+            modifyProductWindow.show();
+        }
     }
 
     @FXML
@@ -462,5 +483,4 @@ public class MainScreenController implements Initializable {
         }
     }
 
-}
 }
