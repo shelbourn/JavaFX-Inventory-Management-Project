@@ -30,14 +30,13 @@ public class InventoryManager extends Application {
 
     // Helper Method to create sample parts
     private void inHouseTestParts(
-            int partID,
             String partName,
             int inventoryLevel,
             double price,
             int maxInventory,
             int minInventory,
             int machineID) {
-        partID = Inventory.getGeneratedPartID();
+        int partID = Inventory.getGeneratedPartID();
         Part newInHouseTest = new InHouse();
         newInHouseTest.setPartID(partID);
         newInHouseTest.setPartName(partName);
@@ -51,14 +50,13 @@ public class InventoryManager extends Application {
     }
 
     private void outsourcedTestParts(
-            int partID,
             String partName,
             int inventoryLevel,
             double price,
             int maxInventory,
             int minInventory,
             String companyName) {
-        partID = Inventory.getGeneratedPartID();
+        int partID = Inventory.getGeneratedPartID();
         Part newOutsourcedTest = new Outsourced();
         newOutsourcedTest.setPartID(partID);
         newOutsourcedTest.setPartName(partName);
@@ -73,14 +71,13 @@ public class InventoryManager extends Application {
 
     // Helper Method to create sample products
     private void testProducts(
-            int productID,
             String productIName,
             int inventoryLevel,
             double price,
             int maxInventory,
             int minInventory,
             ObservableList<Part> associatedParts) {
-        productID = Inventory.getGeneratedProductID();
+        int productID = Inventory.getGeneratedProductID();
         Product newProductTest = new Product();
         newProductTest.setProductID(productID);
         newProductTest.setProductName(productIName);
@@ -94,6 +91,29 @@ public class InventoryManager extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        // Initializing application with test data
+        inHouseTestParts("32-bit ARM9 core microprocessor", 12, 199.99, 32, 6, 662);
+        inHouseTestParts("64-bit ARM9 core microprocessor", 8, 399.99, 24, 4, 662);
+        inHouseTestParts("64 MB DDR2 SDRAM chip", 4, 899.99, 10, 2, 520);
+        inHouseTestParts("4 Gbit NAND memory", 20, 99.99, 64, 10, 400);
+        inHouseTestParts("Micro USB type B connector", 100, 5.99, 300, 25, 210);
+        inHouseTestParts("USB Type A Connector", 97, 3.99, 300, 25, 210);
+        inHouseTestParts("USB Type C 3.0 Connector", 73, 10.99, 200, 12, 210);
+
+        outsourcedTestParts("3.3V Voltage Regulator", 6, 19.99, 20, 2, "Newegg Computer Parts");
+        outsourcedTestParts("1.8V Voltage Regulator", 6, 13.99, 20, 2, "Newegg Computer Parts");
+        outsourcedTestParts("1.0V Voltage Regulator", 6, 9.99, 20, 2, "Newegg Computer Parts");
+        outsourcedTestParts("Aluminum Clamshell Computer Frame - Slate", 4, 53.99, 10, 1, "Newegg Computer Parts");
+        outsourcedTestParts("Aluminum Clamshell Computer Frame - Silver", 3, 53.99, 10, 1, "Newegg Computer Parts");
+        outsourcedTestParts("Aluminum Clamshell Computer Frame - White", 2, 53.99, 10, 1, "Newegg Computer Parts");
+
+        testProducts("32-bit Arm Laptop - Slate", 4, 1199.99, 6, 1, associatedParts);
+        testProducts("32-bit Arm Laptop - Silver", 6, 1299.99, 10, 2, associatedParts);
+        testProducts("32-bit Arm Laptop - White", 10, 1399.99, 14, 4, associatedParts);
+        testProducts("64-bit Arm Laptop - Slate", 4, 1699.99, 6, 1, associatedParts);
+        testProducts("64-bit Arm Laptop - Silver", 6, 1799.99, 10, 2, associatedParts);
+        testProducts("64-bit Arm Laptop - White", 10, 1899.99, 14, 4, associatedParts);
+
         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
 
         Scene scene = new Scene(root);
