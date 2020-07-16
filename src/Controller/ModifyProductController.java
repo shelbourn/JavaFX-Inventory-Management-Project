@@ -210,7 +210,19 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void addBtnHandler(ActionEvent event) {
+        boolean noActiveSelection = addTable.getSelectionModel().isEmpty();
+        Part selectedPart = addTable.getSelectionModel().getSelectedItem();
 
+        if (noActiveSelection) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: NO PART SELECTED");
+            alert.setHeaderText("No part has been added to product's part list.");
+            alert.setContentText("A part must be selected before it can be added to the part list.");
+            alert.showAndWait();
+        }
+
+        associatedParts.add(selectedPart);
+        updateDeleteTable();
     }
 
     @FXML
