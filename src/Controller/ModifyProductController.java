@@ -17,10 +17,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -147,10 +151,66 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void searchBtnHandler(ActionEvent event) {
+        String partSearchString = searchField.getText();
+        int searchedPartIndex;
+        if (partSearchString.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: EMPTY FIELD");
+            alert.setHeaderText("Unable to process search");
+            alert.setContentText("Search field cannot be blank.");
+            alert.showAndWait();
+        } else if (Inventory.lookupPart(partSearchString) == -1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR: PART NOT FOUND");
+            alert.setHeaderText("Unable to locate part");
+            alert.setContentText("The Part ID or name entered was not found in inventory.");
+            alert.showAndWait();
+        } else {
+            searchedPartIndex = Inventory.lookupPart(partSearchString);
+            Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
+            ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
+            searchedPartList.add(searchedPart);
+            addTable.setItems(searchedPartList);
+            searchField.setText("");
+        }
+    }
+
+    @FXML
+    private void searchFieldEnterHandler(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            String partSearchString = searchField.getText();
+            int searchedPartIndex;
+            if (partSearchString.equals("")) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: EMPTY FIELD");
+                alert.setHeaderText("Unable to process search");
+                alert.setContentText("Search field cannot be blank.");
+                alert.showAndWait();
+            } else if (Inventory.lookupPart(partSearchString) == -1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ERROR: PART NOT FOUND");
+                alert.setHeaderText("Unable to locate part");
+                alert.setContentText("The Part ID or name entered was not found in inventory.");
+                alert.showAndWait();
+            } else {
+                searchedPartIndex = Inventory.lookupPart(partSearchString);
+                Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
+                ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
+                searchedPartList.add(searchedPart);
+                addTable.setItems(searchedPartList);
+                searchField.setText("");
+            }
+        }
+    }
+
+    @FXML
+    private void clearSearchFieldHandler(MouseEvent event) {
+        searchField.setText("");
     }
 
     @FXML
     private void addBtnHandler(ActionEvent event) {
+
     }
 
     @FXML
