@@ -273,8 +273,8 @@ public class AddProductController implements Initializable {
         if (alert.getResult() == ButtonType.OK) {
             System.out.println("User confirmed. \nPart has been removed from Product's part list.");
             associatedParts.remove(selectedPart);
-            // ?Not sure if I need to call the updateDeleteTable method here or not. Will test.
             updateDeleteTable();
+
             Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
             removeAlert.setTitle("SUCCESS: PART REMOVED");
             removeAlert.setHeaderText("The selected part has been removed from the part list.");

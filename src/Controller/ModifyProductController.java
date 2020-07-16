@@ -10,15 +10,21 @@ import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +32,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -227,14 +234,141 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void deleteBtnHandler(ActionEvent event) {
+        Part selectedPart = deleteTable.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: REMOVE PART");
+        alert.setHeaderText("Would you like to remove this part from the product's part list?");
+        alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User confirmed. \nPart has been removed from Product's part list.");
+            associatedParts.remove(selectedPart);
+            updateDeleteTable();
+
+            Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
+            removeAlert.setTitle("SUCCESS: PART REMOVED");
+            removeAlert.setHeaderText("The selected part has been removed from the part list.");
+            removeAlert.setContentText("Click OK to close this window.");
+            removeAlert.showAndWait();
+        } else {
+            alert.close();
+        }
     }
 
     @FXML
-    private void saveBtnHandler(ActionEvent event) {
+    private void saveBtnHandler(ActionEvent event) throws IOException {
+        String productName = productNameField.getText();
+        String productPrice = priceField.getText();
+        String productStockLevel = inventoryLevelField.getText();
+        String productMinStockLevel = minLevelField.getText();
+        String productMaxStockLevel = maxLevelField.getText();
+
+        productFieldException = Product.productFieldExceptions(
+                productName,
+                productPrice,
+                productStockLevel,
+                productMinStockLevel,
+                productMaxStockLevel,
+                productFieldException);
+
+        productDataTypeException = Product.prodDataTypeExceptions(
+                productPrice,
+                productStockLevel,
+                productMinStockLevel,
+                productMaxStockLevel,
+                productDataTypeException);
+
+        productValueException = Product.productValueExceptions(
+                Double.parseDouble(productPrice),
+                Integer.parseInt(productStockLevel),
+                Integer.parseInt(productMinStockLevel),
+                Integer.parseInt(productMaxStockLevel),
+                productValueException);
+
+        if (productFieldException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            alert.setHeaderText("This product has not been modified");
+            alert.setContentText(productFieldException);
+            alert.showAndWait();
+            productFieldException = "";
+        } else if (productDataTypeException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            alert.setHeaderText("This product has not been modified");
+            alert.setContentText(productDataTypeException);
+            alert.showAndWait();
+            productDataTypeException = "";
+        } else if (productValueException.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERROR: INVALID VALUES PRESENT");
+            alert.setHeaderText("This product has not been amodified");
+            alert.setContentText(productValueException);
+            alert.showAndWait();
+            productValueException = "";
+        } else {
+            try {
+                if (associatedParts.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
+                    alert.setHeaderText("This product has not been modified");
+                    alert.setContentText("A new product must contain at least one part.");
+                    alert.showAndWait();
+                } else {
+                    Product updatedProduct = new Product();
+                    updatedProduct.setProductID(productID);
+                    updatedProduct.setProductName(productName);
+                    updatedProduct.setProductPrice(Double.parseDouble(productPrice));
+                    updatedProduct.setProductStockLevel(Integer.parseInt(productStockLevel));
+                    updatedProduct.setProductMaxStockLevel(Integer.parseInt(productMaxStockLevel));
+                    updatedProduct.setProductMinStockLevel(Integer.parseInt(productMinStockLevel));
+                    updatedProduct.setAssociatedParts(associatedParts);
+                    Inventory.updateProduct(productModifyIndex, updatedProduct);
+                    System.out.println("Product " + productName + " (ID#: " + productID + ") successfully modified.");
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("SUCCESS: PRODUCT MODIFIED");
+                    alert.setHeaderText("Product Successfully Modified");
+                    alert.setContentText("Click OK to return to the main screen.");
+                    alert.showAndWait();
+
+                    if (alert.getResult() == ButtonType.OK) {
+                        System.out.println("User confirmed product modification. \nExiting to Main Screen.");
+                        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+                        Scene scene = new Scene(root);
+                        Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+                        mainScreenWindow.setScene(scene);
+                        mainScreenWindow.show();
+                    } else {
+                    }
+                }
+            } catch (IOException e) {
+            }
+        }
     }
 
     @FXML
-    private void cancelBtnHandler(ActionEvent event) {
+    private void cancelBtnHandler(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        alert.setHeaderText("Would you like to cancel this operation?");
+        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation. \n\nExiting to Main Screen.");
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(root);
+            Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            mainScreenWindow.setTitle("ABC Company: Inventory Management System");
+            mainScreenWindow.setScene(scene);
+            mainScreenWindow.show();
+        } else {
+            alert.close();
+        }
     }
 
 }
