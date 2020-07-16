@@ -8,8 +8,12 @@ package Main;
 import Model.InHouse;
 import Model.Inventory;
 import static Model.Inventory.addPart;
+import Model.Outsourced;
 import Model.Part;
+import Model.Product;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,31 +25,71 @@ import javafx.stage.Stage;
  */
 public class InventoryManager extends Application {
 
-    // Method to create sample parts
-    private void inHouseTestParts(int partID, String partName, int inventoryLevel, double price, int maxInventory, int minInventory, int machineID) {
+    // Properties required for helper methods
+    ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+
+    // Helper Method to create sample parts
+    private void inHouseTestParts(
+            int partID,
+            String partName,
+            int inventoryLevel,
+            double price,
+            int maxInventory,
+            int minInventory,
+            int machineID) {
         partID = Inventory.getGeneratedPartID();
-        Part newInHouse = new InHouse();
-        newInHouse.setPartID(partID);
-        newInHouse.setPartName(partName);
-        newInHouse.setPartStockLevel(inventoryLevel);
-        newInHouse.setPartPrice(price);
-        newInHouse.setPartMaxStockLevel(maxInventory);
-        newInHouse.setPartMinStockLevel(minInventory);
-        newInHouse.setMachineID(machineID);
-        addPart(newInHouse);
+        Part newInHouseTest = new InHouse();
+        newInHouseTest.setPartID(partID);
+        newInHouseTest.setPartName(partName);
+        newInHouseTest.setPartStockLevel(inventoryLevel);
+        newInHouseTest.setPartPrice(price);
+        newInHouseTest.setPartMaxStockLevel(maxInventory);
+        newInHouseTest.setPartMinStockLevel(minInventory);
+        newInHouseTest.setMachineID(machineID);
+        addPart(newInHouseTest);
+        associatedParts.add(newInHouseTest);
     }
 
-    private void outsourcedTestParts(int partID, String partName, int inventoryLevel, double price, int maxInventory, int minInventory, String companyName) {
+    private void outsourcedTestParts(
+            int partID,
+            String partName,
+            int inventoryLevel,
+            double price,
+            int maxInventory,
+            int minInventory,
+            String companyName) {
         partID = Inventory.getGeneratedPartID();
-        Part newInHouse = new InHouse();
-        newInHouse.setPartID(partID);
-        newInHouse.setPartName(partName);
-        newInHouse.setPartStockLevel(inventoryLevel);
-        newInHouse.setPartPrice(price);
-        newInHouse.setPartMaxStockLevel(maxInventory);
-        newInHouse.setPartMinStockLevel(minInventory);
-        newInHouse.setMachineID(machineID);
-        addPart(newInHouse);
+        Part newOutsourcedTest = new Outsourced();
+        newOutsourcedTest.setPartID(partID);
+        newOutsourcedTest.setPartName(partName);
+        newOutsourcedTest.setPartStockLevel(inventoryLevel);
+        newOutsourcedTest.setPartPrice(price);
+        newOutsourcedTest.setPartMaxStockLevel(maxInventory);
+        newOutsourcedTest.setPartMinStockLevel(minInventory);
+        newOutsourcedTest.setCompanyName(companyName);
+        addPart(newOutsourcedTest);
+        associatedParts.add(newOutsourcedTest);
+    }
+
+    // Helper Method to create sample products
+    private void testProducts(
+            int productID,
+            String productIName,
+            int inventoryLevel,
+            double price,
+            int maxInventory,
+            int minInventory,
+            ObservableList<Part> associatedParts) {
+        productID = Inventory.getGeneratedProductID();
+        Product newProductTest = new Product();
+        newProductTest.setProductID(productID);
+        newProductTest.setProductName(productIName);
+        newProductTest.setProductStockLevel(inventoryLevel);
+        newProductTest.setProductPrice(price);
+        newProductTest.setProductMaxStockLevel(maxInventory);
+        newProductTest.setProductMinStockLevel(minInventory);
+        newProductTest.setAssociatedParts(associatedParts);
+        Inventory.addProduct(newProductTest);
     }
 
     @Override
