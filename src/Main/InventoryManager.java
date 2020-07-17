@@ -1,10 +1,12 @@
+/**
+ * Main for ABC Company: Inventory Management System
+ * Sets test data, adds test data to inventory, populates Main Screen table views
+ * Launches Main Screen
+ *
+ * @author Matthew Shelbourn <mshelbo@wgu.edu>
+ */
 package Main;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import Model.InHouse;
 import Model.Inventory;
 import static Model.Inventory.addPart;
@@ -28,7 +30,7 @@ public class InventoryManager extends Application {
     // Properties required for helper methods
     ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
-    // Helper Method to create sample parts
+    // Helper Method to create sample In-House parts
     private void inHouseTestParts(
             String partName,
             int inventoryLevel,
@@ -37,18 +39,19 @@ public class InventoryManager extends Application {
             int minInventory,
             int machineID) {
         int partID = Inventory.getGeneratedPartID();
-        Part newInHouseTest = new InHouse();
-        newInHouseTest.setPartID(partID);
-        newInHouseTest.setPartName(partName);
-        newInHouseTest.setPartStockLevel(inventoryLevel);
-        newInHouseTest.setPartPrice(price);
-        newInHouseTest.setPartMaxStockLevel(maxInventory);
-        newInHouseTest.setPartMinStockLevel(minInventory);
+        InHouse newInHouseTest = new InHouse();
+        newInHouseTest.setId(partID);
+        newInHouseTest.setName(partName);
+        newInHouseTest.setStock(inventoryLevel);
+        newInHouseTest.setPrice(price);
+        newInHouseTest.setMax(maxInventory);
+        newInHouseTest.setMin(minInventory);
         newInHouseTest.setMachineID(machineID);
         addPart(newInHouseTest);
         associatedParts.add(newInHouseTest);
     }
 
+    // Helper Method to create sample Outsourced parts
     private void outsourcedTestParts(
             String partName,
             int inventoryLevel,
@@ -57,13 +60,13 @@ public class InventoryManager extends Application {
             int minInventory,
             String companyName) {
         int partID = Inventory.getGeneratedPartID();
-        Part newOutsourcedTest = new Outsourced();
-        newOutsourcedTest.setPartID(partID);
-        newOutsourcedTest.setPartName(partName);
-        newOutsourcedTest.setPartStockLevel(inventoryLevel);
-        newOutsourcedTest.setPartPrice(price);
-        newOutsourcedTest.setPartMaxStockLevel(maxInventory);
-        newOutsourcedTest.setPartMinStockLevel(minInventory);
+        Outsourced newOutsourcedTest = new Outsourced();
+        newOutsourcedTest.setId(partID);
+        newOutsourcedTest.setName(partName);
+        newOutsourcedTest.setStock(inventoryLevel);
+        newOutsourcedTest.setPrice(price);
+        newOutsourcedTest.setMax(maxInventory);
+        newOutsourcedTest.setMin(minInventory);
         newOutsourcedTest.setCompanyName(companyName);
         addPart(newOutsourcedTest);
         associatedParts.add(newOutsourcedTest);
@@ -79,18 +82,19 @@ public class InventoryManager extends Application {
             ObservableList<Part> associatedParts) {
         int productID = Inventory.getGeneratedProductID();
         Product newProductTest = new Product();
-        newProductTest.setProductID(productID);
-        newProductTest.setProductName(productIName);
-        newProductTest.setProductStockLevel(inventoryLevel);
-        newProductTest.setProductPrice(price);
-        newProductTest.setProductMaxStockLevel(maxInventory);
-        newProductTest.setProductMinStockLevel(minInventory);
+        newProductTest.setId(productID);
+        newProductTest.setName(productIName);
+        newProductTest.setStock(inventoryLevel);
+        newProductTest.setPrice(price);
+        newProductTest.setMax(maxInventory);
+        newProductTest.setMin(minInventory);
         Inventory.addProduct(newProductTest);
         newProductTest.setAssociatedParts(associatedParts);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage inventoryManager) throws Exception {
+
         // Initializing application with test data
         inHouseTestParts("32-bit ARM9 core microprocessor", 12, 199.99, 32, 6, 662);
         inHouseTestParts("64-bit ARM9 core microprocessor", 8, 399.99, 24, 4, 662);
@@ -114,12 +118,13 @@ public class InventoryManager extends Application {
         testProducts("64-bit Arm Laptop - Silver", 6, 1799.99, 10, 2, associatedParts);
         testProducts("64-bit Arm Laptop - White", 10, 1899.99, 14, 4, associatedParts);
 
+        // Launching app with test data and opening main screen
+        System.out.println("Opening ABC Company: Inventory Management System");
         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-
-        Scene scene = new Scene(root);
-        stage.setTitle("ABC Company: Inventory Management System");
-        stage.setScene(scene);
-        stage.show();
+        Scene mainScreen = new Scene(root);
+        inventoryManager.setTitle("ABC Company: Inventory Management System");
+        inventoryManager.setScene(mainScreen);
+        inventoryManager.show();
     }
 
     /**

@@ -1,5 +1,7 @@
 /**
- * Controller for the AddPart.fxml file and Add Part view
+ * Controller for the Add Part view
+ * Captures user input data for creating new parts, handles exceptions,
+ * adds new parts to inventory
  *
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
@@ -30,11 +32,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Matthew Shelbourn <mshelbo@wgu.edu>
- */
 public class AddPartController implements Initializable {
 
     // FMXL Generated Properties
@@ -152,25 +149,28 @@ public class AddPartController implements Initializable {
                     outsourcedPartDataTypeException);
         }
         if (partFieldException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(partFieldException);
-            alert.showAndWait();
+            System.err.println("Empty fields present in form.\nPart not added to inventory.");
+            Alert emptyFields = new Alert(Alert.AlertType.WARNING);
+            emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFields.setHeaderText("This part has not been added to inventory");
+            emptyFields.setContentText(partFieldException);
+            emptyFields.showAndWait();
             partFieldException = "";
         } else if (iHPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(iHPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present.\nPart not added to inventory.");
+            Alert invalidIHDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidIHDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidIHDataTypes.setHeaderText("This part has not been added to inventory");
+            invalidIHDataTypes.setContentText(iHPartDataTypeException);
+            invalidIHDataTypes.showAndWait();
             iHPartDataTypeException = "";
         } else if (outsourcedPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(outsourcedPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present.\nPart not added to inventory.");
+            Alert invalidOutDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidOutDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidOutDataTypes.setHeaderText("This part has not been added to inventory");
+            invalidOutDataTypes.setContentText(outsourcedPartDataTypeException);
+            invalidOutDataTypes.showAndWait();
             outsourcedPartDataTypeException = "";
         } else {
             try {
@@ -182,64 +182,67 @@ public class AddPartController implements Initializable {
                         partValueException);
 
                 if (partValueException.length() > 0) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
-                    alert.setHeaderText("This part has not been added to inventory");
-                    alert.setContentText(partValueException);
-                    alert.showAndWait();
+                    System.err.println("Invalid field values present.\nPart not added to inventory.");
+                    Alert invalidValues = new Alert(Alert.AlertType.WARNING);
+                    invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
+                    invalidValues.setHeaderText("This part has not been added to inventory");
+                    invalidValues.setContentText(partValueException);
+                    invalidValues.showAndWait();
                     partValueException = "";
                 } else {
                     if (inHousePart == true) {
                         InHouse inHouse = new InHouse();
-                        inHouse.setPartID(partID);
-                        inHouse.setPartName(partName);
-                        inHouse.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        inHouse.setPartPrice(Double.parseDouble(priceCost));
-                        inHouse.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        inHouse.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        inHouse.setId(partID);
+                        inHouse.setName(partName);
+                        inHouse.setStock(Integer.parseInt(inventoryLevel));
+                        inHouse.setPrice(Double.parseDouble(priceCost));
+                        inHouse.setMax(Integer.parseInt(maxInvLevel));
+                        inHouse.setMin(Integer.parseInt(minInvLevel));
                         inHouse.setMachineID(Integer.parseInt(machIDCompName));
                         addPart(inHouse);
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: IN-HOUSE PART ADDED");
-                        alert.setHeaderText("In-House Part Successfully Added to Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        System.out.println("In-House part " + inHouse + " successfully added to inventory.");
+                        Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        partAddSuccess.setTitle("SUCCESS: IN-HOUSE PART ADDED");
+                        partAddSuccess.setHeaderText("In-House Part " + inHouse + " Successfully Added to Inventory");
+                        partAddSuccess.setContentText("Click OK to return to the main screen.");
+                        partAddSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
-                            System.out.println("In-House Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
+                        if (partAddSuccess.getResult() == ButtonType.OK) {
+                            System.out.println("Exiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
                     } else {
                         Outsourced outsourced = new Outsourced();
-                        outsourced.setPartID(partID);
-                        outsourced.setPartName(partName);
-                        outsourced.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        outsourced.setPartPrice(Double.parseDouble(priceCost));
-                        outsourced.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        outsourced.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        outsourced.setId(partID);
+                        outsourced.setName(partName);
+                        outsourced.setStock(Integer.parseInt(inventoryLevel));
+                        outsourced.setPrice(Double.parseDouble(priceCost));
+                        outsourced.setMax(Integer.parseInt(maxInvLevel));
+                        outsourced.setMin(Integer.parseInt(minInvLevel));
                         outsourced.setCompanyName(machIDCompName);
                         addPart(outsourced);
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: OUTSOURCED PART ADDED");
-                        alert.setHeaderText("Outsourced Part Successfully Added to Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        System.out.println("Outsourced part " + outsourced + " successfully added to inventory.");
+                        Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        partAddSuccess.setTitle("SUCCESS: OUTSOURCED PART ADDED");
+                        partAddSuccess.setHeaderText("Outsourced Part " + outsourced + " Successfully Added to Inventory");
+                        partAddSuccess.setContentText("Click OK to return to the main screen.");
+                        partAddSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
-                            System.out.println("Outsourced Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
+                        if (partAddSuccess.getResult() == ButtonType.OK) {
+                            System.out.println("Exiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
@@ -258,22 +261,22 @@ public class AddPartController implements Initializable {
      */
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-        alert.setHeaderText("Would you like to cancel this operation?");
-        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
-        alert.showAndWait();
+        Alert cancelAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        cancelAlert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        cancelAlert.setHeaderText("Would you like to cancel this operation?");
+        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
+        cancelAlert.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
-            System.out.println("User cancelled operation. Exiting to Main Screen.");
+        if (cancelAlert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation.\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-            Scene scene = new Scene(root);
+            Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-            mainScreenWindow.setScene(scene);
+            mainScreenWindow.setScene(mainScreen);
             mainScreenWindow.show();
         } else {
-            alert.close();
+            cancelAlert.close();
         }
     }
 }

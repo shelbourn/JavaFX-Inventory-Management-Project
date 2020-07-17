@@ -17,96 +17,96 @@ import javafx.beans.property.StringProperty;
 public abstract class Part {
 
     // Properties for Part class
-    private IntegerProperty partID;
-    private StringProperty partName;
-    private DoubleProperty partPrice;
-    private IntegerProperty partStockLevel;
-    private IntegerProperty partMinStockLevel;
-    private IntegerProperty partMaxStockLevel;
+    private IntegerProperty id;
+    private StringProperty name;
+    private DoubleProperty price;
+    private IntegerProperty stock;
+    private IntegerProperty min;
+    private IntegerProperty max;
 
     // Constructor to Instantiate Part Class
     public Part() {
-        this.partID = new SimpleIntegerProperty();
-        this.partName = new SimpleStringProperty();
-        this.partPrice = new SimpleDoubleProperty();
-        this.partStockLevel = new SimpleIntegerProperty();
-        this.partMinStockLevel = new SimpleIntegerProperty();
-        this.partMaxStockLevel = new SimpleIntegerProperty();
+        this.id = new SimpleIntegerProperty();
+        this.name = new SimpleStringProperty();
+        this.price = new SimpleDoubleProperty();
+        this.stock = new SimpleIntegerProperty();
+        this.min = new SimpleIntegerProperty();
+        this.max = new SimpleIntegerProperty();
     }
 
     // Getters for Part Property Values
-    public int getPartID() {
-        return partID.get();
+    public int getId() {
+        return id.get();
     }
 
-    public String getPartName() {
-        return partName.get();
+    public String getName() {
+        return name.get();
     }
 
-    public double getPartPrice() {
-        return partPrice.get();
+    public double getPrice() {
+        return price.get();
     }
 
-    public int getPartStockLevel() {
-        return partStockLevel.get();
+    public int getStock() {
+        return stock.get();
     }
 
-    public int getPartMinStockLevel() {
-        return partMinStockLevel.get();
+    public int getMin() {
+        return min.get();
     }
 
-    public int getPartMaxStockLevel() {
-        return partMaxStockLevel.get();
+    public int getMax() {
+        return max.get();
     }
 
     // Getters for Part Properties
-    public IntegerProperty getPartIDProperty() {
-        return partID;
+    public IntegerProperty getIdProperty() {
+        return id;
     }
 
-    public StringProperty getPartNameProperty() {
-        return partName;
+    public StringProperty getNameProperty() {
+        return name;
     }
 
-    public DoubleProperty getPartPriceProperty() {
-        return partPrice;
+    public DoubleProperty getPriceProperty() {
+        return price;
     }
 
-    public IntegerProperty getPartStockLevelProperty() {
-        return partStockLevel;
+    public IntegerProperty getStockProperty() {
+        return stock;
     }
 
-    public IntegerProperty getPartMinStockLevelProperty() {
-        return partMinStockLevel;
+    public IntegerProperty getMinProperty() {
+        return min;
     }
 
-    public IntegerProperty getPartMaxStockLevelProperty() {
-        return partMaxStockLevel;
+    public IntegerProperty getMaxProperty() {
+        return max;
     }
 
     // Setters for Part Properties
-    public void setPartID(int value) {
-        partID.set(value);
+    public void setId(int value) {
+        id.set(value);
     }
 
-    public void setPartName(String value) {
-        partName.set(value);
+    public void setName(String value) {
+        name.set(value);
     }
 
-    public void setPartPrice(double value) {
-        partPrice.set(value);
+    public void setPrice(double value) {
+        price.set(value);
     }
 
-    public void setPartStockLevel(int value) {
-        partStockLevel.set(value);
+    public void setStock(int value) {
+        stock.set(value);
     }
 
-    public void setPartMinStockLevel(int value) {
-        partMinStockLevel.set(value);
+    public void setMin(int value) {
+        min.set(value);
     }
 
-    public void setPartMaxStockLevel(int value) {
-        partMaxStockLevel.set(value);
+    public void setMax(int value) {
+        max.set(value);
     }
 
     /**
@@ -260,13 +260,5 @@ public abstract class Part {
             outsourcedPartDataTypeException = outsourcedPartDataTypeException + "\nPart Minimum Inventory Level must be a whole number.";
         }
         return outsourcedPartDataTypeException;
-    }
-
-    public void setMachineID(int machineID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setCompanyName(String companyName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

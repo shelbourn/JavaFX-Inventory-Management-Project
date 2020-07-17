@@ -36,10 +36,7 @@ public class Inventory {
         return generatedProductID;
     }
 
-    /**
-     * * Methods for Inventory Class
-     */
-    // Integer validation for input
+    // Integer validation for inputs
     public static boolean validInt(String input) {
         try {
             Integer.parseInt(input);
@@ -49,6 +46,9 @@ public class Inventory {
         }
     }
 
+    /**
+     * * Methods for Inventory Class -- Parts
+     */
     // Add Part
     public static void addPart(Part newPart) {
         allParts.add(newPart);
@@ -60,7 +60,7 @@ public class Inventory {
         int partIndex = 0;
         if (validInt(partSearch)) {
             for (int i = 0; i < allParts.size(); i++) {
-                if (Integer.parseInt(partSearch) == allParts.get(i).getPartID()) {
+                if (Integer.parseInt(partSearch) == allParts.get(i).getId()) {
                     partIndex = i;
                     partFound = true;
                 }
@@ -68,7 +68,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < allParts.size(); i++) {
                 partSearch = partSearch.toLowerCase();
-                if (partSearch.contains(allParts.get(i).getPartName().toLowerCase())) {
+                if (partSearch.contains(allParts.get(i).getName().toLowerCase())) {
                     partIndex = i;
                     partFound = true;
                 }
@@ -92,18 +92,21 @@ public class Inventory {
     public static boolean deletePartCheck(Part selectedPart) {
         boolean okayToDeletePart = true;
         for (int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getAssociatedParts().contains(selectedPart)) {
+            if (allProducts.get(i).getAllAssociatedParts().contains(selectedPart)) {
                 okayToDeletePart = false;
             }
         }
         return okayToDeletePart;
     }
 
-// Delete Part
+    // Delete Part
     public static void deletePart(Part selectedPart) {
         allParts.remove(selectedPart);
     }
 
+    /**
+     * * Methods for Inventory Class -- Products
+     */
     // Add Product
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
@@ -115,7 +118,7 @@ public class Inventory {
         int productIndex = 0;
         if (validInt(productSearch)) {
             for (int i = 0; i < allProducts.size(); i++) {
-                if (Integer.parseInt(productSearch) == allProducts.get(i).getProductID()) {
+                if (Integer.parseInt(productSearch) == allProducts.get(i).getId()) {
                     productIndex = i;
                     productFound = true;
                 }
@@ -123,7 +126,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < allParts.size(); i++) {
                 productSearch = productSearch.toLowerCase();
-                if (productSearch.contains(allParts.get(i).getPartName().toLowerCase())) {
+                if (productSearch.contains(allParts.get(i).getName().toLowerCase())) {
                     productIndex = i;
                     productFound = true;
                 }
@@ -146,10 +149,10 @@ public class Inventory {
     // Checks to see whether a product can be deleted or not (checks whether the product contains any parts)
     public static boolean deleteProductCheck(Product selectedProduct) {
         boolean okayToDeleteProduct = false;
-        int selectedProductID = selectedProduct.getProductID();
+        int selectedProductID = selectedProduct.getId();
         for (int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getProductID() == selectedProductID) {
-                if (allProducts.get(i).getAssociatedParts().isEmpty()) {
+            if (allProducts.get(i).getId() == selectedProductID) {
+                if (allProducts.get(i).getAllAssociatedParts().isEmpty()) {
                     okayToDeleteProduct = true;
                 }
             }
