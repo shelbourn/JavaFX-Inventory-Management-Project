@@ -120,16 +120,16 @@ public class ModifyProductController implements Initializable {
         associatedParts = productToModify.getAssociatedParts();
 
         // Fetching and setting Add Table rows
-        addTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
-        addTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
-        addTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
-        addTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+        addTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
+        addTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        addTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getStockProperty().asObject());
+        addTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty().asObject());
 
         // Fetching and setting Delete Table rows
-        deleteTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
-        deleteTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
-        deleteTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
-        deleteTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+        deleteTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
+        deleteTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        deleteTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getStockProperty().asObject());
+        deleteTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty().asObject());
 
         // Initializing Add Part and Delete Part table views
         updateAddTable();

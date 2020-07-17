@@ -85,13 +85,13 @@ public class ModifyPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Part partToModify = getAllParts().get(partModifyIndex);
-        partID = getAllParts().get(partModifyIndex).getPartID();
+        partID = getAllParts().get(partModifyIndex).getId();
         partIDField.setText("Auto-Generated:   " + partID);
-        partNameField.setText(partToModify.getPartName());
-        inventoryLevelField.setText(Integer.toString(partToModify.getPartStockLevel()));
-        priceCostField.setText(Double.toString(partToModify.getPartPrice()));
-        maxLevelField.setText(Integer.toString(partToModify.getPartMaxStockLevel()));
-        minLevelField.setText(Integer.toString(partToModify.getPartMinStockLevel()));
+        partNameField.setText(partToModify.getName());
+        inventoryLevelField.setText(Integer.toString(partToModify.getStock()));
+        priceCostField.setText(Double.toString(partToModify.getPrice()));
+        maxLevelField.setText(Integer.toString(partToModify.getMax()));
+        minLevelField.setText(Integer.toString(partToModify.getMin()));
 
         if (partToModify instanceof InHouse) {
             inHouseRadio.setSelected(true);
@@ -207,12 +207,12 @@ public class ModifyPartController implements Initializable {
                 } else {
                     if (inHousePart == true) {
                         InHouse inHouse = new InHouse();
-                        inHouse.setPartID(partID);
-                        inHouse.setPartName(partName);
-                        inHouse.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        inHouse.setPartPrice(Double.parseDouble(priceCost));
-                        inHouse.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        inHouse.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        inHouse.setId(partID);
+                        inHouse.setName(partName);
+                        inHouse.setStock(Integer.parseInt(inventoryLevel));
+                        inHouse.setPrice(Double.parseDouble(priceCost));
+                        inHouse.setMax(Integer.parseInt(maxInvLevel));
+                        inHouse.setMin(Integer.parseInt(minInvLevel));
                         inHouse.setMachineID(Integer.parseInt(machIDCompName));
                         Inventory.updatePart(partModifyIndex, inHouse);
 
@@ -234,12 +234,12 @@ public class ModifyPartController implements Initializable {
                         }
                     } else {
                         Outsourced outsourced = new Outsourced();
-                        outsourced.setPartID(partID);
-                        outsourced.setPartName(partName);
-                        outsourced.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        outsourced.setPartPrice(Double.parseDouble(priceCost));
-                        outsourced.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        outsourced.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        outsourced.setId(partID);
+                        outsourced.setName(partName);
+                        outsourced.setStock(Integer.parseInt(inventoryLevel));
+                        outsourced.setPrice(Double.parseDouble(priceCost));
+                        outsourced.setMax(Integer.parseInt(maxInvLevel));
+                        outsourced.setMin(Integer.parseInt(minInvLevel));
                         outsourced.setCompanyName(machIDCompName);
                         Inventory.updatePart(partModifyIndex, outsourced);
 

@@ -60,7 +60,7 @@ public class Inventory {
         int partIndex = 0;
         if (validInt(partSearch)) {
             for (int i = 0; i < allParts.size(); i++) {
-                if (Integer.parseInt(partSearch) == allParts.get(i).getPartID()) {
+                if (Integer.parseInt(partSearch) == allParts.get(i).getId()) {
                     partIndex = i;
                     partFound = true;
                 }
@@ -68,7 +68,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < allParts.size(); i++) {
                 partSearch = partSearch.toLowerCase();
-                if (partSearch.contains(allParts.get(i).getPartName().toLowerCase())) {
+                if (partSearch.contains(allParts.get(i).getName().toLowerCase())) {
                     partIndex = i;
                     partFound = true;
                 }
@@ -126,7 +126,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < allParts.size(); i++) {
                 productSearch = productSearch.toLowerCase();
-                if (productSearch.contains(allParts.get(i).getPartName().toLowerCase())) {
+                if (productSearch.contains(allParts.get(i).getName().toLowerCase())) {
                     productIndex = i;
                     productFound = true;
                 }

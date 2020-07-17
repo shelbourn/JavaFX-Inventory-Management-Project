@@ -192,12 +192,12 @@ public class AddPartController implements Initializable {
                 } else {
                     if (inHousePart == true) {
                         InHouse inHouse = new InHouse();
-                        inHouse.setPartID(partID);
-                        inHouse.setPartName(partName);
-                        inHouse.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        inHouse.setPartPrice(Double.parseDouble(priceCost));
-                        inHouse.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        inHouse.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        inHouse.setId(partID);
+                        inHouse.setName(partName);
+                        inHouse.setStock(Integer.parseInt(inventoryLevel));
+                        inHouse.setPrice(Double.parseDouble(priceCost));
+                        inHouse.setMax(Integer.parseInt(maxInvLevel));
+                        inHouse.setMin(Integer.parseInt(minInvLevel));
                         inHouse.setMachineID(Integer.parseInt(machIDCompName));
                         addPart(inHouse);
 
@@ -220,12 +220,12 @@ public class AddPartController implements Initializable {
                         }
                     } else {
                         Outsourced outsourced = new Outsourced();
-                        outsourced.setPartID(partID);
-                        outsourced.setPartName(partName);
-                        outsourced.setPartStockLevel(Integer.parseInt(inventoryLevel));
-                        outsourced.setPartPrice(Double.parseDouble(priceCost));
-                        outsourced.setPartMaxStockLevel(Integer.parseInt(maxInvLevel));
-                        outsourced.setPartMinStockLevel(Integer.parseInt(minInvLevel));
+                        outsourced.setId(partID);
+                        outsourced.setName(partName);
+                        outsourced.setStock(Integer.parseInt(inventoryLevel));
+                        outsourced.setPrice(Double.parseDouble(priceCost));
+                        outsourced.setMax(Integer.parseInt(maxInvLevel));
+                        outsourced.setMin(Integer.parseInt(minInvLevel));
                         outsourced.setCompanyName(machIDCompName);
                         addPart(outsourced);
 

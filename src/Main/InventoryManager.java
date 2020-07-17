@@ -39,13 +39,13 @@ public class InventoryManager extends Application {
             int minInventory,
             int machineID) {
         int partID = Inventory.getGeneratedPartID();
-        Part newInHouseTest = new InHouse();
-        newInHouseTest.setPartID(partID);
-        newInHouseTest.setPartName(partName);
-        newInHouseTest.setPartStockLevel(inventoryLevel);
-        newInHouseTest.setPartPrice(price);
-        newInHouseTest.setPartMaxStockLevel(maxInventory);
-        newInHouseTest.setPartMinStockLevel(minInventory);
+        InHouse newInHouseTest = new InHouse();
+        newInHouseTest.setId(partID);
+        newInHouseTest.setName(partName);
+        newInHouseTest.setStock(inventoryLevel);
+        newInHouseTest.setPrice(price);
+        newInHouseTest.setMax(maxInventory);
+        newInHouseTest.setMin(minInventory);
         newInHouseTest.setMachineID(machineID);
         addPart(newInHouseTest);
         associatedParts.add(newInHouseTest);
@@ -60,13 +60,13 @@ public class InventoryManager extends Application {
             int minInventory,
             String companyName) {
         int partID = Inventory.getGeneratedPartID();
-        Part newOutsourcedTest = new Outsourced();
-        newOutsourcedTest.setPartID(partID);
-        newOutsourcedTest.setPartName(partName);
-        newOutsourcedTest.setPartStockLevel(inventoryLevel);
-        newOutsourcedTest.setPartPrice(price);
-        newOutsourcedTest.setPartMaxStockLevel(maxInventory);
-        newOutsourcedTest.setPartMinStockLevel(minInventory);
+        Outsourced newOutsourcedTest = new Outsourced();
+        newOutsourcedTest.setId(partID);
+        newOutsourcedTest.setName(partName);
+        newOutsourcedTest.setStock(inventoryLevel);
+        newOutsourcedTest.setPrice(price);
+        newOutsourcedTest.setMax(maxInventory);
+        newOutsourcedTest.setMin(minInventory);
         newOutsourcedTest.setCompanyName(companyName);
         addPart(newOutsourcedTest);
         associatedParts.add(newOutsourcedTest);

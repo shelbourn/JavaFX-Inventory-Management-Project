@@ -109,10 +109,10 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Fetching and setting Parts Table rows
-        partsTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getPartIDProperty().asObject());
-        partsTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getPartNameProperty());
-        partsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getPartStockLevelProperty().asObject());
-        partsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPartPriceProperty().asObject());
+        partsTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
+        partsTablePartNameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        partsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getStockProperty().asObject());
+        partsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty().asObject());
 
         // Fetching and setting Products Table rows
         productsTableProductIDCol.setCellValueFactory(cellData -> cellData.getValue().getProductIDProperty().asObject());
@@ -237,8 +237,8 @@ public class MainScreenController implements Initializable {
         boolean noActiveSelection = partsTable.getSelectionModel().isEmpty();
         partModify = partsTable.getSelectionModel().getSelectedItem();
         partModifyIndex = Inventory.getAllParts().indexOf(partModify);
-        String partModifyName = partModify.getPartName();
-        int partModifyID = partModify.getPartID();
+        String partModifyName = partModify.getName();
+        int partModifyID = partModify.getId();
 
         if (noActiveSelection) {
             System.err.println("No part selected. Part modification cannot be completed.");
