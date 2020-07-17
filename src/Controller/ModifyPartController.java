@@ -250,7 +250,7 @@ public class ModifyPartController implements Initializable {
                         modifyPartSuccess.showAndWait();
 
                         if (modifyPartSuccess.getResult() == ButtonType.OK) {
-                            System.out.println("Outsourced Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
+                            System.out.println("Outsourced Part successfully modified in inventory.\nUser confirmed. \nExiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                             Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -271,7 +271,7 @@ public class ModifyPartController implements Initializable {
         Alert cancelConfirm = new Alert(Alert.AlertType.CONFIRMATION);
         cancelConfirm.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
         cancelConfirm.setHeaderText("Would you like to cancel this operation?");
-        cancelConfirm.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        cancelConfirm.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
         cancelConfirm.showAndWait();
 
         if (cancelConfirm.getResult() == ButtonType.OK) {

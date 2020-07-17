@@ -149,7 +149,7 @@ public class MainScreenController implements Initializable {
         String partSearchString = partsSearchField.getText();
         int searchedPartIndex;
         if (partSearchString.equals("")) {
-            System.err.println("Empty fields present. Product not added to inventory.");
+            System.err.println("Empty search field present. Part search could not be conducted.");
             Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
             emptySearchField.setTitle("ERROR: EMPTY FIELD");
             emptySearchField.setHeaderText("Unable to process search");
@@ -272,27 +272,27 @@ public class MainScreenController implements Initializable {
             noPartSelected.setContentText("A part must be selected before it can be deleted.");
             noPartSelected.showAndWait();
         } else if (!Inventory.deletePartCheck(partToDelete)) {
-            System.err.println("Part is associated with product(s)\nUnable to delete part.");
+            System.err.println(partToDelete + " is associated with product(s)\nUnable to delete part.");
             Alert partDelete = new Alert(Alert.AlertType.WARNING);
             partDelete.setTitle("ERROR: UNABLE TO DELETE PART");
-            partDelete.setHeaderText("Part associated with product(s)");
+            partDelete.setHeaderText(partDelete + " is associated with product(s)");
             partDelete.setContentText("Part cannot be associated with any products in order to be deleted.");
             partDelete.showAndWait();
         } else {
             Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
             deleteConfirm.setTitle("CONFIRMATION: DELETE PART FROM INVENTORY");
-            deleteConfirm.setHeaderText("Are you sure you would like to delete this part from inventory?\n\n This cannot be undone!");
+            deleteConfirm.setHeaderText("Are you sure you would like to delete " + partToDelete + " from inventory?\n\n This cannot be undone!");
             deleteConfirm.setContentText("Click OK to delete this part.\nClick CANCEL to close this window and keep the part.");
             deleteConfirm.showAndWait();
 
             if (deleteConfirm.getResult() == ButtonType.OK) {
-                System.out.println("User confirmed.\nPart " + partToDelete + " was deleted from inventory");
+                System.out.println("User confirmed.\n" + partToDelete + " was deleted from inventory");
                 Inventory.deletePart(partToDelete);
                 updatePartsTable();
 
                 Alert partDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
                 partDeletionAlert.setTitle("SUCCESS: PART DELETED");
-                partDeletionAlert.setHeaderText("The selected part has been deleted from inventory");
+                partDeletionAlert.setHeaderText(partToDelete + " has been deleted from inventory");
                 partDeletionAlert.setContentText("The Parts table has been updated.\n Click OK to close this window.");
                 partDeletionAlert.showAndWait();
             } else {
@@ -441,27 +441,27 @@ public class MainScreenController implements Initializable {
             noProductSelected.setContentText("A product must be selected before it can be deleted.");
             noProductSelected.showAndWait();
         } else if (!Inventory.deleteProductCheck(productToDelete)) {
-            System.err.println("Product has associated part(s).\nUnable to delete product.");
+            System.err.println(productToDelete + " has associated part(s).\nUnable to delete product.");
             Alert associatedParts = new Alert(Alert.AlertType.WARNING);
             associatedParts.setTitle("ERROR: UNABLE TO DELETE PRODUCT");
-            associatedParts.setHeaderText("Product has associated part(s)");
+            associatedParts.setHeaderText(productToDelete + " has associated part(s)");
             associatedParts.setContentText("Product cannot be deleted if it has associated parts.");
             associatedParts.showAndWait();
         } else {
             Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
             deleteConfirm.setTitle("CONFIRMATION: DELETE PRODUCT FROM INVENTORY");
-            deleteConfirm.setHeaderText("Are you sure you would like to delete this product from inventory?\nThis cannot be undone!");
+            deleteConfirm.setHeaderText("Are you sure you would like to delete " + productToDelete + " from inventory?\nThis cannot be undone!");
             deleteConfirm.setContentText("Click OK to delete this product.\nClick CANCEL to close this window and keep the product.");
             deleteConfirm.showAndWait();
 
             if (deleteConfirm.getResult() == ButtonType.OK) {
-                System.out.println("User confirmed.\nProduct is being deleted from inventory");
+                System.out.println("User confirmed.\n" + productToDelete + " has been deleted from inventory");
                 Inventory.deleteProduct(productToDelete);
                 updateProductsTable();
 
                 Alert productDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
                 productDeletionAlert.setTitle("SUCCESS: PRODUCT DELETED");
-                productDeletionAlert.setHeaderText("The selected product has been deleted from inventory");
+                productDeletionAlert.setHeaderText(productToDelete + " has been deleted from inventory");
                 productDeletionAlert.setContentText("The Products table has been updated.\nClick OK to close this window.");
                 productDeletionAlert.showAndWait();
             } else {
@@ -475,7 +475,7 @@ public class MainScreenController implements Initializable {
     ) {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         exitAlert.setTitle("CONFIRMATION: EXIT APPLICATION");
-        exitAlert.setHeaderText("Are you sure you would like to exit this application?");
+        exitAlert.setHeaderText("Are you sure you would like to exit the application?");
         exitAlert.setContentText("Click OK to exit the application.\nClick CANCEL to continue and return to the current screen.");
         exitAlert.showAndWait();
 
@@ -483,7 +483,7 @@ public class MainScreenController implements Initializable {
             System.out.println("User confirmed.\nExiting application.\nEND.");
             System.exit(0);
         } else {
-            System.out.println("User cancelled alert\nReturning to Main Screen.");
+            System.out.println("User cancelled alert.\nReturning to Main Screen.");
             exitAlert.close();
         }
     }

@@ -235,7 +235,7 @@ public class ModifyProductController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMATION: REMOVE PART");
         alert.setHeaderText("Would you like to remove " + selectedPart + " from the product's part list?");
-        alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
+        alert.setContentText("Click OK to remove the part.\nClick CANCEL to close this window and keep the part.");
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
