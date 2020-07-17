@@ -279,7 +279,6 @@ public class MainScreenController implements Initializable {
     private void productsSearchBtnHandler(ActionEvent event
     ) {
         String productSearchString = productsSearchField.getText();
-        int searchedProductIndex;
         if (productSearchString.equals("")) {
             System.err.println("Empty search field present. Product search could not be conducted.");
             Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
@@ -311,7 +310,6 @@ public class MainScreenController implements Initializable {
     ) {
         if (event.getCode() == KeyCode.ENTER) {
             String productSearchString = productsSearchField.getText();
-            int searchedProductIndex;
             if (productSearchString.equals("")) {
                 System.err.println("Empty search field present. Product search could not be conducted.");
                 Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);

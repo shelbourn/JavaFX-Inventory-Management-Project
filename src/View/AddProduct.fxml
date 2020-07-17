@@ -82,7 +82,7 @@
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <TextField fx:id="searchField" layoutX="954.0" layoutY="93.0" onKeyPressed="#searchFieldEnterHandler" prefHeight="35.0" prefWidth="176.0" promptText="Enter part ID or name">
+            <TextField fx:id="searchField" layoutX="954.0" layoutY="93.0" onKeyPressed="#searchFieldEnterHandler" prefHeight="35.0" prefWidth="176.0" promptText="Enter ID or Keyword">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>

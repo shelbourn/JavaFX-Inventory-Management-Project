@@ -13,9 +13,7 @@ public class Inventory {
 
     // Properties for Inventory class
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private static ObservableList<Part> partSearch = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
-    private static ObservableList<Product> productSearch = FXCollections.observableArrayList();
     private static int generatedPartID = 1000;
     private static int generatedProductID = 1000;
 
@@ -58,6 +56,7 @@ public class Inventory {
 
     // Lookup parts by Part ID or Keyword
     public static ObservableList<Part> lookupPart(String partSearchString) {
+        ObservableList<Part> partSearch = FXCollections.observableArrayList();
         boolean isFound = false;
         if (validInt(partSearchString)) {
             for (int i = 0; i < allParts.size(); i++) {
@@ -81,8 +80,8 @@ public class Inventory {
             return null;
         }
     }
-
     // Update Part
+
     public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
@@ -114,16 +113,17 @@ public class Inventory {
 
     // Lookup Products by Product ID or Keyword
     public static ObservableList<Product> lookupProduct(String productSearchString) {
+        ObservableList<Product> productSearch = FXCollections.observableArrayList();
         boolean isFound = false;
         if (validInt(productSearchString)) {
-            for (int i = 0; i < allParts.size(); i++) {
-                if (Integer.parseInt(productSearchString) == allParts.get(i).getId()) {
+            for (int i = 0; i < allProducts.size(); i++) {
+                if (Integer.parseInt(productSearchString) == allProducts.get(i).getId()) {
                     productSearch.add(allProducts.get(i));
                     isFound = true;
                 }
             }
         } else {
-            for (int i = 0; i < allParts.size(); i++) {
+            for (int i = 0; i < allProducts.size(); i++) {
                 productSearchString = productSearchString.toLowerCase();
                 if ((allProducts.get(i).getName().toLowerCase()).contains(productSearchString)) {
                     productSearch.add(allProducts.get(i));
