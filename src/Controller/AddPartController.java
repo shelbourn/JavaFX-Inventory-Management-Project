@@ -150,11 +150,11 @@ public class AddPartController implements Initializable {
         }
         if (partFieldException.length() > 0) {
             System.err.println("Empty fields present in form.\n Part not added to inventory.");
-            Alert emptyFieldAlert = new Alert(Alert.AlertType.WARNING);
-            emptyFieldAlert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            emptyFieldAlert.setHeaderText("This part has not been added to inventory");
-            emptyFieldAlert.setContentText(partFieldException);
-            emptyFieldAlert.showAndWait();
+            Alert emptyFields = new Alert(Alert.AlertType.WARNING);
+            emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFields.setHeaderText("This part has not been added to inventory");
+            emptyFields.setContentText(partFieldException);
+            emptyFields.showAndWait();
             partFieldException = "";
         } else if (iHPartDataTypeException.length() > 0) {
             System.err.println("Invalid data types present.\n Part not added to inventory.");

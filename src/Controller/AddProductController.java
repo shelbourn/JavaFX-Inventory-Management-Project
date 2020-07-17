@@ -1,5 +1,7 @@
 /**
- * Controller for the AddProduct.fxml file and Add Product view
+ * Controller for the Add Product view
+ * Captures user input data for new products, performs exception handling, adds parts to product's
+ * associate parts list, adds products to inventory.
  *
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
@@ -32,11 +34,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Matthew Shelbourn <mshelbo@wgu.edu>
- */
 public class AddProductController implements Initializable {
 
     // FXML Generated Properties
@@ -123,21 +120,9 @@ public class AddProductController implements Initializable {
         // Initializing Add Part and Delete Part table views
         updateAddTable();
         updateDeleteTable();
-//        testDataHelper();
     }
 
-// Helper Methods for Updating Table Views
-    // Method to create test data (******COMMENT OUT BEFORE FINAL BUILD*******)
-//    private void testDataHelper() {
-//        for (int i = 3000; i < 3006; i++) {
-//            InHouse inHouseTest = new InHouse();
-//            inHouseTest.setPartID(i);
-//            inHouseTest.setPartName("Test" + i);
-//            inHouseTest.setPartStockLevel(i - 2095);
-//            inHouseTest.setPartPrice(i - 999);
-//            Inventory.addPart(inHouseTest);
-//        }
-//    }
+    // Helper Methods for Updating Table Views
     private void updateAddTable() {
         addTable.setItems(Inventory.getAllParts());
     }
@@ -160,18 +145,21 @@ public class AddProductController implements Initializable {
         String partSearchString = searchField.getText();
         int searchedPartIndex;
         if (partSearchString.equals("")) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: EMPTY FIELD");
-            alert.setHeaderText("Unable to process search");
-            alert.setContentText("Search field cannot be blank.");
-            alert.showAndWait();
+            System.err.println("Empty fields present. Product not added to inventory.");
+            Alert emptyFields = new Alert(Alert.AlertType.INFORMATION);
+            emptyFields.setTitle("ERROR: EMPTY FIELD");
+            emptyFields.setHeaderText("Unable to process search");
+            emptyFields.setContentText("Search field cannot be blank.");
+            emptyFields.showAndWait();
         } else if (Inventory.lookupPart(partSearchString) == -1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: PART NOT FOUND");
-            alert.setHeaderText("Unable to locate part");
-            alert.setContentText("The Part ID or name entered was not found in inventory.");
-            alert.showAndWait();
+            System.err.println("Part not found. Search returned no results.");
+            Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
+            partNotFound.setTitle("ERROR: PART NOT FOUND");
+            partNotFound.setHeaderText("Unable to locate part");
+            partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
+            partNotFound.showAndWait();
         } else {
+            System.out.println("Part search succeeded. Add parts table view updated.");
             searchedPartIndex = Inventory.lookupPart(partSearchString);
             Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
             ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -193,18 +181,21 @@ public class AddProductController implements Initializable {
             String partSearchString = searchField.getText();
             int searchedPartIndex;
             if (partSearchString.equals("")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: EMPTY FIELD");
-                alert.setHeaderText("Unable to process search");
-                alert.setContentText("Search field cannot be blank.");
-                alert.showAndWait();
+                System.err.println("Empty search field present. Search cannot be conducted.");
+                Alert emptySearch = new Alert(Alert.AlertType.INFORMATION);
+                emptySearch.setTitle("ERROR: EMPTY FIELD");
+                emptySearch.setHeaderText("Unable to process search");
+                emptySearch.setContentText("Search field cannot be blank.");
+                emptySearch.showAndWait();
             } else if (Inventory.lookupPart(partSearchString) == -1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: PART NOT FOUND");
-                alert.setHeaderText("Unable to locate part");
-                alert.setContentText("The Part ID or name entered was not found in inventory.");
-                alert.showAndWait();
+                System.err.println("Part not found. Search returned no results.");
+                Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
+                partNotFound.setTitle("ERROR: PART NOT FOUND");
+                partNotFound.setHeaderText("Unable to locate part");
+                partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
+                partNotFound.showAndWait();
             } else {
+                System.out.println("Part search succeeded. Add parts table view updated.");
                 searchedPartIndex = Inventory.lookupPart(partSearchString);
                 Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
                 ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -238,13 +229,15 @@ public class AddProductController implements Initializable {
         Part selectedPart = addTable.getSelectionModel().getSelectedItem();
 
         if (noActiveSelection) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: NO PART SELECTED");
-            alert.setHeaderText("No part has been added to product's part list.");
-            alert.setContentText("A part must be selected before it can be added to the part list.");
-            alert.showAndWait();
+            System.err.println("No part selected. Part cannot be added to product's associated parts list.");
+            Alert noPartSelected = new Alert(Alert.AlertType.WARNING);
+            noPartSelected.setTitle("ERROR: NO PART SELECTED");
+            noPartSelected.setHeaderText("No part has been added to product's part list.");
+            noPartSelected.setContentText("A part must be selected before it can be added to the part list.");
+            noPartSelected.showAndWait();
         }
 
+        System.out.println("Selected part successfully added to product's associated parts list.");
         associatedParts.add(selectedPart);
         updateDeleteTable();
     }
@@ -262,13 +255,13 @@ public class AddProductController implements Initializable {
     private void deleteBtnHandler(ActionEvent event) {
         Part selectedPart = deleteTable.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: REMOVE PART");
-        alert.setHeaderText("Would you like to remove this part from the product's part list?");
-        alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
-        alert.showAndWait();
+        Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteConfirm.setTitle("CONFIRMATION: REMOVE PART");
+        deleteConfirm.setHeaderText("Would you like to remove this part from the product's part list?");
+        deleteConfirm.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
+        deleteConfirm.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
+        if (deleteConfirm.getResult() == ButtonType.OK) {
             System.out.println("User confirmed. \nPart has been removed from Product's part list.");
             associatedParts.remove(selectedPart);
             updateDeleteTable();
@@ -279,7 +272,8 @@ public class AddProductController implements Initializable {
             removeAlert.setContentText("Click OK to close this window.");
             removeAlert.showAndWait();
         } else {
-            alert.close();
+            System.out.println("User cancelled part removal.\n Closing alert window.");
+            deleteConfirm.close();
         }
     }
 
@@ -323,34 +317,38 @@ public class AddProductController implements Initializable {
                 productValueException);
 
         if (productFieldException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This product has not been added to inventory");
-            alert.setContentText(productFieldException);
-            alert.showAndWait();
+            System.err.println("Empty fields present. Product not added to inventory.");
+            Alert emptyFields = new Alert(Alert.AlertType.WARNING);
+            emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFields.setHeaderText("This product has not been added to inventory");
+            emptyFields.setContentText(productFieldException);
+            emptyFields.showAndWait();
             productFieldException = "";
         } else if (productDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This product has not been added to inventory");
-            alert.setContentText(productDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present. Product not added to inventory.");
+            Alert invalidDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidDataTypes.setHeaderText("This product has not been added to inventory");
+            invalidDataTypes.setContentText(productDataTypeException);
+            invalidDataTypes.showAndWait();
             productDataTypeException = "";
         } else if (productValueException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID VALUES PRESENT");
-            alert.setHeaderText("This product has not been added to inventory");
-            alert.setContentText(productValueException);
-            alert.showAndWait();
+            System.err.println("Invalid field values present. Product has not been added to inventory.");
+            Alert invalidValues = new Alert(Alert.AlertType.WARNING);
+            invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
+            invalidValues.setHeaderText("This product has not been added to inventory");
+            invalidValues.setContentText(productValueException);
+            invalidValues.showAndWait();
             productValueException = "";
         } else {
             try {
                 if (associatedParts.isEmpty()) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
-                    alert.setHeaderText("This product has not been added to inventory");
-                    alert.setContentText("A new product must contain at least one part.");
-                    alert.showAndWait();
+                    System.err.println("No parts added to product. Product has not been added to inventory.");
+                    Alert noPartsAdded = new Alert(Alert.AlertType.WARNING);
+                    noPartsAdded.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
+                    noPartsAdded.setHeaderText("This product has not been added to inventory");
+                    noPartsAdded.setContentText("A new product must contain at least one part.");
+                    noPartsAdded.showAndWait();
                 } else {
                     Product newProduct = new Product();
                     newProduct.setProductID(productID);
@@ -363,19 +361,19 @@ public class AddProductController implements Initializable {
                     Inventory.addProduct(newProduct);
                     System.out.println("Product " + productName + " (ID#: " + productID + ") successfully added to inventory.");
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("SUCCESS: PRODUCT ADDED");
-                    alert.setHeaderText("Product Successfully Added to Inventory");
-                    alert.setContentText("Click OK to return to the main screen.");
-                    alert.showAndWait();
+                    Alert productAddSuccess = new Alert(Alert.AlertType.INFORMATION);
+                    productAddSuccess.setTitle("SUCCESS: PRODUCT ADDED");
+                    productAddSuccess.setHeaderText("Product Successfully Added to Inventory");
+                    productAddSuccess.setContentText("Click OK to return to the main screen.");
+                    productAddSuccess.showAndWait();
 
-                    if (alert.getResult() == ButtonType.OK) {
+                    if (productAddSuccess.getResult() == ButtonType.OK) {
                         System.out.println("User confirmed product addition. \nExiting to Main Screen.");
                         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                        Scene scene = new Scene(root);
+                        Scene mainScreen = new Scene(root);
                         Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                        mainScreenWindow.setScene(scene);
+                        mainScreenWindow.setScene(mainScreen);
                         mainScreenWindow.show();
                     } else {
                     }
