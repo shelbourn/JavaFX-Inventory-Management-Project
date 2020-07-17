@@ -36,10 +36,7 @@ public class Inventory {
         return generatedProductID;
     }
 
-    /**
-     * * Methods for Inventory Class
-     */
-    // Integer validation for input
+    // Integer validation for inputs
     public static boolean validInt(String input) {
         try {
             Integer.parseInt(input);
@@ -49,6 +46,9 @@ public class Inventory {
         }
     }
 
+    /**
+     * * Methods for Inventory Class -- Parts
+     */
     // Add Part
     public static void addPart(Part newPart) {
         allParts.add(newPart);
@@ -99,11 +99,14 @@ public class Inventory {
         return okayToDeletePart;
     }
 
-// Delete Part
+    // Delete Part
     public static void deletePart(Part selectedPart) {
         allParts.remove(selectedPart);
     }
 
+    /**
+     * * Methods for Inventory Class -- Products
+     */
     // Add Product
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
