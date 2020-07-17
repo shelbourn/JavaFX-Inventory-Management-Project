@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller for the Main Screen view
+ * Displays table views for all parts and all products, includes main navigation for adding, modifying, and deleting parts/products.
+ *
+ * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
 package Controller;
 
@@ -32,11 +33,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Matthew Shelbourn <mshelbo@wgu.edu>
- */
 public class MainScreenController implements Initializable {
 
     // FXML Created Properties
