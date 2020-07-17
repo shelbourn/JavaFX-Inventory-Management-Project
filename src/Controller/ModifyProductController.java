@@ -22,7 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,12 +42,6 @@ public class ModifyProductController implements Initializable {
     // FXML Created Properties
     @FXML
     private AnchorPane modifyProdScr;
-    @FXML
-    private AnchorPane modifyProdScrPane;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button cancelBtn;
     @FXML
     private TextField productIDField;
     @FXML
@@ -72,10 +65,6 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TableColumn<Part, Double> addTablePPUCol;
     @FXML
-    private Button addBtn;
-    @FXML
-    private Button searchBtn;
-    @FXML
     private TextField searchField;
     @FXML
     private TableView<Part> deleteTable;
@@ -87,8 +76,6 @@ public class ModifyProductController implements Initializable {
     private TableColumn<Part, Integer> deleteTableInvLevelCol;
     @FXML
     private TableColumn<Part, Double> deleteTablePPUCol;
-    @FXML
-    private Button deleteBtn;
 
     // Additional properties required for functionality
     private int productID;

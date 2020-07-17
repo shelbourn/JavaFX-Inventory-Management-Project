@@ -23,26 +23,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class AddPartController implements Initializable {
 
-    // FMXL Generated Properties
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private RadioButton inHouseRadio;
-    @FXML
-    private RadioButton outsourcedRadio;
     @FXML
     private TextField partIDField;
     @FXML
@@ -51,8 +39,6 @@ public class AddPartController implements Initializable {
     private TextField partNameField;
     @FXML
     private TextField minLevelField;
-    @FXML
-    private AnchorPane addPartScrPane;
     @FXML
     private ToggleGroup addPartToggleGroup;
     @FXML

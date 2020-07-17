@@ -22,7 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,18 +29,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainScreenController implements Initializable {
 
-    // FXML Created Properties
-    @FXML
-    private AnchorPane mainScr;
-    @FXML
-    private Button exitBtn;
-    @FXML
-    private AnchorPane productsPanel;
     @FXML
     private TableView<Product> productsTable;
     @FXML
@@ -53,17 +44,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private TableColumn<Product, Double> productsTablePPUCol;
     @FXML
-    private Button productsAddBtn;
-    @FXML
-    private Button productsModifyBtn;
-    @FXML
-    private Button productsDeleteBtn;
-    @FXML
-    private Button productsSearchBtn;
-    @FXML
     private TextField productsSearchField;
-    @FXML
-    private AnchorPane partPanel;
     @FXML
     private TableView<Part> partsTable;
     @FXML
@@ -75,15 +56,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private TableColumn<Part, Double> partsTablePPUCol;
     @FXML
-    private Button partsSearchBtn;
-    @FXML
     private TextField partsSearchField;
-    @FXML
-    private Button partsAddBtn;
-    @FXML
-    private Button partsModifyBtn;
-    @FXML
-    private Button partsDeleteBtn;
 
     // Additional properties required for functionality
     private static Part partModify;

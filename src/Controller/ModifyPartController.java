@@ -24,7 +24,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -38,17 +37,9 @@ public class ModifyPartController implements Initializable {
     // FXML Created Properties
     @FXML
     private AnchorPane modifyPartScr;
-    @FXML
-    private AnchorPane modifyPartScrPane;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button cancelBtn;
-    @FXML
     private RadioButton inHouseRadio;
     @FXML
     private ToggleGroup modifyPartToggleGroup;
-    @FXML
     private RadioButton outsourcedRadio;
     @FXML
     private TextField partIDField;

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainScr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreenController">
    <children>
       <Label layoutX="35.0" layoutY="88.0" prefHeight="26.0" prefWidth="294.0" text="Inventory Management System" textFill="#908e8e" AnchorPane.leftAnchor="35.0">
          <font>
@@ -23,12 +23,12 @@
             <Font name="Segoe UI Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="exitBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="959.0" layoutY="525.0" mnemonicParsing="false" onAction="#exitBtnHandler" prefHeight="51.0" prefWidth="163.0" style="-fx-border-radius: 5px;" text="Exit">
+      <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="959.0" layoutY="525.0" mnemonicParsing="false" onAction="#exitBtnHandler" prefHeight="51.0" prefWidth="163.0" style="-fx-border-radius: 5px;" text="Exit">
          <font>
             <Font name="Segoe UI" size="18.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="partPanel" layoutX="36.0" layoutY="153.0" prefHeight="352.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
+      <AnchorPane layoutX="36.0" layoutY="153.0" prefHeight="352.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
             <TableView fx:id="partsTable" accessibleHelp="List of all parts" accessibleText="Parts Table" layoutX="18.0" layoutY="66.0" prefHeight="218.0" prefWidth="514.0">
               <columns>
@@ -43,7 +43,7 @@
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="partsSearchBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="213.0" layoutY="22.0" mnemonicParsing="false" onAction="#partsSearchBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Search">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="213.0" layoutY="22.0" mnemonicParsing="false" onAction="#partsSearchBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Search">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -53,17 +53,17 @@
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="partsAddBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="190.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsAddBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Add">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="190.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsAddBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Add">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="partsModifyBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsModifyBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Modify">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsModifyBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Modify">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="partsDeleteBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsDeleteBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Delete">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="295.0" mnemonicParsing="false" onAction="#partsDeleteBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Delete">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -80,7 +80,7 @@
             </Group>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="productsPanel" layoutX="613.0" layoutY="153.0" prefHeight="352.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
+      <AnchorPane layoutX="613.0" layoutY="153.0" prefHeight="352.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
             <TableView fx:id="productsTable" accessibleHelp="List of all products" accessibleText="Products Table" layoutX="18.0" layoutY="67.0" prefHeight="218.0" prefWidth="514.0">
                <columns>
@@ -95,22 +95,22 @@
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="productsAddBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="190.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsAddBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Add">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="190.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsAddBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Add">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="productsModifyBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsModifyBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Modify">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="304.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsModifyBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Modify">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="productsDeleteBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsDeleteBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Delete">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="418.0" layoutY="295.0" mnemonicParsing="false" onAction="#productsDeleteBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Delete">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="productsSearchBtn" accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="213.0" layoutY="22.0" mnemonicParsing="false" onAction="#productsSearchBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Search">
+            <Button accessibleHelp="Click here to exit the application" accessibleText="Exit Application" layoutX="213.0" layoutY="22.0" mnemonicParsing="false" onAction="#productsSearchBtnHandler" prefHeight="33.0" prefWidth="103.0" style="-fx-border-radius: 5px;" text="Search">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>

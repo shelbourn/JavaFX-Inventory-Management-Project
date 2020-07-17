@@ -23,7 +23,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,20 +30,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class AddProductController implements Initializable {
 
-    // FXML Generated Properties
-    @FXML
-    private AnchorPane addProdScr;
-    @FXML
-    private AnchorPane addProdScrPane;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button cancelBtn;
     @FXML
     private TextField productIDField;
     @FXML
@@ -68,10 +57,6 @@ public class AddProductController implements Initializable {
     @FXML
     private TableColumn<Part, Double> addTablePPUCol;
     @FXML
-    private Button addBtn;
-    @FXML
-    private Button searchBtn;
-    @FXML
     private TextField searchField;
     @FXML
     private TableView<Part> deleteTable;
@@ -83,8 +68,6 @@ public class AddProductController implements Initializable {
     private TableColumn<Part, Integer> deleteTableInvLevelCol;
     @FXML
     private TableColumn<Part, Double> deleteTablePPUCol;
-    @FXML
-    private Button deleteBtn;
 
     // Additional properties needed for functionality
     private int productID;
