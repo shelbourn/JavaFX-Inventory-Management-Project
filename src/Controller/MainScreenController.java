@@ -12,8 +12,6 @@ import Model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,7 +118,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private void partsSearchBtnHandler(ActionEvent event) {
         String partSearchString = partsSearchField.getText();
-        int searchedPartIndex;
         if (partSearchString.equals("")) {
             System.err.println("Empty search field present. Part search could not be conducted.");
             Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
@@ -128,7 +125,7 @@ public class MainScreenController implements Initializable {
             emptySearchField.setHeaderText("Unable to process search");
             emptySearchField.setContentText("Search field cannot be blank.");
             emptySearchField.showAndWait();
-        } else if (Inventory.lookupPart(partSearchString) == -1) {
+        } else if (Inventory.lookupPart(partSearchString) == null) {
             System.err.println("Part not found. Search returned no results.");
             Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
             partNotFound.setTitle("ERROR: PART NOT FOUND");
@@ -137,12 +134,7 @@ public class MainScreenController implements Initializable {
             partNotFound.showAndWait();
         } else {
             System.out.println("Part search succeeded. Parts table view updated.");
-            searchedPartIndex = Inventory.lookupPart(partSearchString);
-            Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
-            ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
-            searchedPartList.add(searchedPart);
-            partsTable.setItems(searchedPartList);
-            partsSearchField.setText("");
+            partsTable.setItems(Inventory.lookupPart(partSearchString));
         }
     }
 
@@ -156,7 +148,6 @@ public class MainScreenController implements Initializable {
     private void partsSearchFieldEnterHandler(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             String partSearchString = partsSearchField.getText();
-            int searchedPartIndex;
             if (partSearchString.equals("")) {
                 System.err.println("Empty search field present. Part search could not be conducted.");
                 Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
@@ -164,7 +155,7 @@ public class MainScreenController implements Initializable {
                 emptySearchField.setHeaderText("Unable to process search");
                 emptySearchField.setContentText("Search field cannot be blank.");
                 emptySearchField.showAndWait();
-            } else if (Inventory.lookupPart(partSearchString) == -1) {
+            } else if (Inventory.lookupPart(partSearchString) == null) {
                 System.err.println("Part not found. Search returned no results.");
                 Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
                 partNotFound.setTitle("ERROR: PART NOT FOUND");
@@ -173,12 +164,7 @@ public class MainScreenController implements Initializable {
                 partNotFound.showAndWait();
             } else {
                 System.out.println("Part search succeeded. Parts table view updated.");
-                searchedPartIndex = Inventory.lookupPart(partSearchString);
-                Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
-                ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
-                searchedPartList.add(searchedPart);
-                partsTable.setItems(searchedPartList);
-                partsSearchField.setText("");
+                partsTable.setItems(Inventory.lookupPart(partSearchString));
             }
         }
     }
@@ -301,7 +287,7 @@ public class MainScreenController implements Initializable {
             emptySearchField.setHeaderText("Unable to process search");
             emptySearchField.setContentText("Search field cannot be blank.");
             emptySearchField.showAndWait();
-        } else if (Inventory.lookupProduct(productSearchString) == -1) {
+        } else if (Inventory.lookupProduct(productSearchString) == null) {
             System.err.println("Product not found. Search returned no results.");
             Alert productNotFound = new Alert(Alert.AlertType.INFORMATION);
             productNotFound.setTitle("ERROR: PRODUCT NOT FOUND");
@@ -310,12 +296,7 @@ public class MainScreenController implements Initializable {
             productNotFound.showAndWait();
         } else {
             System.out.println("Product search succeeded. Products table view updated.");
-            searchedProductIndex = Inventory.lookupProduct(productSearchString);
-            Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
-            ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
-            searchedProductList.add(searchedProduct);
-            productsTable.setItems(searchedProductList);
-            productsSearchField.setText("");
+            productsTable.setItems(Inventory.lookupProduct(productSearchString));
         }
     }
 
@@ -338,7 +319,7 @@ public class MainScreenController implements Initializable {
                 emptySearchField.setHeaderText("Unable to process search");
                 emptySearchField.setContentText("Search field cannot be blank.");
                 emptySearchField.showAndWait();
-            } else if (Inventory.lookupProduct(productSearchString) == -1) {
+            } else if (Inventory.lookupProduct(productSearchString) == null) {
                 System.err.println("Product not found. Search returned no results.");
                 Alert productNotFound = new Alert(Alert.AlertType.INFORMATION);
                 productNotFound.setTitle("ERROR: PRODUCT NOT FOUND");
@@ -347,12 +328,7 @@ public class MainScreenController implements Initializable {
                 productNotFound.showAndWait();
             } else {
                 System.out.println("Product search succeeded. Products table view updated.");
-                searchedProductIndex = Inventory.lookupProduct(productSearchString);
-                Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
-                ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
-                searchedProductList.add(searchedProduct);
-                productsTable.setItems(searchedProductList);
-                productsSearchField.setText("");
+                productsTable.setItems(Inventory.lookupProduct(productSearchString));
             }
         }
     }

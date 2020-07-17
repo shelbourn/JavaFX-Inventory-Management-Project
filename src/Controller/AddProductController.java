@@ -134,7 +134,7 @@ public class AddProductController implements Initializable {
             emptySearchField.setHeaderText("Unable to process search");
             emptySearchField.setContentText("Search field cannot be blank.");
             emptySearchField.showAndWait();
-        } else if (Inventory.lookupPart(partSearchString) == -1) {
+        } else if (Inventory.lookupPart(partSearchString) == null) {
             System.err.println("Part not found. Search returned no results.");
             Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
             partNotFound.setTitle("ERROR: PART NOT FOUND");
@@ -143,12 +143,7 @@ public class AddProductController implements Initializable {
             partNotFound.showAndWait();
         } else {
             System.out.println("Part search succeeded. Add parts table view updated.");
-            searchedPartIndex = Inventory.lookupPart(partSearchString);
-            Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
-            ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
-            searchedPartList.add(searchedPart);
-            addTable.setItems(searchedPartList);
-            searchField.setText("");
+            addTable.setItems(Inventory.lookupPart(partSearchString));
         }
     }
 
@@ -170,7 +165,7 @@ public class AddProductController implements Initializable {
                 emptySearch.setHeaderText("Unable to process search");
                 emptySearch.setContentText("Search field cannot be blank.");
                 emptySearch.showAndWait();
-            } else if (Inventory.lookupPart(partSearchString) == -1) {
+            } else if (Inventory.lookupPart(partSearchString) == null) {
                 System.err.println("Part not found. Search returned no results.");
                 Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
                 partNotFound.setTitle("ERROR: PART NOT FOUND");
@@ -179,12 +174,7 @@ public class AddProductController implements Initializable {
                 partNotFound.showAndWait();
             } else {
                 System.out.println("Part search succeeded. Add parts table view updated.");
-                searchedPartIndex = Inventory.lookupPart(partSearchString);
-                Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
-                ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
-                searchedPartList.add(searchedPart);
-                addTable.setItems(searchedPartList);
-                searchField.setText("");
+                addTable.setItems(Inventory.lookupPart(partSearchString));
             }
         }
     }

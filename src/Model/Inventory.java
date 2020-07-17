@@ -13,7 +13,9 @@ public class Inventory {
 
     // Properties for Inventory class
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Part> partSearch = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Product> productSearch = FXCollections.observableArrayList();
     private static int generatedPartID = 1000;
     private static int generatedProductID = 1000;
 
@@ -54,31 +56,29 @@ public class Inventory {
         allParts.add(newPart);
     }
 
-    // Lookup parts by Part ID or Part Name
-    public static int lookupPart(String partSearch) {
-        boolean partFound = false;
-        int partIndex = 0;
-        if (validInt(partSearch)) {
+    // Lookup parts by Part ID or Keyword
+    public static ObservableList<Part> lookupPart(String partSearchString) {
+        boolean isFound = false;
+        if (validInt(partSearchString)) {
             for (int i = 0; i < allParts.size(); i++) {
-                if (Integer.parseInt(partSearch) == allParts.get(i).getId()) {
-                    partIndex = i;
-                    partFound = true;
+                if (Integer.parseInt(partSearchString) == allParts.get(i).getId()) {
+                    partSearch.add(allParts.get(i));
+                    isFound = true;
                 }
             }
         } else {
             for (int i = 0; i < allParts.size(); i++) {
-                partSearch = partSearch.toLowerCase();
-                if (partSearch.contains(allParts.get(i).getName().toLowerCase())) {
-                    partIndex = i;
-                    partFound = true;
+                partSearchString = partSearchString.toLowerCase();
+                if ((allParts.get(i).getName().toLowerCase()).contains(partSearchString)) {
+                    partSearch.add(allParts.get(i));
+                    isFound = true;
                 }
             }
         }
-        if (partFound == true) {
-            return partIndex;
+        if (isFound == true) {
+            return partSearch;
         } else {
-            System.out.println("ERROR: Unable to locate any parts based on the given search parameters.");
-            return -1;
+            return null;
         }
     }
 
@@ -112,31 +112,29 @@ public class Inventory {
         allProducts.add(newProduct);
     }
 
-    // Lookup parts by Part ID or Part Name
-    public static int lookupProduct(String productSearch) {
-        boolean productFound = false;
-        int productIndex = 0;
-        if (validInt(productSearch)) {
-            for (int i = 0; i < allProducts.size(); i++) {
-                if (Integer.parseInt(productSearch) == allProducts.get(i).getId()) {
-                    productIndex = i;
-                    productFound = true;
+    // Lookup Products by Product ID or Keyword
+    public static ObservableList<Product> lookupProduct(String productSearchString) {
+        boolean isFound = false;
+        if (validInt(productSearchString)) {
+            for (int i = 0; i < allParts.size(); i++) {
+                if (Integer.parseInt(productSearchString) == allParts.get(i).getId()) {
+                    productSearch.add(allProducts.get(i));
+                    isFound = true;
                 }
             }
         } else {
             for (int i = 0; i < allParts.size(); i++) {
-                productSearch = productSearch.toLowerCase();
-                if (productSearch.contains(allParts.get(i).getName().toLowerCase())) {
-                    productIndex = i;
-                    productFound = true;
+                productSearchString = productSearchString.toLowerCase();
+                if ((allProducts.get(i).getName().toLowerCase()).contains(productSearchString)) {
+                    productSearch.add(allProducts.get(i));
+                    isFound = true;
                 }
             }
         }
-        if (productFound == true) {
-            return productIndex;
+        if (isFound == true) {
+            return productSearch;
         } else {
-            System.out.println("ERROR: Unable to locate any products based on the given search parameters.");
-            return -1;
+            return null;
         }
     }
 
