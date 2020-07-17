@@ -284,34 +284,38 @@ public class ModifyProductController implements Initializable {
                 productValueException);
 
         if (productFieldException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This has not been modified");
-            alert.setContentText(productFieldException);
-            alert.showAndWait();
+            System.err.println("Empty fields present. Product has not been modified.");
+            Alert emptyFields = new Alert(Alert.AlertType.WARNING);
+            emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFields.setHeaderText("This product has not been modified");
+            emptyFields.setContentText(productFieldException);
+            emptyFields.showAndWait();
             productFieldException = "";
         } else if (productDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This product has not been modified");
-            alert.setContentText(productDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present. Product has not been modified.");
+            Alert invalidDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidDataTypes.setHeaderText("This product has not been modified");
+            invalidDataTypes.setContentText(productDataTypeException);
+            invalidDataTypes.showAndWait();
             productDataTypeException = "";
         } else if (productValueException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID VALUES PRESENT");
-            alert.setHeaderText("This product has not been modified");
-            alert.setContentText(productValueException);
-            alert.showAndWait();
+            System.err.println("Invalid values present. Product has not been modified.");
+            Alert invalidValues = new Alert(Alert.AlertType.WARNING);
+            invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
+            invalidValues.setHeaderText("This product has not been modified");
+            invalidValues.setContentText(productValueException);
+            invalidValues.showAndWait();
             productValueException = "";
         } else {
             try {
                 if (associatedParts.isEmpty()) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
-                    alert.setHeaderText("This product has not been modified");
-                    alert.setContentText("A product must contain at least one part.");
-                    alert.showAndWait();
+                    System.err.println("No parts added to product. Product has not been modified.");
+                    Alert noPartsAdded = new Alert(Alert.AlertType.WARNING);
+                    noPartsAdded.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
+                    noPartsAdded.setHeaderText("This product has not been modified");
+                    noPartsAdded.setContentText("A product must contain at least one part.");
+                    noPartsAdded.showAndWait();
                 } else {
                     Product updatedProduct = new Product();
                     updatedProduct.setProductID(productID);
@@ -324,19 +328,19 @@ public class ModifyProductController implements Initializable {
                     Inventory.updateProduct(productModifyIndex, updatedProduct);
                     System.out.println("Product " + productName + " (ID#: " + productID + ") successfully modified.");
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("SUCCESS: PRODUCT MODIFIED");
-                    alert.setHeaderText(productName + " Successfully Modified");
-                    alert.setContentText("Click OK to return to the main screen.");
-                    alert.showAndWait();
+                    Alert productModifySuccess = new Alert(Alert.AlertType.INFORMATION);
+                    productModifySuccess.setTitle("SUCCESS: PRODUCT MODIFIED");
+                    productModifySuccess.setHeaderText(productName + " Successfully Modified");
+                    productModifySuccess.setContentText("Click OK to return to the main screen.");
+                    productModifySuccess.showAndWait();
 
-                    if (alert.getResult() == ButtonType.OK) {
-                        System.out.println("User confirmed product modification. \nExiting to Main Screen.");
+                    if (productModifySuccess.getResult() == ButtonType.OK) {
+                        System.out.println("User confirmed product modification.\nExiting to Main Screen.");
                         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                        Scene scene = new Scene(root);
+                        Scene mainScreen = new Scene(root);
                         Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                        mainScreenWindow.setScene(scene);
+                        mainScreenWindow.setScene(mainScreen);
                         mainScreenWindow.show();
                     } else {
                     }
@@ -348,22 +352,22 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-        alert.setHeaderText("Would you like to cancel this operation?");
-        alert.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
-        alert.showAndWait();
+        Alert cancelConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        cancelConfirm.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        cancelConfirm.setHeaderText("Would you like to cancel this operation?");
+        cancelConfirm.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
+        cancelConfirm.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
+        if (cancelConfirm.getResult() == ButtonType.OK) {
             System.out.println("User cancelled operation.\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-            Scene scene = new Scene(root);
+            Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-            mainScreenWindow.setScene(scene);
+            mainScreenWindow.setScene(mainScreen);
             mainScreenWindow.show();
         } else {
-            alert.close();
+            cancelConfirm.close();
         }
     }
 
