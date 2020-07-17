@@ -238,7 +238,7 @@ public class AddProductController implements Initializable {
         }
 
         System.out.println(selectedPart + " successfully added to product's associated parts list.");
-        associatedParts.add(selectedPart);
+        Product.addAssociatedPart(selectedPart);
         updateDeleteTable();
     }
 
@@ -263,6 +263,7 @@ public class AddProductController implements Initializable {
 
         if (deleteConfirm.getResult() == ButtonType.OK) {
             System.out.println("User confirmed.\n" + selectedPart + " has been removed from Product's part list.");
+            Product.deleteAssociatedPart(selectedPart);
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
@@ -351,12 +352,12 @@ public class AddProductController implements Initializable {
                     noPartsAdded.showAndWait();
                 } else {
                     Product newProduct = new Product();
-                    newProduct.setProductID(productID);
-                    newProduct.setProductName(productName);
-                    newProduct.setProductPrice(Double.parseDouble(productPrice));
-                    newProduct.setProductStockLevel(Integer.parseInt(productStockLevel));
-                    newProduct.setProductMaxStockLevel(Integer.parseInt(productMaxStockLevel));
-                    newProduct.setProductMinStockLevel(Integer.parseInt(productMinStockLevel));
+                    newProduct.setId(productID);
+                    newProduct.setName(productName);
+                    newProduct.setPrice(Double.parseDouble(productPrice));
+                    newProduct.setStock(Integer.parseInt(productStockLevel));
+                    newProduct.setMax(Integer.parseInt(productMaxStockLevel));
+                    newProduct.setMin(Integer.parseInt(productMinStockLevel));
                     newProduct.setAssociatedParts(associatedParts);
                     Inventory.addProduct(newProduct);
                     System.out.println("Product " + productName + " (ID#: " + productID + ") successfully added to inventory.");

@@ -108,16 +108,16 @@ public class ModifyProductController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //Fetching and populating data for product to modify
         Product productToModify = Inventory.getAllProducts().get(productModifyIndex);
-        productID = Inventory.getAllProducts().get(productModifyIndex).getProductID();
+        productID = Inventory.getAllProducts().get(productModifyIndex).getId();
         productIDField.setText("Auto-Generated:   " + productID);
-        productNameField.setText(productToModify.getProductName());
-        inventoryLevelField.setText(Integer.toString(productToModify.getProductStockLevel()));
-        priceField.setText(Double.toString(productToModify.getProductPrice()));
-        maxLevelField.setText(Integer.toString(productToModify.getProductMaxStockLevel()));
-        minLevelField.setText(Integer.toString(productToModify.getProductMinStockLevel()));
+        productNameField.setText(productToModify.getName());
+        inventoryLevelField.setText(Integer.toString(productToModify.getStock()));
+        priceField.setText(Double.toString(productToModify.getPrice()));
+        maxLevelField.setText(Integer.toString(productToModify.getMax()));
+        minLevelField.setText(Integer.toString(productToModify.getMin()));
 
         // Fetching and populating product's associated parts
-        associatedParts = productToModify.getAssociatedParts();
+        associatedParts = productToModify.getAllAssociatedParts();
 
         // Fetching and setting Add Table rows
         addTablePartIDCol.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
@@ -224,7 +224,7 @@ public class ModifyProductController implements Initializable {
             noPartSelected.showAndWait();
         }
 
-        associatedParts.add(selectedPart);
+        Product.addAssociatedPart(selectedPart);
         updateDeleteTable();
     }
 
@@ -240,6 +240,7 @@ public class ModifyProductController implements Initializable {
 
         if (alert.getResult() == ButtonType.OK) {
             System.out.println("User confirmed.\n" + selectedPart + " has been removed from Product's part list.");
+            Product.deleteAssociatedPart(selectedPart);
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
@@ -318,12 +319,12 @@ public class ModifyProductController implements Initializable {
                     noPartsAdded.showAndWait();
                 } else {
                     Product updatedProduct = new Product();
-                    updatedProduct.setProductID(productID);
-                    updatedProduct.setProductName(productName);
-                    updatedProduct.setProductPrice(Double.parseDouble(productPrice));
-                    updatedProduct.setProductStockLevel(Integer.parseInt(productStockLevel));
-                    updatedProduct.setProductMaxStockLevel(Integer.parseInt(productMaxStockLevel));
-                    updatedProduct.setProductMinStockLevel(Integer.parseInt(productMinStockLevel));
+                    updatedProduct.setId(productID);
+                    updatedProduct.setName(productName);
+                    updatedProduct.setPrice(Double.parseDouble(productPrice));
+                    updatedProduct.setStock(Integer.parseInt(productStockLevel));
+                    updatedProduct.setMax(Integer.parseInt(productMaxStockLevel));
+                    updatedProduct.setMin(Integer.parseInt(productMinStockLevel));
                     updatedProduct.setAssociatedParts(associatedParts);
                     Inventory.updateProduct(productModifyIndex, updatedProduct);
                     System.out.println("Product " + productName + " (ID#: " + productID + ") successfully modified.");

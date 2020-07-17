@@ -115,10 +115,10 @@ public class MainScreenController implements Initializable {
         partsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty().asObject());
 
         // Fetching and setting Products Table rows
-        productsTableProductIDCol.setCellValueFactory(cellData -> cellData.getValue().getProductIDProperty().asObject());
-        productsTableProductNameCol.setCellValueFactory(cellData -> cellData.getValue().getProductNameProperty());
-        productsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getProductStockLevelProperty().asObject());
-        productsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getProductPriceProperty().asObject());
+        productsTableProductIDCol.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
+        productsTableProductNameCol.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        productsTableInvLevelCol.setCellValueFactory(cellData -> cellData.getValue().getStockProperty().asObject());
+        productsTablePPUCol.setCellValueFactory(cellData -> cellData.getValue().getPriceProperty().asObject());
 
         // Initializing Add Part and Delete Part table views
         updatePartsTable();
@@ -406,8 +406,8 @@ public class MainScreenController implements Initializable {
         boolean noActiveSelection = productsTable.getSelectionModel().isEmpty();
         productModify = productsTable.getSelectionModel().getSelectedItem();
         productModifyIndex = Inventory.getAllProducts().indexOf(productModify);
-        String productModifyName = productModify.getProductName();
-        int productModifyID = productModify.getProductID();
+        String productModifyName = productModify.getName();
+        int productModifyID = productModify.getId();
 
         if (noActiveSelection) {
             System.err.println("No product selected. Product modification cannot be completed.");

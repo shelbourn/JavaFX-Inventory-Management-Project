@@ -82,12 +82,12 @@ public class InventoryManager extends Application {
             ObservableList<Part> associatedParts) {
         int productID = Inventory.getGeneratedProductID();
         Product newProductTest = new Product();
-        newProductTest.setProductID(productID);
-        newProductTest.setProductName(productIName);
-        newProductTest.setProductStockLevel(inventoryLevel);
-        newProductTest.setProductPrice(price);
-        newProductTest.setProductMaxStockLevel(maxInventory);
-        newProductTest.setProductMinStockLevel(minInventory);
+        newProductTest.setId(productID);
+        newProductTest.setName(productIName);
+        newProductTest.setStock(inventoryLevel);
+        newProductTest.setPrice(price);
+        newProductTest.setMax(maxInventory);
+        newProductTest.setMin(minInventory);
         Inventory.addProduct(newProductTest);
         newProductTest.setAssociatedParts(associatedParts);
     }

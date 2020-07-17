@@ -18,101 +18,109 @@ import javafx.collections.ObservableList;
 public class Product {
 
     // Properties for Product Class
-    private IntegerProperty productID;
-    private StringProperty productName;
-    private DoubleProperty productPrice;
-    private IntegerProperty productStockLevel;
-    private IntegerProperty productMinStockLevel;
-    private IntegerProperty productMaxStockLevel;
+    private IntegerProperty id;
+    private StringProperty name;
+    private DoubleProperty price;
+    private IntegerProperty stock;
+    private IntegerProperty min;
+    private IntegerProperty max;
     public static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
     // Constructor to Instantiate Product Class
     public Product() {
-        this.productID = new SimpleIntegerProperty();
-        this.productName = new SimpleStringProperty();
-        this.productPrice = new SimpleDoubleProperty();
-        this.productStockLevel = new SimpleIntegerProperty();
-        this.productMinStockLevel = new SimpleIntegerProperty();
-        this.productMaxStockLevel = new SimpleIntegerProperty();
+        this.id = new SimpleIntegerProperty();
+        this.name = new SimpleStringProperty();
+        this.price = new SimpleDoubleProperty();
+        this.stock = new SimpleIntegerProperty();
+        this.min = new SimpleIntegerProperty();
+        this.max = new SimpleIntegerProperty();
     }
 
     // Getters for Product Property Values
-    public int getProductID() {
-        return productID.get();
+    public int getId() {
+        return id.get();
     }
 
-    public String getProductName() {
-        return productName.get();
+    public String getName() {
+        return name.get();
     }
 
-    public double getProductPrice() {
-        return productPrice.get();
+    public double getPrice() {
+        return price.get();
     }
 
-    public int getProductStockLevel() {
-        return productStockLevel.get();
+    public int getStock() {
+        return stock.get();
     }
 
-    public int getProductMinStockLevel() {
-        return productMinStockLevel.get();
+    public int getMin() {
+        return min.get();
     }
 
-    public int getProductMaxStockLevel() {
-        return productMaxStockLevel.get();
+    public int getMax() {
+        return max.get();
     }
 
-    public ObservableList<Part> getAssociatedParts() {
+    public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
     }
 
     // Getters for Product Properties
-    public IntegerProperty getProductIDProperty() {
-        return productID;
+    public IntegerProperty getIdProperty() {
+        return id;
     }
 
-    public StringProperty getProductNameProperty() {
-        return productName;
+    public StringProperty getNameProperty() {
+        return name;
     }
 
-    public DoubleProperty getProductPriceProperty() {
-        return productPrice;
+    public DoubleProperty getPriceProperty() {
+        return price;
     }
 
-    public IntegerProperty getProductStockLevelProperty() {
-        return productStockLevel;
+    public IntegerProperty getStockProperty() {
+        return stock;
     }
 
-    public IntegerProperty getProductMinStockLevelProperty() {
-        return productMinStockLevel;
+    public IntegerProperty getMinProperty() {
+        return min;
     }
 
-    public IntegerProperty getProductMaxStockLevelProperty() {
-        return productMaxStockLevel;
+    public IntegerProperty getMaxProperty() {
+        return max;
     }
 
     // Setters for Product Properties
-    public void setProductID(int value) {
-        productID.set(value);
+    public void setId(int value) {
+        id.set(value);
     }
 
-    public void setProductName(String value) {
-        productName.set(value);
+    public void setName(String value) {
+        name.set(value);
     }
 
-    public void setProductPrice(double value) {
-        productPrice.set(value);
+    public void setPrice(double value) {
+        price.set(value);
     }
 
-    public void setProductStockLevel(int value) {
-        productStockLevel.set(value);
+    public void setStock(int value) {
+        stock.set(value);
     }
 
-    public void setProductMinStockLevel(int value) {
-        productMinStockLevel.set(value);
+    public void setMin(int value) {
+        min.set(value);
     }
 
-    public void setProductMaxStockLevel(int value) {
-        productMaxStockLevel.set(value);
+    public void setMax(int value) {
+        max.set(value);
+    }
+
+    public static void addAssociatedPart(Part part) {
+        associatedParts.add(part);
+    }
+
+    public static boolean deleteAssociatedPart(Part selectedAssociatedPart) {
+        return true;
     }
 
     public void setAssociatedParts(ObservableList<Part> associatedParts) {

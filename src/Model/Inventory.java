@@ -92,7 +92,7 @@ public class Inventory {
     public static boolean deletePartCheck(Part selectedPart) {
         boolean okayToDeletePart = true;
         for (int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getAssociatedParts().contains(selectedPart)) {
+            if (allProducts.get(i).getAllAssociatedParts().contains(selectedPart)) {
                 okayToDeletePart = false;
             }
         }
@@ -118,7 +118,7 @@ public class Inventory {
         int productIndex = 0;
         if (validInt(productSearch)) {
             for (int i = 0; i < allProducts.size(); i++) {
-                if (Integer.parseInt(productSearch) == allProducts.get(i).getProductID()) {
+                if (Integer.parseInt(productSearch) == allProducts.get(i).getId()) {
                     productIndex = i;
                     productFound = true;
                 }
@@ -149,10 +149,10 @@ public class Inventory {
     // Checks to see whether a product can be deleted or not (checks whether the product contains any parts)
     public static boolean deleteProductCheck(Product selectedProduct) {
         boolean okayToDeleteProduct = false;
-        int selectedProductID = selectedProduct.getProductID();
+        int selectedProductID = selectedProduct.getId();
         for (int i = 0; i < allProducts.size(); i++) {
-            if (allProducts.get(i).getProductID() == selectedProductID) {
-                if (allProducts.get(i).getAssociatedParts().isEmpty()) {
+            if (allProducts.get(i).getId() == selectedProductID) {
+                if (allProducts.get(i).getAllAssociatedParts().isEmpty()) {
                     okayToDeleteProduct = true;
                 }
             }
