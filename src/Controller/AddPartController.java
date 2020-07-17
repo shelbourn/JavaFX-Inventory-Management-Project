@@ -230,13 +230,13 @@ public class AddPartController implements Initializable {
                         addPart(outsourced);
 
                         System.out.println("Outsourced part " + outsourced + " successfully added to inventory.");
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: OUTSOURCED PART ADDED");
-                        alert.setHeaderText("Outsourced Part Successfully Added to Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        partAddSuccess.setTitle("SUCCESS: OUTSOURCED PART ADDED");
+                        partAddSuccess.setHeaderText("Outsourced Part Successfully Added to Inventory");
+                        partAddSuccess.setContentText("Click OK to return to the main screen.");
+                        partAddSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
+                        if (partAddSuccess.getResult() == ButtonType.OK) {
                             System.out.println("Exiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                             Scene mainScreen = new Scene(root);
@@ -261,22 +261,22 @@ public class AddPartController implements Initializable {
      */
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-        alert.setHeaderText("Would you like to cancel this operation?");
-        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
-        alert.showAndWait();
+        Alert cancelAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        cancelAlert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        cancelAlert.setHeaderText("Would you like to cancel this operation?");
+        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        cancelAlert.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
-            System.out.println("User cancelled operation. Exiting to Main Screen.");
+        if (cancelAlert.getResult() == ButtonType.OK) {
+            System.out.println("User cancelled operation.\n Exiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-            Scene scene = new Scene(root);
+            Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-            mainScreenWindow.setScene(scene);
+            mainScreenWindow.setScene(mainScreen);
             mainScreenWindow.show();
         } else {
-            alert.close();
+            cancelAlert.close();
         }
     }
 }
