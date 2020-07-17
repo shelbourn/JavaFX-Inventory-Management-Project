@@ -237,7 +237,7 @@ public class AddProductController implements Initializable {
             noPartSelected.showAndWait();
         }
 
-        System.out.println("Selected part successfully added to product's associated parts list.");
+        System.out.println(selectedPart + " successfully added to product's associated parts list.");
         associatedParts.add(selectedPart);
         updateDeleteTable();
     }
@@ -257,18 +257,18 @@ public class AddProductController implements Initializable {
 
         Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
         deleteConfirm.setTitle("CONFIRMATION: REMOVE PART");
-        deleteConfirm.setHeaderText("Would you like to remove this part from the product's part list?");
+        deleteConfirm.setHeaderText("Would you like to remove " + selectedPart + " from the product's part list?");
         deleteConfirm.setContentText("Click OK to remove the part.\nClick CANCEL to close this window and keep the part.");
         deleteConfirm.showAndWait();
 
         if (deleteConfirm.getResult() == ButtonType.OK) {
-            System.out.println("User confirmed.\nPart has been removed from Product's part list.");
+            System.out.println("User confirmed.\n" + selectedPart + " has been removed from Product's part list.");
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
             Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
             removeAlert.setTitle("SUCCESS: PART REMOVED");
-            removeAlert.setHeaderText("The selected part has been removed from the part list.");
+            removeAlert.setHeaderText(selectedPart + " has been removed from the part list.");
             removeAlert.setContentText("Click OK to close this window.");
             removeAlert.showAndWait();
         } else {
@@ -363,7 +363,7 @@ public class AddProductController implements Initializable {
 
                     Alert productAddSuccess = new Alert(Alert.AlertType.INFORMATION);
                     productAddSuccess.setTitle("SUCCESS: PRODUCT ADDED");
-                    productAddSuccess.setHeaderText("Product Successfully Added to Inventory");
+                    productAddSuccess.setHeaderText(productName + " Successfully Added to Inventory");
                     productAddSuccess.setContentText("Click OK to return to the main screen.");
                     productAddSuccess.showAndWait();
 

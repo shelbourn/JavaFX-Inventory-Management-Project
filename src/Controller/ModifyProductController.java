@@ -100,6 +100,9 @@ public class ModifyProductController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,21 +134,9 @@ public class ModifyProductController implements Initializable {
         // Initializing Add Part and Delete Part table views
         updateAddTable();
         updateDeleteTable();
-//        testDataHelper();
     }
 
     // Helper Methods for Updating Table Views
-    // Method to create test data (******COMMENT OUT BEFORE FINAL BUILD*******)
-//    private void testDataHelper() {
-//        for (int i = 3000; i < 3006; i++) {
-//            InHouse inHouseTest = new InHouse();
-//            inHouseTest.setPartID(i);
-//            inHouseTest.setPartName("Test" + i);
-//            inHouseTest.setPartStockLevel(i - 2095);
-//            inHouseTest.setPartPrice(i - 999);
-//            Inventory.addPart(inHouseTest);
-//        }
-//    }
     private void updateAddTable() {
         addTable.setItems(Inventory.getAllParts());
     }
@@ -159,18 +150,21 @@ public class ModifyProductController implements Initializable {
         String partSearchString = searchField.getText();
         int searchedPartIndex;
         if (partSearchString.equals("")) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: EMPTY FIELD");
-            alert.setHeaderText("Unable to process search");
-            alert.setContentText("Search field cannot be blank.");
-            alert.showAndWait();
+            System.err.println("Empty search field present. Part search could not be conducted.");
+            Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
+            emptySearchField.setTitle("ERROR: EMPTY FIELD");
+            emptySearchField.setHeaderText("Unable to process search");
+            emptySearchField.setContentText("Search field cannot be blank.");
+            emptySearchField.showAndWait();
         } else if (Inventory.lookupPart(partSearchString) == -1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: PART NOT FOUND");
-            alert.setHeaderText("Unable to locate part");
-            alert.setContentText("The Part ID or name entered was not found in inventory.");
-            alert.showAndWait();
+            System.err.println("Part not found. Search returned no results.");
+            Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
+            partNotFound.setTitle("ERROR: PART NOT FOUND");
+            partNotFound.setHeaderText("Unable to locate part");
+            partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
+            partNotFound.showAndWait();
         } else {
+            System.out.println("Part search succeeded. Add parts table view updated.");
             searchedPartIndex = Inventory.lookupPart(partSearchString);
             Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
             ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -186,18 +180,21 @@ public class ModifyProductController implements Initializable {
             String partSearchString = searchField.getText();
             int searchedPartIndex;
             if (partSearchString.equals("")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: EMPTY FIELD");
-                alert.setHeaderText("Unable to process search");
-                alert.setContentText("Search field cannot be blank.");
-                alert.showAndWait();
+                System.err.println("Empty search field present. Part search could not be conducted.");
+                Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
+                emptySearchField.setTitle("ERROR: EMPTY FIELD");
+                emptySearchField.setHeaderText("Unable to process search");
+                emptySearchField.setContentText("Search field cannot be blank.");
+                emptySearchField.showAndWait();
             } else if (Inventory.lookupPart(partSearchString) == -1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: PART NOT FOUND");
-                alert.setHeaderText("Unable to locate part");
-                alert.setContentText("The Part ID or name entered was not found in inventory.");
-                alert.showAndWait();
+                System.err.println("Part not found. Search returned no results.");
+                Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
+                partNotFound.setTitle("ERROR: PART NOT FOUND");
+                partNotFound.setHeaderText("Unable to locate part");
+                partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
+                partNotFound.showAndWait();
             } else {
+                System.out.println("Part search succeeded. Add parts table view updated.");
                 searchedPartIndex = Inventory.lookupPart(partSearchString);
                 Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
                 ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -219,11 +216,12 @@ public class ModifyProductController implements Initializable {
         Part selectedPart = addTable.getSelectionModel().getSelectedItem();
 
         if (noActiveSelection) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: NO PART SELECTED");
-            alert.setHeaderText("No part has been added to product's part list.");
-            alert.setContentText("A part must be selected before it can be added to the part list.");
-            alert.showAndWait();
+            System.err.println("No part selected. Part cannot be added to product's associated parts list.");
+            Alert noPartSelected = new Alert(Alert.AlertType.WARNING);
+            noPartSelected.setTitle("ERROR: NO PART SELECTED");
+            noPartSelected.setHeaderText("No part has been added to product's part list.");
+            noPartSelected.setContentText("A part must be selected before it can be added to the part list.");
+            noPartSelected.showAndWait();
         }
 
         associatedParts.add(selectedPart);
@@ -236,18 +234,18 @@ public class ModifyProductController implements Initializable {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMATION: REMOVE PART");
-        alert.setHeaderText("Would you like to remove this part from the product's part list?");
+        alert.setHeaderText("Would you like to remove " + selectedPart + " from the product's part list?");
         alert.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
-            System.out.println("User confirmed. \nPart has been removed from Product's part list.");
+            System.out.println("User confirmed.\n" + selectedPart + " has been removed from Product's part list.");
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
             Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
             removeAlert.setTitle("SUCCESS: PART REMOVED");
-            removeAlert.setHeaderText("The selected part has been removed from the part list.");
+            removeAlert.setHeaderText(selectedPart + " has been removed from the part list.");
             removeAlert.setContentText("Click OK to close this window.");
             removeAlert.showAndWait();
         } else {
@@ -288,7 +286,7 @@ public class ModifyProductController implements Initializable {
         if (productFieldException.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This product has not been modified");
+            alert.setHeaderText("This has not been modified");
             alert.setContentText(productFieldException);
             alert.showAndWait();
             productFieldException = "";
@@ -302,7 +300,7 @@ public class ModifyProductController implements Initializable {
         } else if (productValueException.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERROR: INVALID VALUES PRESENT");
-            alert.setHeaderText("This product has not been amodified");
+            alert.setHeaderText("This product has not been modified");
             alert.setContentText(productValueException);
             alert.showAndWait();
             productValueException = "";
@@ -312,7 +310,7 @@ public class ModifyProductController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("ERROR: NO PARTS ADDED TO PRODUCT");
                     alert.setHeaderText("This product has not been modified");
-                    alert.setContentText("A new product must contain at least one part.");
+                    alert.setContentText("A product must contain at least one part.");
                     alert.showAndWait();
                 } else {
                     Product updatedProduct = new Product();
@@ -328,7 +326,7 @@ public class ModifyProductController implements Initializable {
 
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("SUCCESS: PRODUCT MODIFIED");
-                    alert.setHeaderText("Product Successfully Modified");
+                    alert.setHeaderText(productName + " Successfully Modified");
                     alert.setContentText("Click OK to return to the main screen.");
                     alert.showAndWait();
 
@@ -353,11 +351,11 @@ public class ModifyProductController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
         alert.setHeaderText("Would you like to cancel this operation?");
-        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        alert.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
-            System.out.println("User cancelled operation. \n\nExiting to Main Screen.");
+            System.out.println("User cancelled operation.\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
             Scene scene = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();

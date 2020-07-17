@@ -204,7 +204,7 @@ public class AddPartController implements Initializable {
                         System.out.println("In-House part " + inHouse + " successfully added to inventory.");
                         Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
                         partAddSuccess.setTitle("SUCCESS: IN-HOUSE PART ADDED");
-                        partAddSuccess.setHeaderText("In-House Part Successfully Added to Inventory");
+                        partAddSuccess.setHeaderText("In-House Part " + inHouse + " Successfully Added to Inventory");
                         partAddSuccess.setContentText("Click OK to return to the main screen.");
                         partAddSuccess.showAndWait();
 
@@ -232,7 +232,7 @@ public class AddPartController implements Initializable {
                         System.out.println("Outsourced part " + outsourced + " successfully added to inventory.");
                         Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
                         partAddSuccess.setTitle("SUCCESS: OUTSOURCED PART ADDED");
-                        partAddSuccess.setHeaderText("Outsourced Part Successfully Added to Inventory");
+                        partAddSuccess.setHeaderText("Outsourced Part " + outsourced + " Successfully Added to Inventory");
                         partAddSuccess.setContentText("Click OK to return to the main screen.");
                         partAddSuccess.showAndWait();
 

@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller for the Modify Part view
+ * Captures user input data for modifying parts, handles exceptions,
+ * modifies existing part in inventory
+ *
+ * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
 package Controller;
 
@@ -31,11 +33,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Matthew Shelbourn <mshelbo@wgu.edu>
- */
 public class ModifyPartController implements Initializable {
 
     // FXML Created Properties
@@ -81,6 +78,9 @@ public class ModifyPartController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -164,25 +164,28 @@ public class ModifyPartController implements Initializable {
                     outsourcedPartDataTypeException);
         }
         if (partFieldException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This part has not been modified");
-            alert.setContentText(partFieldException);
-            alert.showAndWait();
+            System.err.println("Empty fields present. Part has not been modified.");
+            Alert emptyFields = new Alert(Alert.AlertType.WARNING);
+            emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFields.setHeaderText("This part has not been modified");
+            emptyFields.setContentText(partFieldException);
+            emptyFields.showAndWait();
             partFieldException = "";
         } else if (iHPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been modified");
-            alert.setContentText(iHPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present. Part has not been modified.");
+            Alert invalidDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidDataTypes.setHeaderText("This part has not been modified");
+            invalidDataTypes.setContentText(iHPartDataTypeException);
+            invalidDataTypes.showAndWait();
             iHPartDataTypeException = "";
         } else if (outsourcedPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been modified");
-            alert.setContentText(outsourcedPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types presents. Part has not been modified.");
+            Alert invalidDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidDataTypes.setHeaderText("This part has not been modified");
+            invalidDataTypes.setContentText(outsourcedPartDataTypeException);
+            invalidDataTypes.showAndWait();
             outsourcedPartDataTypeException = "";
         } else {
             try {
@@ -194,11 +197,12 @@ public class ModifyPartController implements Initializable {
                         partValueException);
 
                 if (partValueException.length() > 0) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
-                    alert.setHeaderText("This part has not been modified");
-                    alert.setContentText(partValueException);
-                    alert.showAndWait();
+                    System.err.println("Invalid values present. Part has not been modiied.");
+                    Alert invalidValues = new Alert(Alert.AlertType.WARNING);
+                    invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
+                    invalidValues.setHeaderText("This part has not been modified");
+                    invalidValues.setContentText(partValueException);
+                    invalidValues.showAndWait();
                     partValueException = "";
                 } else {
                     if (inHousePart == true) {
@@ -212,19 +216,19 @@ public class ModifyPartController implements Initializable {
                         inHouse.setMachineID(Integer.parseInt(machIDCompName));
                         Inventory.updatePart(partModifyIndex, inHouse);
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: IN-HOUSE PART MODIFIED");
-                        alert.setHeaderText("In-House Part Successfully Modified in Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        Alert modifyPartSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        modifyPartSuccess.setTitle("SUCCESS: IN-HOUSE PART MODIFIED");
+                        modifyPartSuccess.setHeaderText("In-House Part " + inHouse + " Successfully Modified in Inventory");
+                        modifyPartSuccess.setContentText("Click OK to return to the main screen.");
+                        modifyPartSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
+                        if (modifyPartSuccess.getResult() == ButtonType.OK) {
                             System.out.println("In-House Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
@@ -239,19 +243,19 @@ public class ModifyPartController implements Initializable {
                         outsourced.setCompanyName(machIDCompName);
                         Inventory.updatePart(partModifyIndex, outsourced);
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: OUTSOURCED PART MODIFIED");
-                        alert.setHeaderText("Outsourced Part Successfully Modified in Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        Alert modifyPartSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        modifyPartSuccess.setTitle("SUCCESS: OUTSOURCED PART MODIFIED");
+                        modifyPartSuccess.setHeaderText("Outsourced Part " + outsourced + " Successfully Modified in Inventory");
+                        modifyPartSuccess.setContentText("Click OK to return to the main screen.");
+                        modifyPartSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
+                        if (modifyPartSuccess.getResult() == ButtonType.OK) {
                             System.out.println("Outsourced Part successfully modified in inventory. \nUser confirmed. \nExiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
@@ -264,22 +268,22 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     private void cancelBtnHandler(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
-        alert.setHeaderText("Would you like to cancel this operation?");
-        alert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
-        alert.showAndWait();
+        Alert cancelConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        cancelConfirm.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
+        cancelConfirm.setHeaderText("Would you like to cancel this operation?");
+        cancelConfirm.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        cancelConfirm.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
+        if (cancelConfirm.getResult() == ButtonType.OK) {
             System.out.println("User cancelled operation. Exiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-            Scene scene = new Scene(root);
+            Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-            mainScreenWindow.setScene(scene);
+            mainScreenWindow.setScene(mainScreen);
             mainScreenWindow.show();
         } else {
-            alert.close();
+            cancelConfirm.close();
         }
     }
 
