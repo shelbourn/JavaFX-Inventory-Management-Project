@@ -139,10 +139,10 @@ public class Product {
             productValueException = productValueException + "\nProduct Stock Level cannot be zero.";
         }
         if (prodStockLevel < prodMinStockLevel) {
-            productValueException = productValueException + "\nProduct Stock Level must be greater than its Minimum Stock Level requirement.";
+            productValueException = productValueException + "\nProduct Stock Level must be greater than or equal to its Minimum Stock Level requirement.";
         }
         if (prodStockLevel > prodMaxStockLevel) {
-            productValueException = productValueException + "\nProduct Stock Level must be less than its Maximum Stock Level requirement.";
+            productValueException = productValueException + "\nProduct Stock Level must be less than or equal to its Maximum Stock Level requirement.";
         }
         if (prodMinStockLevel > prodMaxStockLevel) {
             productValueException = productValueException + "\nProduct Minimum Stock Level cannot be greater than its Maximum Stock Level.";

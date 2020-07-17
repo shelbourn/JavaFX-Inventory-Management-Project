@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
@@ -39,6 +40,10 @@ public class AddPartController implements Initializable {
     private TextField partNameField;
     @FXML
     private TextField minLevelField;
+    @FXML
+    private RadioButton inHouseRadio;
+    @FXML
+    private RadioButton outsourcedRadio;
     @FXML
     private ToggleGroup addPartToggleGroup;
     @FXML
@@ -190,7 +195,7 @@ public class AddPartController implements Initializable {
                         System.out.println("In-House part " + inHouse + " successfully added to inventory.");
                         Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
                         partAddSuccess.setTitle("SUCCESS: IN-HOUSE PART ADDED");
-                        partAddSuccess.setHeaderText("In-House Part " + inHouse + " Successfully Added to Inventory");
+                        partAddSuccess.setHeaderText("In-House Part " + partName + " Successfully Added to Inventory");
                         partAddSuccess.setContentText("Click OK to return to the main screen.");
                         partAddSuccess.showAndWait();
 
@@ -218,7 +223,7 @@ public class AddPartController implements Initializable {
                         System.out.println("Outsourced part " + outsourced + " successfully added to inventory.");
                         Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
                         partAddSuccess.setTitle("SUCCESS: OUTSOURCED PART ADDED");
-                        partAddSuccess.setHeaderText("Outsourced Part " + outsourced + " Successfully Added to Inventory");
+                        partAddSuccess.setHeaderText("Outsourced Part " + partName + " Successfully Added to Inventory");
                         partAddSuccess.setContentText("Click OK to return to the main screen.");
                         partAddSuccess.showAndWait();
 

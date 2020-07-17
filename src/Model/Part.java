@@ -121,10 +121,10 @@ public abstract class Part {
             partValueException = partValueException + "\nPart Stock Level cannot be zero.";
         }
         if (partStockLevel < partMinStockLevel) {
-            partValueException = partValueException + "\nPart Stock Level must be greater than its Minimum Stock Level requirement.";
+            partValueException = partValueException + "\nPart Stock Level must be greater than or equal to its Minimum Stock Level requirement.";
         }
         if (partStockLevel > partMaxStockLevel) {
-            partValueException = partValueException + "\nPart Stock Level must be less than its Maximum Stock Level requirement.";
+            partValueException = partValueException + "\nPart Stock Level must be less than or equal to its Maximum Stock Level requirement.";
         }
         if (partMinStockLevel > partMaxStockLevel) {
             partValueException = partValueException + "\nPart Minimum Stock Level cannot be greater than its Maximum Stock Level.";

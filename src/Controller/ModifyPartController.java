@@ -37,10 +37,13 @@ public class ModifyPartController implements Initializable {
     // FXML Created Properties
     @FXML
     private AnchorPane modifyPartScr;
+    @FXML
     private RadioButton inHouseRadio;
     @FXML
-    private ToggleGroup modifyPartToggleGroup;
     private RadioButton outsourcedRadio;
+    @FXML
+    private ToggleGroup modifyPartToggleGroup;
+
     @FXML
     private TextField partIDField;
     @FXML
@@ -209,7 +212,7 @@ public class ModifyPartController implements Initializable {
 
                         Alert modifyPartSuccess = new Alert(Alert.AlertType.INFORMATION);
                         modifyPartSuccess.setTitle("SUCCESS: IN-HOUSE PART MODIFIED");
-                        modifyPartSuccess.setHeaderText("In-House Part " + inHouse + " Successfully Modified in Inventory");
+                        modifyPartSuccess.setHeaderText("In-House Part " + partName + " Successfully Modified in Inventory");
                         modifyPartSuccess.setContentText("Click OK to return to the main screen.");
                         modifyPartSuccess.showAndWait();
 
@@ -236,7 +239,7 @@ public class ModifyPartController implements Initializable {
 
                         Alert modifyPartSuccess = new Alert(Alert.AlertType.INFORMATION);
                         modifyPartSuccess.setTitle("SUCCESS: OUTSOURCED PART MODIFIED");
-                        modifyPartSuccess.setHeaderText("Outsourced Part " + outsourced + " Successfully Modified in Inventory");
+                        modifyPartSuccess.setHeaderText("Outsourced Part " + partName + " Successfully Modified in Inventory");
                         modifyPartSuccess.setContentText("Click OK to return to the main screen.");
                         modifyPartSuccess.showAndWait();
 

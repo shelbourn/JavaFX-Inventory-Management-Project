@@ -13,7 +13,7 @@
    <children>
       <AnchorPane layoutX="25.0" layoutY="28.0" prefHeight="507.0" prefWidth="550.0" style="-fx-border-color: steelblue; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-color: eee;">
          <children>
-            <RadioButton layoutX="268.0" layoutY="31.0" mnemonicParsing="false" onAction="#inHouseRadioHandler" text="In-House">
+            <RadioButton fx:id="inHouseRadio" layoutX="268.0" layoutY="31.0" mnemonicParsing="false" onAction="#inHouseRadioHandler" text="In-House">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
@@ -21,7 +21,7 @@
                   <ToggleGroup fx:id="addPartToggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="397.0" layoutY="31.0" mnemonicParsing="false" onAction="#outsourcedRadioHandler" text="Outsourced" toggleGroup="$addPartToggleGroup">
+            <RadioButton fx:id="outsourcedRadio" layoutX="397.0" layoutY="31.0" mnemonicParsing="false" onAction="#outsourcedRadioHandler" text="Outsourced" toggleGroup="$addPartToggleGroup">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
