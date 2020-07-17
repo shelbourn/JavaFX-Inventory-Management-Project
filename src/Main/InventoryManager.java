@@ -28,7 +28,7 @@ public class InventoryManager extends Application {
     // Properties required for helper methods
     ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
-    // Helper Method to create sample parts
+    // Helper Method to create sample In-House parts
     private void inHouseTestParts(
             String partName,
             int inventoryLevel,
@@ -49,6 +49,7 @@ public class InventoryManager extends Application {
         associatedParts.add(newInHouseTest);
     }
 
+    // Helper Method to create sample Outsourced parts
     private void outsourcedTestParts(
             String partName,
             int inventoryLevel,
@@ -90,7 +91,8 @@ public class InventoryManager extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage inventoryManager) throws Exception {
+
         // Initializing application with test data
         inHouseTestParts("32-bit ARM9 core microprocessor", 12, 199.99, 32, 6, 662);
         inHouseTestParts("64-bit ARM9 core microprocessor", 8, 399.99, 24, 4, 662);
@@ -114,12 +116,13 @@ public class InventoryManager extends Application {
         testProducts("64-bit Arm Laptop - Silver", 6, 1799.99, 10, 2, associatedParts);
         testProducts("64-bit Arm Laptop - White", 10, 1899.99, 14, 4, associatedParts);
 
+        // Launching app with test data and opening main screen
+        System.out.println("Opening ABC Company: Inventory Management System");
         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-
-        Scene scene = new Scene(root);
-        stage.setTitle("ABC Company: Inventory Management System");
-        stage.setScene(scene);
-        stage.show();
+        Scene mainScreen = new Scene(root);
+        inventoryManager.setTitle("ABC Company: Inventory Management System");
+        inventoryManager.setScene(mainScreen);
+        inventoryManager.show();
     }
 
     /**
