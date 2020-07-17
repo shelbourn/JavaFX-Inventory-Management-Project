@@ -218,26 +218,38 @@ public class ModifyProductController implements Initializable {
     @FXML
     private void deleteBtnHandler(ActionEvent event) {
         Part selectedPart = deleteTable.getSelectionModel().getSelectedItem();
+        String selectedPartName = selectedPart.getName();
+        boolean noActiveSelection = addTable.getSelectionModel().isEmpty();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION: REMOVE PART");
-        alert.setHeaderText("Would you like to remove " + selectedPart + " from the product's part list?");
-        alert.setContentText("Click OK to remove the part.\nClick CANCEL to close this window and keep the part.");
-        alert.showAndWait();
+        if (noActiveSelection) {
+            System.err.println("No part selected. Part must selected to be removed from product's associated parts list.");
+            Alert noPartSelected = new Alert(Alert.AlertType.WARNING);
+            noPartSelected.setTitle("ERROR: NO PART SELECTED");
+            noPartSelected.setHeaderText("No part has been removed from product's part list.");
+            noPartSelected.setContentText("A part must be selected before it can be removed from the part list.");
+            noPartSelected.showAndWait();
+        }
 
-        if (alert.getResult() == ButtonType.OK) {
-            System.out.println("User confirmed.\n" + selectedPart + " has been removed from Product's part list.");
+        Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteConfirm.setTitle("CONFIRMATION: REMOVE PART");
+        deleteConfirm.setHeaderText("Would you like to remove " + selectedPartName + " from the product's part list?");
+        deleteConfirm.setContentText("Click OK to remove the part.\nClick CANCEL to close this window and keep the part.");
+        deleteConfirm.showAndWait();
+
+        if (deleteConfirm.getResult() == ButtonType.OK) {
+            System.out.println("User confirmed.\n" + selectedPartName + " has been removed from Product's part list.");
             Product.deleteAssociatedPart(selectedPart);
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
             Alert removeAlert = new Alert(Alert.AlertType.INFORMATION);
             removeAlert.setTitle("SUCCESS: PART REMOVED");
-            removeAlert.setHeaderText(selectedPart + " has been removed from the part list.");
+            removeAlert.setHeaderText(selectedPartName + " has been removed from the part list.");
             removeAlert.setContentText("Click OK to close this window.");
             removeAlert.showAndWait();
         } else {
-            alert.close();
+            System.out.println("User cancelled part removal.\nClosing alert window.");
+            deleteConfirm.close();
         }
     }
 
