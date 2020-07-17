@@ -163,7 +163,7 @@ public class MainScreenController implements Initializable {
             partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
             partNotFound.showAndWait();
         } else {
-            System.out.println("Part search succeeded. Add parts table view updated.");
+            System.out.println("Part search succeeded. Parts table view updated.");
             searchedPartIndex = Inventory.lookupPart(partSearchString);
             Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
             ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -185,7 +185,7 @@ public class MainScreenController implements Initializable {
             String partSearchString = partsSearchField.getText();
             int searchedPartIndex;
             if (partSearchString.equals("")) {
-                System.err.println("Empty fields present. Product not added to inventory.");
+                System.err.println("Empty search field present. Part search could not be conducted.");
                 Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
                 emptySearchField.setTitle("ERROR: EMPTY FIELD");
                 emptySearchField.setHeaderText("Unable to process search");
@@ -199,7 +199,7 @@ public class MainScreenController implements Initializable {
                 partNotFound.setContentText("The Part ID or name entered was not found in inventory.");
                 partNotFound.showAndWait();
             } else {
-                System.out.println("Part search succeeded. Add parts table view updated.");
+                System.out.println("Part search succeeded. Parts table view updated.");
                 searchedPartIndex = Inventory.lookupPart(partSearchString);
                 Part searchedPart = Inventory.getAllParts().get(searchedPartIndex);
                 ObservableList<Part> searchedPartList = FXCollections.observableArrayList();
@@ -223,11 +223,11 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void partsAddBtnHandler(ActionEvent event) throws IOException {
-        System.out.println("User selected 'ADD PART'. \n\nOpening ADD PART screen.");
+        System.out.println("User selected 'ADD PART'.\nOpening ADD PART screen.");
         Parent root = FXMLLoader.load(getClass().getResource("/View/AddPart.fxml"));
         Scene addPartScreen = new Scene(root);
         Stage addPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addPartWindow.setTitle("ABC Company: Inventory Management System");
+        addPartWindow.setTitle("Add Part");
         addPartWindow.setScene(addPartScreen);
         addPartWindow.show();
     }
@@ -241,14 +241,14 @@ public class MainScreenController implements Initializable {
         int partModifyID = partModify.getPartID();
 
         if (noActiveSelection) {
-            System.err.println("No part selected. Part cannot be added to product's associated parts list.");
+            System.err.println("No part selected. Part modification cannot be completed.");
             Alert noPartSelected = new Alert(Alert.AlertType.WARNING);
             noPartSelected.setTitle("ERROR: NO PART SELECTED");
-            noPartSelected.setHeaderText("No part has been added to product's part list.");
-            noPartSelected.setContentText("A part must be selected before it can be added to the part list.");
+            noPartSelected.setHeaderText("Part Modification Failed");
+            noPartSelected.setContentText("A part must be selected before it can be modified.");
             noPartSelected.showAndWait();
         } else {
-            System.out.println("User has selected " + partModifyName + " with Part ID: " + partModifyID + " to modify.\n\n Opening Modify Part Screen now.");
+            System.out.println("User has selected " + partModifyName + " with Part ID: " + partModifyID + " to modify.\nOpening Modify Part Screen now.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyPart.fxml"));
             Scene modifyPartScreen = new Scene(root);
             Stage modifyPartWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -262,9 +262,17 @@ public class MainScreenController implements Initializable {
     private void partsDeleteBtnHandler(ActionEvent event
     ) {
         Part partToDelete = partsTable.getSelectionModel().getSelectedItem();
+        boolean noActiveSelection = partsTable.getSelectionModel().isEmpty();
 
-        if (!Inventory.deletePartCheck(partToDelete)) {
-            System.err.println("Part is associated with product(s).\n Unable to delete part.");
+        if (noActiveSelection) {
+            System.err.println("No part selected. Part deletion cannot be completed.");
+            Alert noPartSelected = new Alert(Alert.AlertType.WARNING);
+            noPartSelected.setTitle("ERROR: NO PART SELECTED");
+            noPartSelected.setHeaderText("Part Deletion Failed");
+            noPartSelected.setContentText("A part must be selected before it can be deleted.");
+            noPartSelected.showAndWait();
+        } else if (!Inventory.deletePartCheck(partToDelete)) {
+            System.err.println("Part is associated with product(s)\nUnable to delete part.");
             Alert partDelete = new Alert(Alert.AlertType.WARNING);
             partDelete.setTitle("ERROR: UNABLE TO DELETE PART");
             partDelete.setHeaderText("Part associated with product(s)");
@@ -274,18 +282,18 @@ public class MainScreenController implements Initializable {
             Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
             deleteConfirm.setTitle("CONFIRMATION: DELETE PART FROM INVENTORY");
             deleteConfirm.setHeaderText("Are you sure you would like to delete this part from inventory?\n\n This cannot be undone!");
-            deleteConfirm.setContentText("Click OK to delete this part. \n\nClick CANCEL to close this window and keep the part.");
+            deleteConfirm.setContentText("Click OK to delete this part.\nClick CANCEL to close this window and keep the part.");
             deleteConfirm.showAndWait();
 
             if (deleteConfirm.getResult() == ButtonType.OK) {
-                System.out.println("User confirmed. \nPart " + partToDelete + " was deleted from inventory");
+                System.out.println("User confirmed.\nPart " + partToDelete + " was deleted from inventory");
                 Inventory.deletePart(partToDelete);
                 updatePartsTable();
 
                 Alert partDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
                 partDeletionAlert.setTitle("SUCCESS: PART DELETED");
                 partDeletionAlert.setHeaderText("The selected part has been deleted from inventory");
-                partDeletionAlert.setContentText("The Parts table has been updated.\n\n Click OK to close this window.");
+                partDeletionAlert.setContentText("The Parts table has been updated.\n Click OK to close this window.");
                 partDeletionAlert.showAndWait();
             } else {
                 deleteConfirm.close();
@@ -309,18 +317,21 @@ public class MainScreenController implements Initializable {
         String productSearchString = productsSearchField.getText();
         int searchedProductIndex;
         if (productSearchString.equals("")) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: EMPTY FIELD");
-            alert.setHeaderText("Unable to process search");
-            alert.setContentText("Search field cannot be blank.");
-            alert.showAndWait();
+            System.err.println("Empty search field present. Product search could not be conducted.");
+            Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
+            emptySearchField.setTitle("ERROR: EMPTY FIELD");
+            emptySearchField.setHeaderText("Unable to process search");
+            emptySearchField.setContentText("Search field cannot be blank.");
+            emptySearchField.showAndWait();
         } else if (Inventory.lookupProduct(productSearchString) == -1) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ERROR: PRODUCT NOT FOUND");
-            alert.setHeaderText("Unable to locate product");
-            alert.setContentText("The Product ID or name entered was not found in inventory.");
-            alert.showAndWait();
+            System.err.println("Product not found. Search returned no results.");
+            Alert productNotFound = new Alert(Alert.AlertType.INFORMATION);
+            productNotFound.setTitle("ERROR: PRODUCT NOT FOUND");
+            productNotFound.setHeaderText("Unable to locate product");
+            productNotFound.setContentText("The Product ID or name entered was not found in inventory.");
+            productNotFound.showAndWait();
         } else {
+            System.out.println("Product search succeeded. Products table view updated.");
             searchedProductIndex = Inventory.lookupProduct(productSearchString);
             Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
             ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
@@ -343,18 +354,21 @@ public class MainScreenController implements Initializable {
             String productSearchString = productsSearchField.getText();
             int searchedProductIndex;
             if (productSearchString.equals("")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: EMPTY FIELD");
-                alert.setHeaderText("Unable to process search");
-                alert.setContentText("Search field cannot be blank.");
-                alert.showAndWait();
+                System.err.println("Empty search field present. Product search could not be conducted.");
+                Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
+                emptySearchField.setTitle("ERROR: EMPTY FIELD");
+                emptySearchField.setHeaderText("Unable to process search");
+                emptySearchField.setContentText("Search field cannot be blank.");
+                emptySearchField.showAndWait();
             } else if (Inventory.lookupProduct(productSearchString) == -1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ERROR: PRODUCT NOT FOUND");
-                alert.setHeaderText("Unable to locate product");
-                alert.setContentText("The Product ID or name entered was not found in inventory.");
-                alert.showAndWait();
+                System.err.println("Product not found. Search returned no results.");
+                Alert productNotFound = new Alert(Alert.AlertType.INFORMATION);
+                productNotFound.setTitle("ERROR: PRODUCT NOT FOUND");
+                productNotFound.setHeaderText("Unable to locate product");
+                productNotFound.setContentText("The Product ID or name entered was not found in inventory.");
+                productNotFound.showAndWait();
             } else {
+                System.out.println("Product search succeeded. Products table view updated.");
                 searchedProductIndex = Inventory.lookupProduct(productSearchString);
                 Product searchedProduct = Inventory.getAllProducts().get(searchedProductIndex);
                 ObservableList<Product> searchedProductList = FXCollections.observableArrayList();
@@ -378,12 +392,12 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void productsAddBtnHandler(ActionEvent event) throws IOException {
-        System.out.println("User selected 'ADD PRODUCT'. \n\nOpening ADD PRODUCT screen.");
+        System.out.println("User selected 'ADD PRODUCT'.\nOpening ADD PRODUCT screen.");
         Parent root = FXMLLoader.load(getClass().getResource("/View/AddProduct.fxml"));
-        Scene scene = new Scene(root);
+        Scene addProductScreen = new Scene(root);
         Stage addProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addProductWindow.setTitle("ABC Company: Inventory Management System");
-        addProductWindow.setScene(scene);
+        addProductWindow.setTitle("Add Product");
+        addProductWindow.setScene(addProductScreen);
         addProductWindow.show();
     }
 
@@ -396,18 +410,19 @@ public class MainScreenController implements Initializable {
         int productModifyID = productModify.getProductID();
 
         if (noActiveSelection) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: NO PART SELECTED");
-            alert.setHeaderText("No part has been selected to modify");
-            alert.setContentText("You must select a part before it can be modified.");
-            alert.showAndWait();
+            System.err.println("No product selected. Product modification cannot be completed.");
+            Alert noProductSelected = new Alert(Alert.AlertType.WARNING);
+            noProductSelected.setTitle("ERROR: NO PRODUCT SELECTED");
+            noProductSelected.setHeaderText("No product has been selected to modify");
+            noProductSelected.setContentText("A product must be selected before it can be modified.");
+            noProductSelected.showAndWait();
         } else {
-            System.out.println("User has selected " + productModifyName + " with Product ID: " + productModifyID + " to modify.\n\n Opening Modify Product Screen now.");
+            System.out.println("User has selected " + productModifyName + " with Product ID: " + productModifyID + " to modify.\nOpening Modify Product Screen now.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyProduct.fxml"));
-            Scene scene = new Scene(root);
+            Scene modifyProductScreen = new Scene(root);
             Stage modifyProductWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
             modifyProductWindow.setTitle("Modify Product | " + productModifyName + " | " + "Product ID: " + productModifyID);
-            modifyProductWindow.setScene(scene);
+            modifyProductWindow.setScene(modifyProductScreen);
             modifyProductWindow.show();
         }
     }
@@ -416,33 +431,41 @@ public class MainScreenController implements Initializable {
     private void productsDeleteBtnHandler(ActionEvent event
     ) {
         Product productToDelete = productsTable.getSelectionModel().getSelectedItem();
+        boolean noActiveSelection = partsTable.getSelectionModel().isEmpty();
 
-        if (!Inventory.deleteProductCheck(productToDelete)) {
-            System.out.println("Product has associated part(s).\n Unable to delete product.");
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: UNABLE TO DELETE PRODUCT");
-            alert.setHeaderText("Product has associated part(s)");
-            alert.setContentText("Product cannot be deleted if it has associated parts.");
-            alert.showAndWait();
+        if (noActiveSelection) {
+            System.err.println("No product selected. Product deletion cannot be completed.");
+            Alert noProductSelected = new Alert(Alert.AlertType.WARNING);
+            noProductSelected.setTitle("ERROR: NO PRODUCT SELECTED");
+            noProductSelected.setHeaderText("Product Deletion Failed");
+            noProductSelected.setContentText("A product must be selected before it can be deleted.");
+            noProductSelected.showAndWait();
+        } else if (!Inventory.deleteProductCheck(productToDelete)) {
+            System.err.println("Product has associated part(s).\nUnable to delete product.");
+            Alert associatedParts = new Alert(Alert.AlertType.WARNING);
+            associatedParts.setTitle("ERROR: UNABLE TO DELETE PRODUCT");
+            associatedParts.setHeaderText("Product has associated part(s)");
+            associatedParts.setContentText("Product cannot be deleted if it has associated parts.");
+            associatedParts.showAndWait();
         } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("CONFIRMATION: DELETE PRODUCT FROM INVENTORY");
-            alert.setHeaderText("Are you sure you would like to delete this product from inventory?\n\n This cannot be undone!");
-            alert.setContentText("Click OK to delete this product. \n\nClick CANCEL to close this window and keep the product.");
-            alert.showAndWait();
+            Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteConfirm.setTitle("CONFIRMATION: DELETE PRODUCT FROM INVENTORY");
+            deleteConfirm.setHeaderText("Are you sure you would like to delete this product from inventory?\nThis cannot be undone!");
+            deleteConfirm.setContentText("Click OK to delete this product.\nClick CANCEL to close this window and keep the product.");
+            deleteConfirm.showAndWait();
 
-            if (alert.getResult() == ButtonType.OK) {
-                System.out.println("User confirmed. \nPart is being deleted from inventory");
+            if (deleteConfirm.getResult() == ButtonType.OK) {
+                System.out.println("User confirmed.\nProduct is being deleted from inventory");
                 Inventory.deleteProduct(productToDelete);
                 updateProductsTable();
 
                 Alert productDeletionAlert = new Alert(Alert.AlertType.INFORMATION);
                 productDeletionAlert.setTitle("SUCCESS: PRODUCT DELETED");
                 productDeletionAlert.setHeaderText("The selected product has been deleted from inventory");
-                productDeletionAlert.setContentText("The Products table has been updated.\n\n Click OK to close this window.");
+                productDeletionAlert.setContentText("The Products table has been updated.\nClick OK to close this window.");
                 productDeletionAlert.showAndWait();
             } else {
-                alert.close();
+                deleteConfirm.close();
             }
         }
     }
@@ -453,14 +476,14 @@ public class MainScreenController implements Initializable {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
         exitAlert.setTitle("CONFIRMATION: EXIT APPLICATION");
         exitAlert.setHeaderText("Are you sure you would like to exit this application?");
-        exitAlert.setContentText("Click OK to exit the application. \n\nClick CANCEL to continue and return to the current screen.");
+        exitAlert.setContentText("Click OK to exit the application.\nClick CANCEL to continue and return to the current screen.");
         exitAlert.showAndWait();
 
         if (exitAlert.getResult() == ButtonType.OK) {
-            System.out.println("User confirmed. Exiting application. END.");
+            System.out.println("User confirmed.\nExiting application.\nEND.");
             System.exit(0);
         } else {
-            System.out.println("User cancelled alert. Returning to Main Screen.");
+            System.out.println("User cancelled alert\nReturning to Main Screen.");
             exitAlert.close();
         }
     }

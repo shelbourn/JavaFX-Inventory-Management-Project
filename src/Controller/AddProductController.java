@@ -145,12 +145,12 @@ public class AddProductController implements Initializable {
         String partSearchString = searchField.getText();
         int searchedPartIndex;
         if (partSearchString.equals("")) {
-            System.err.println("Empty fields present. Product not added to inventory.");
-            Alert emptyFields = new Alert(Alert.AlertType.INFORMATION);
-            emptyFields.setTitle("ERROR: EMPTY FIELD");
-            emptyFields.setHeaderText("Unable to process search");
-            emptyFields.setContentText("Search field cannot be blank.");
-            emptyFields.showAndWait();
+            System.err.println("Empty search field present. Part search could not be conducted.");
+            Alert emptySearchField = new Alert(Alert.AlertType.INFORMATION);
+            emptySearchField.setTitle("ERROR: EMPTY FIELD");
+            emptySearchField.setHeaderText("Unable to process search");
+            emptySearchField.setContentText("Search field cannot be blank.");
+            emptySearchField.showAndWait();
         } else if (Inventory.lookupPart(partSearchString) == -1) {
             System.err.println("Part not found. Search returned no results.");
             Alert partNotFound = new Alert(Alert.AlertType.INFORMATION);
