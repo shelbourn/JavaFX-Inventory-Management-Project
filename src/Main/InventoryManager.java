@@ -1,10 +1,12 @@
+/**
+ * Main for ABC Company: Inventory Management System
+ * Sets test data, adds test data to inventory, populates Main Screen table views
+ * Launches Main Screen
+ *
+ * @author Matthew Shelbourn <mshelbo@wgu.edu>
+ */
 package Main;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import Model.InHouse;
 import Model.Inventory;
 import static Model.Inventory.addPart;

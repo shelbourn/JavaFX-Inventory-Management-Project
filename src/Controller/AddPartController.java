@@ -1,5 +1,7 @@
 /**
- * Controller for the AddPart.fxml file and Add Part view
+ * Controller for the Add Part view
+ * Captures user input data for creating new parts, handles exceptions,
+ * adds new parts to inventory
  *
  * @author Matthew Shelbourn <mshelbo@wgu.edu>
  */
@@ -30,11 +32,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Matthew Shelbourn <mshelbo@wgu.edu>
- */
 public class AddPartController implements Initializable {
 
     // FMXL Generated Properties
@@ -152,25 +149,28 @@ public class AddPartController implements Initializable {
                     outsourcedPartDataTypeException);
         }
         if (partFieldException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: EMPTY FIELDS PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(partFieldException);
-            alert.showAndWait();
+            System.err.println("Empty fields present in form.\n Part not added to inventory.");
+            Alert emptyFieldAlert = new Alert(Alert.AlertType.WARNING);
+            emptyFieldAlert.setTitle("ERROR: EMPTY FIELDS PRESENT");
+            emptyFieldAlert.setHeaderText("This part has not been added to inventory");
+            emptyFieldAlert.setContentText(partFieldException);
+            emptyFieldAlert.showAndWait();
             partFieldException = "";
         } else if (iHPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(iHPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present.\n Part not added to inventory.");
+            Alert invalidIHDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidIHDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidIHDataTypes.setHeaderText("This part has not been added to inventory");
+            invalidIHDataTypes.setContentText(iHPartDataTypeException);
+            invalidIHDataTypes.showAndWait();
             iHPartDataTypeException = "";
         } else if (outsourcedPartDataTypeException.length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("ERROR: INVALID DATA TYPES PRESENT");
-            alert.setHeaderText("This part has not been added to inventory");
-            alert.setContentText(outsourcedPartDataTypeException);
-            alert.showAndWait();
+            System.err.println("Invalid data types present.\n Part not added to inventory.");
+            Alert invalidOutDataTypes = new Alert(Alert.AlertType.WARNING);
+            invalidOutDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
+            invalidOutDataTypes.setHeaderText("This part has not been added to inventory");
+            invalidOutDataTypes.setContentText(outsourcedPartDataTypeException);
+            invalidOutDataTypes.showAndWait();
             outsourcedPartDataTypeException = "";
         } else {
             try {
@@ -182,11 +182,12 @@ public class AddPartController implements Initializable {
                         partValueException);
 
                 if (partValueException.length() > 0) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("ERROR: INVALID VALUES PRESENT");
-                    alert.setHeaderText("This part has not been added to inventory");
-                    alert.setContentText(partValueException);
-                    alert.showAndWait();
+                    System.err.println("Invalid field values present.\n Part not added to inventory.");
+                    Alert invalidValues = new Alert(Alert.AlertType.WARNING);
+                    invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
+                    invalidValues.setHeaderText("This part has not been added to inventory");
+                    invalidValues.setContentText(partValueException);
+                    invalidValues.showAndWait();
                     partValueException = "";
                 } else {
                     if (inHousePart == true) {
@@ -200,19 +201,20 @@ public class AddPartController implements Initializable {
                         inHouse.setMachineID(Integer.parseInt(machIDCompName));
                         addPart(inHouse);
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("SUCCESS: IN-HOUSE PART ADDED");
-                        alert.setHeaderText("In-House Part Successfully Added to Inventory");
-                        alert.setContentText("Click OK to return to the main screen.");
-                        alert.showAndWait();
+                        System.out.println("In-House part " + inHouse + " successfully added to inventory.");
+                        Alert partAddSuccess = new Alert(Alert.AlertType.INFORMATION);
+                        partAddSuccess.setTitle("SUCCESS: IN-HOUSE PART ADDED");
+                        partAddSuccess.setHeaderText("In-House Part Successfully Added to Inventory");
+                        partAddSuccess.setContentText("Click OK to return to the main screen.");
+                        partAddSuccess.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
-                            System.out.println("In-House Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
+                        if (partAddSuccess.getResult() == ButtonType.OK) {
+                            System.out.println("Exiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
@@ -227,6 +229,7 @@ public class AddPartController implements Initializable {
                         outsourced.setCompanyName(machIDCompName);
                         addPart(outsourced);
 
+                        System.out.println("Outsourced part " + outsourced + " successfully added to inventory.");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("SUCCESS: OUTSOURCED PART ADDED");
                         alert.setHeaderText("Outsourced Part Successfully Added to Inventory");
@@ -234,12 +237,12 @@ public class AddPartController implements Initializable {
                         alert.showAndWait();
 
                         if (alert.getResult() == ButtonType.OK) {
-                            System.out.println("Outsourced Part successfully added to inventory. \nUser confirmed. \nExiting to Main Screen.");
+                            System.out.println("Exiting to Main Screen.");
                             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
-                            Scene scene = new Scene(root);
+                            Scene mainScreen = new Scene(root);
                             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             mainScreenWindow.setTitle("ABC Company: Inventory Management System");
-                            mainScreenWindow.setScene(scene);
+                            mainScreenWindow.setScene(mainScreen);
                             mainScreenWindow.show();
                         } else {
                         }
