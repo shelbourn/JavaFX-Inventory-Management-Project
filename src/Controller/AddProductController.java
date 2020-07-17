@@ -258,11 +258,11 @@ public class AddProductController implements Initializable {
         Alert deleteConfirm = new Alert(Alert.AlertType.CONFIRMATION);
         deleteConfirm.setTitle("CONFIRMATION: REMOVE PART");
         deleteConfirm.setHeaderText("Would you like to remove this part from the product's part list?");
-        deleteConfirm.setContentText("Click OK to remove the part. \n\nClick CANCEL to close this window and keep the part.");
+        deleteConfirm.setContentText("Click OK to remove the part.\nClick CANCEL to close this window and keep the part.");
         deleteConfirm.showAndWait();
 
         if (deleteConfirm.getResult() == ButtonType.OK) {
-            System.out.println("User confirmed. \nPart has been removed from Product's part list.");
+            System.out.println("User confirmed.\nPart has been removed from Product's part list.");
             associatedParts.remove(selectedPart);
             updateDeleteTable();
 
@@ -272,7 +272,7 @@ public class AddProductController implements Initializable {
             removeAlert.setContentText("Click OK to close this window.");
             removeAlert.showAndWait();
         } else {
-            System.out.println("User cancelled part removal.\n Closing alert window.");
+            System.out.println("User cancelled part removal.\nClosing alert window.");
             deleteConfirm.close();
         }
     }
@@ -368,7 +368,7 @@ public class AddProductController implements Initializable {
                     productAddSuccess.showAndWait();
 
                     if (productAddSuccess.getResult() == ButtonType.OK) {
-                        System.out.println("User confirmed product addition. \nExiting to Main Screen.");
+                        System.out.println("User confirmed product addition.\nExiting to Main Screen.");
                         Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
                         Scene mainScreen = new Scene(root);
                         Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -394,11 +394,11 @@ public class AddProductController implements Initializable {
         Alert cancelAlert = new Alert(Alert.AlertType.CONFIRMATION);
         cancelAlert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
         cancelAlert.setHeaderText("Would you like to cancel this operation?");
-        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
         cancelAlert.showAndWait();
 
         if (cancelAlert.getResult() == ButtonType.OK) {
-            System.out.println("User cancelled operation. \n\nExiting to Main Screen.");
+            System.out.println("User cancelled operation.\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
             Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
