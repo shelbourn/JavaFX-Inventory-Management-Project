@@ -149,7 +149,7 @@ public class AddPartController implements Initializable {
                     outsourcedPartDataTypeException);
         }
         if (partFieldException.length() > 0) {
-            System.err.println("Empty fields present in form.\n Part not added to inventory.");
+            System.err.println("Empty fields present in form.\nPart not added to inventory.");
             Alert emptyFields = new Alert(Alert.AlertType.WARNING);
             emptyFields.setTitle("ERROR: EMPTY FIELDS PRESENT");
             emptyFields.setHeaderText("This part has not been added to inventory");
@@ -157,7 +157,7 @@ public class AddPartController implements Initializable {
             emptyFields.showAndWait();
             partFieldException = "";
         } else if (iHPartDataTypeException.length() > 0) {
-            System.err.println("Invalid data types present.\n Part not added to inventory.");
+            System.err.println("Invalid data types present.\nPart not added to inventory.");
             Alert invalidIHDataTypes = new Alert(Alert.AlertType.WARNING);
             invalidIHDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
             invalidIHDataTypes.setHeaderText("This part has not been added to inventory");
@@ -165,7 +165,7 @@ public class AddPartController implements Initializable {
             invalidIHDataTypes.showAndWait();
             iHPartDataTypeException = "";
         } else if (outsourcedPartDataTypeException.length() > 0) {
-            System.err.println("Invalid data types present.\n Part not added to inventory.");
+            System.err.println("Invalid data types present.\nPart not added to inventory.");
             Alert invalidOutDataTypes = new Alert(Alert.AlertType.WARNING);
             invalidOutDataTypes.setTitle("ERROR: INVALID DATA TYPES PRESENT");
             invalidOutDataTypes.setHeaderText("This part has not been added to inventory");
@@ -182,7 +182,7 @@ public class AddPartController implements Initializable {
                         partValueException);
 
                 if (partValueException.length() > 0) {
-                    System.err.println("Invalid field values present.\n Part not added to inventory.");
+                    System.err.println("Invalid field values present.\nPart not added to inventory.");
                     Alert invalidValues = new Alert(Alert.AlertType.WARNING);
                     invalidValues.setTitle("ERROR: INVALID VALUES PRESENT");
                     invalidValues.setHeaderText("This part has not been added to inventory");
@@ -264,11 +264,11 @@ public class AddPartController implements Initializable {
         Alert cancelAlert = new Alert(Alert.AlertType.CONFIRMATION);
         cancelAlert.setTitle("CONFIRMATION: EXIT TO MAIN SCREEN");
         cancelAlert.setHeaderText("Would you like to cancel this operation?");
-        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen. \n\nClick CANCEL to continue and return to the current screen.");
+        cancelAlert.setContentText("Click OK to cancel operation and return to the main screen.\nClick CANCEL to continue and return to the current screen.");
         cancelAlert.showAndWait();
 
         if (cancelAlert.getResult() == ButtonType.OK) {
-            System.out.println("User cancelled operation.\n Exiting to Main Screen.");
+            System.out.println("User cancelled operation.\nExiting to Main Screen.");
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
             Scene mainScreen = new Scene(root);
             Stage mainScreenWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
